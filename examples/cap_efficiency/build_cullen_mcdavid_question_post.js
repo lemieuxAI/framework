@@ -27,6 +27,14 @@ const fmtFr = (n, p = 2) => fmt(n, p).replace('.', ',');
 const dollars = (n) => '$' + Math.round(n).toLocaleString('en-US');
 const dollarsFr = (n) => Math.round(n).toLocaleString('en-US').replace(/,/g, ' ') + ' $';
 
+// 80% CI bracket from point estimate + standard error.
+// 1.282 = inverse normal at 0.90 (so the 10th-90th gives the 80% interval).
+function ciStr(v, se, fmtN) {
+  if (se === null || se === undefined) return '—';
+  const z = 1.282;
+  return `[${fmtN(v - z * se, 2)}, ${fmtN(v + z * se, 2)}]`;
+}
+
 const thinBorder = { style: BorderStyle.SINGLE, size: 4, color: BRAND.rule };
 const cellBorders = { top: thinBorder, bottom: thinBorder, left: thinBorder, right: thinBorder };
 
@@ -130,8 +138,8 @@ function rankColor(pct) {
 const T = {
   fr: {
     title: 'McDavid lui a donné 7 M$. Bowman les a-t-il jetés au gardien?',
-    subtitle: 'Chronique stat rigoureuse · 1ᵉʳ mai 2026 · GSAx + déploiement projeté + IC 80 %',
-    banner: 'Lemieux · données ouvertes, méthode documentée, conclusions honnêtes même quand elles dérangent.',
+    subtitle: 'Chronique stat · 1ᵉʳ mai 2026 · 4 000 combinaisons aléatoires, GSAx, intervalles à 80 %',
+    banner: 'Lemieux · données ouvertes, méthode documentée.',
 
     h_premise: 'Le tweet qui nous a fait fouiller',
     premise_box: (
@@ -140,38 +148,52 @@ const T = {
       `on Trent Frederic and the difference in cap hit between Stuart Skinner and Tristan Jarry. »\n\n` +
       `Question naïve mais utile : avec ce 6,625 M$ exactement (Frederic + (Jarry − Skinner)), ` +
       `Bowman aurait pu acheter à peu près n'importe quoi dans la LNH. Donc on a fait à peu près ` +
-      `n'importe quoi — **4 000 fois** — et on a comparé. Cette version est la deuxième passe : ` +
-      `**plus rigoureuse**, avec GSAx, déploiement projeté joueur-par-joueur, et intervalles de ` +
-      `confiance à 80 % par-dessus tout.`
+      `n'importe quoi — **4 000 fois** — et on a comparé.`
     ),
 
-    h_verdict: 'Le verdict, version honnête',
+    h_verdict: 'Le verdict en clair',
     verdict_box: (
-      `**Valeur projetée du choix d'EDM : ${fmtFr(actual.total_value_xg, 1)} ± ${fmtFr(actual.total_value_se, 1)} buts attendus / saison.** ` +
-      `Intervalle de confiance à 80 % : **[${fmtFr(actual.total_value_ci80_low, 1)} ; ${fmtFr(actual.total_value_ci80_high, 1)}]**. ` +
-      `${ciStraddles ? '**L\'IC chevauche zéro** — direction négative claire, ampleur statistiquement floue. ' : '**L\'IC exclut zéro.** '}` +
+      `**Selon notre modèle, le choix d'EDM produit environ ${fmtFr(actual.total_value_xg, 1)} buts attendus par saison.** ` +
+      `Concrètement : sur une saison complète, EDM encaisserait probablement ` +
+      `${Math.abs(Math.round(actual.total_value_xg))} buts ${actual.total_value_xg < 0 ? 'de plus' : 'de moins'} qu'avec un budget équivalent dépensé à la médiane du marché.\n\n` +
+      `**L'estimation a une marge d'erreur substantielle.** Notre intervalle à 80 % — la plage où ` +
+      `on s'attend à ce que la vraie réponse tombe 80 fois sur 100 si on refaisait l'analyse avec des ` +
+      `échantillons légèrement différents — s'étend de **${fmtFr(actual.total_value_ci80_low, 1)} (un coup catastrophique)** ` +
+      `à **${fmtFr(actual.total_value_ci80_high, 1)} (un coup légèrement positif)**. ` +
+      `${ciStraddles ? 'L\'intervalle chevauche zéro. La meilleure estimation pointe nettement vers le négatif, ' +
+        'mais on ne peut pas affirmer à quel point. Le scénario « Bowman a quand même fait un bon move » et le ' +
+        'scénario « 6,6 M$ jetés à la rivière » sont tous les deux statistiquement vivants. Le deuxième est juste plus probable.' :
+        'L\'intervalle exclut zéro, donc le verdict est statistiquement net.'}\n\n` +
       `Sur 2 000 combinaisons aléatoires de même structure (1 attaquant + 1 changement de gardien), ` +
       `EDM se classe au **${sumA.actual_percentile_rank.toFixed(0)}ᵉ centile** ` +
       `(${(100 - sumA.actual_percentile_rank).toFixed(0)} % des permutations aléatoires produisaient plus de valeur).\n\n` +
-      `**Le coupable, ce n'est pas Frederic.** Son iso net60 de ${fmtFr(actual.skater_iso_net60, 3)} sur ` +
-      `${Math.round(actual.skater_pool_toi)} minutes pooled est essentiellement neutre. ` +
-      `À son déploiement projeté de ${Math.round(actual.skater_projected_5v5_min)} minutes, sa contribution est ` +
-      `${fmtFr(actual.skater_season_value_xg, 2)} ± ${fmtFr(actual.skater_season_value_se, 2)} xG. Pas un cadeau. Pas un problème.\n\n` +
-      `**Le coupable, c'est le gardien.** GSAx (saves above expected) ramène les deux gardiens sur la même règle ` +
-      `en ajustant pour la qualité des tirs subis. Sur les deux dernières saisons régulière + séries combinées : ` +
+      `**Frederic n'est pas le coupable principal, mais l'appeler « neutre » serait trop indulgent.** ` +
+      `Son iso net60 de ${fmtFr(actual.skater_iso_net60, 3)} sur ${Math.round(actual.skater_pool_toi)} minutes ` +
+      `pooled veut dire qu'il est essentiellement un patineur de niveau remplacement sur la glace. ` +
+      `À 3,85 M$, dans un contexte où McDavid a sacrifié 7 M$ précisément pour libérer cette marge, le ` +
+      `standard implicite n'est pas « pas négatif » — c'est « apport mesurablement positif ». Sa contribution ` +
+      `projetée à ${Math.round(actual.skater_projected_5v5_min)} minutes 5 c. 5 est de seulement ` +
+      `**${fmtFr(actual.skater_season_value_xg, 2)} buts attendus** par saison. À peine distinguable de zéro.\n\n` +
+      `**La perte plus grosse vient du gardien.** GSAx (saves above expected) ramène les deux gardiens sur la même ` +
+      `règle en ajustant pour la qualité des tirs subis. Sur les deux dernières saisons régulière + séries combinées : ` +
       `Skinner a un GSAx/60 de **${fmtFr(actual.out_gsax_per_60, 3)}** (au-dessus de l'attendu) ; Jarry a ` +
-      `**${fmtFr(actual.in_gsax_per_60, 3)}** (en-dessous). À 3 000 minutes de référence (≈ 55 GP, partant 1A), ` +
-      `c'est **${fmtFr(actual.goalie_season_value_xg, 1)} ± ${fmtFr(actual.goalie_season_value_se, 1)} xG/saison** de coût. ` +
+      `**${fmtFr(actual.in_gsax_per_60, 3)}** (en-dessous). À 3 000 minutes de référence (≈ 55 matchs joués, partant 1A), ` +
+      `ça représente **${fmtFr(actual.goalie_season_value_xg, 1)} buts attendus** de coût par saison ` +
+      `(intervalle à 80 % : [${fmtFr(actual.goalie_season_value_xg - 1.282 * actual.goalie_season_value_se, 1)} ; ` +
+      `${fmtFr(actual.goalie_season_value_xg + 1.282 * actual.goalie_season_value_se, 1)}]). ` +
       `Et tu paies ${dollarsFr(actual.goalie_aav_cost)} de plus pour ce « downgrade ».\n\n` +
       `Avant de conclure « Bowman a fait pire que la moyenne aléatoire » : c'est un contrefactuel ` +
-      `mathématique, pas une note de DG. La méthodologie complète est en section 5.`
+      `mathématique, pas une note de DG. Méthodologie complète en section 5.`
     ),
 
     h_actual: '1 · Le choix réel — démonté ligne par ligne',
     actual_intro: ('Tout sort de notre table player_contracts (CapWages) jointe à skater_stats + ' +
-                   'goalie_stats (NST). Deux fenêtres : 24-25 + 25-26, saison régulière + séries.'),
+                   'goalie_stats (NST). Deux fenêtres : 24-25 + 25-26, saison régulière + séries. ' +
+                   'Pour chaque ligne, on rapporte la valeur centrale projetée et l\'intervalle à 80 % autour ' +
+                   '(la plage où on s\'attend à ce que la vraie réponse tombe 80 fois sur 100). Plus l\'intervalle ' +
+                   'est large, plus l\'incertitude est grande — souvent à cause de petits échantillons.'),
     th_component: 'Composante', th_cost: 'Coût annuel',
-    th_metric: 'Métrique', th_value: 'Valeur xG/saison ± SE',
+    th_metric: 'Métrique', th_value: 'Valeur xG/saison', th_ci: 'Intervalle à 80 %',
 
     h_methodology: '5 · Méthodologie — pourquoi ces choix, pas d\'autres',
     methodology_intro: ('Pour que les chiffres veuillent dire quelque chose, il faut documenter ' +
@@ -244,12 +266,17 @@ const T = {
 
     h_top: '4 · Les pires bons coups que Bowman aurait pu frapper',
     top_intro: (
-      `Voici 5 combinaisons aléatoires qui battent EDM par une marge gênante. **Important** : ces noms ` +
-      `incluent presque tous Samuel Ersson dans la colonne « sortant ». Ersson est un gardien dont le ` +
-      `petit échantillon récent à PHI tire sa valeur vers le bas — donc « le remplacer par n'importe quoi » ` +
-      `gonfle artificiellement le Δ GSAx/60 du Mode A. C'est exactement le genre de biais d'échantillonnage ` +
-      `que les caveats en section 5 mentionnent. Lis ces lignes comme « voici la queue droite de la ` +
-      `distribution », pas « voici des transactions plausibles ».`
+      `**Lis cette table avec un grain de sel.** Le calcul Mode A est ` +
+      `\`nouveau gardien − ancien gardien\`, donc on récompense automatiquement les combinaisons qui ` +
+      `« remplacent » un gardien qui sous-performe. Quatre des cinq lignes ci-dessous sortent ` +
+      `**Samuel Ersson** — un gardien de Philadelphie qui a connu une saison récente difficile et ` +
+      `dont le GSAx pooled est nettement en-dessous de la moyenne. Pratiquement n'importe qui à sa ` +
+      `place dans le filet donne un grand chiffre positif.\n\n` +
+      `**Sauf qu'Ersson n'est pas un gardien qu'EDM aurait pu remplacer.** Il joue à PHI. Le tirage ` +
+      `aléatoire le pige souvent comme « ancien gardien » parce que son salaire passe le filtre de budget ` +
+      `— pas parce que c'était un swap réaliste. Plusieurs « alternatives qui battent EDM » dans cette ` +
+      `table sont donc **des artefacts d'échantillonnage, pas des transactions plausibles**. Lis ces ` +
+      `lignes comme « voici la queue droite de la distribution », pas « voici un calendrier de transactions ».`
     ),
 
     h_bottom: 'Pour le contexte — Bowman aurait pu faire pire',
@@ -281,8 +308,8 @@ const T = {
   },
   en: {
     title: 'McDavid gave him $7M. Did Bowman throw it at the goalie?',
-    subtitle: 'Rigorous stat column · May 1, 2026 · GSAx + projected deployment + 80% CIs',
-    banner: 'Lemieux · open data, documented method, honest conclusions even when uncomfortable.',
+    subtitle: 'Stat column · May 1, 2026 · 4 000 random combinations, GSAx, 80% intervals',
+    banner: 'Lemieux · open data, documented method.',
 
     h_premise: 'The tweet that started this',
     premise_box: (
@@ -291,37 +318,52 @@ const T = {
       `Trent Frederic and the difference in cap hit between Stuart Skinner and Tristan Jarry."\n\n` +
       `Naïve but useful question: with that exact $6.625M (Frederic + (Jarry − Skinner)), Bowman could ` +
       `have bought just about anything in the NHL. So we did just about anything — **4 000 times** — ` +
-      `and compared. This version is the second pass: **rigorous**, with GSAx, per-player projected ` +
-      `deployment, and 80% confidence intervals throughout.`
+      `and compared.`
     ),
 
-    h_verdict: 'The bottom line, honestly',
+    h_verdict: 'The bottom line in plain language',
     verdict_box: (
-      `**Projected value of EDM's choice: ${fmt(actual.total_value_xg, 1)} ± ${fmt(actual.total_value_se, 1)} expected goals / season.** ` +
-      `80% CI: **[${fmt(actual.total_value_ci80_low, 1)}, ${fmt(actual.total_value_ci80_high, 1)}]**. ` +
-      `${ciStraddles ? '**The CI straddles zero** — direction is clearly negative, magnitude statistically uncertain. ' : '**The CI excludes zero.** '}` +
+      `**By our model, EDM's choice is worth roughly ${fmt(actual.total_value_xg, 1)} expected goals per season.** ` +
+      `In concrete terms: over a full season, EDM would likely allow about ` +
+      `${Math.abs(Math.round(actual.total_value_xg))} ${actual.total_value_xg < 0 ? 'more' : 'fewer'} goals than they would have ` +
+      `with the same budget spent at the market median.\n\n` +
+      `**That estimate has a substantial margin of error.** Our 80% interval — the range where we ` +
+      `expect the true answer to land 80 times out of 100 if we re-ran the analysis on slightly different ` +
+      `samples — runs from **${fmt(actual.total_value_ci80_low, 1)} (a catastrophic loss)** ` +
+      `to **${fmt(actual.total_value_ci80_high, 1)} (a slight gain)**. ` +
+      `${ciStraddles ? 'The interval straddles zero. The best estimate clearly points negative, but we can\'t ' +
+        'pin down how negative. The "Bowman still made a smart move" scenario and the "$6.6M down the drain" scenario ' +
+        'are both statistically alive. The second is just more likely.' :
+        'The interval excludes zero, so the verdict is statistically clean.'}\n\n` +
       `Out of 2 000 random combinations of the same structure (1 skater + 1 goalie change), EDM ranks at the ` +
       `**${sumA.actual_percentile_rank.toFixed(0)}th percentile** ` +
       `(${(100 - sumA.actual_percentile_rank).toFixed(0)}% of random combinations produced more value).\n\n` +
-      `**Frederic isn't the culprit.** His iso net60 of ${fmt(actual.skater_iso_net60, 3)} over ` +
-      `${Math.round(actual.skater_pool_toi)} pooled minutes is essentially neutral. At his projected ` +
-      `${Math.round(actual.skater_projected_5v5_min)} 5v5 min, his contribution is ${fmt(actual.skater_season_value_xg, 2)} ± ` +
-      `${fmt(actual.skater_season_value_se, 2)} xG. Not a gift. Not a problem.\n\n` +
-      `**The culprit is the goalie.** GSAx (goals saved above expected) puts both goalies on the same ruler ` +
-      `by adjusting for shot quality. Over the last two reg + playoff seasons combined: Skinner has a ` +
+      `**Frederic isn't the main culprit, but calling him "neutral" would be too kind.** ` +
+      `His iso net60 of ${fmt(actual.skater_iso_net60, 3)} over ${Math.round(actual.skater_pool_toi)} pooled minutes ` +
+      `means he's essentially a replacement-level skater on the ice. At $3.85M, in a context where McDavid ` +
+      `sacrificed $7M precisely to free up that cap room, the implicit standard isn't "not negative" — it's ` +
+      `"measurably positive impact". His projected contribution at ` +
+      `${Math.round(actual.skater_projected_5v5_min)} 5v5 min is only ` +
+      `**${fmt(actual.skater_season_value_xg, 2)} expected goals/season**. Barely distinguishable from zero.\n\n` +
+      `**The bigger loss comes from the goalie.** GSAx (goals saved above expected) puts both goalies on the same ` +
+      `ruler by adjusting for shot quality. Over the last two reg + playoff seasons combined: Skinner has a ` +
       `GSAx/60 of **${fmt(actual.out_gsax_per_60, 3)}** (above expected); Jarry has **${fmt(actual.in_gsax_per_60, 3)}** ` +
-      `(below). At 3 000 reference minutes (~ 55 GP, 1A starter), that's **${fmt(actual.goalie_season_value_xg, 1)} ± ` +
-      `${fmt(actual.goalie_season_value_se, 1)} xG/season** of cost. And you pay ${dollars(actual.goalie_aav_cost)} extra ` +
-      `for that "downgrade".\n\n` +
-      `Before concluding "Bowman did worse than the random average": this is a mathematical counterfactual, ` +
+      `(below). At 3 000 reference minutes (~ 55 GP, 1A starter), that's **${fmt(actual.goalie_season_value_xg, 1)} expected goals** ` +
+      `of cost per season (80% interval [${fmt(actual.goalie_season_value_xg - 1.282 * actual.goalie_season_value_se, 1)}, ` +
+      `${fmt(actual.goalie_season_value_xg + 1.282 * actual.goalie_season_value_se, 1)}]). ` +
+      `And you pay ${dollars(actual.goalie_aav_cost)} extra for that "downgrade".\n\n` +
+      `Before concluding "Bowman did worse than random average": this is a mathematical counterfactual, ` +
       `not a GM grade. Full methodology in section 5.`
     ),
 
     h_actual: '1 · The actual choice — broken down line by line',
     actual_intro: ('Pulled from our player_contracts table (CapWages) joined with skater_stats + ' +
-                   'goalie_stats (NST). Two windows: 24-25 + 25-26, regular season + playoffs.'),
+                   'goalie_stats (NST). Two windows: 24-25 + 25-26, regular season + playoffs. ' +
+                   'For each row we report the projected central value and the 80% interval around it ' +
+                   '(the range where we expect the true answer to land 80 times out of 100). Wider intervals ' +
+                   'mean more uncertainty — usually from small samples.'),
     th_component: 'Component', th_cost: 'Annual cost',
-    th_metric: 'Metric', th_value: 'xG/season value ± SE',
+    th_metric: 'Metric', th_value: 'xG/season value', th_ci: '80% interval',
 
     h_methodology: '5 · Methodology — why these choices, not others',
     methodology_intro: ('For the numbers to mean something, the choices must be documented. ' +
@@ -389,11 +431,16 @@ const T = {
 
     h_top: '4 · The "almost-good" alternatives Bowman could have grabbed',
     top_intro: (
-      `Here are 5 random combinations that beat EDM by an embarrassing margin. **Important**: almost all ` +
-      `of these include Samuel Ersson in the "outgoing goalie" column. Ersson is a goalie whose recent ` +
-      `small-sample performance at PHI drags his value down — so "replace him with anything" artificially ` +
-      `inflates the Mode A Δ GSAx/60. This is exactly the sampling bias the section 5 caveats mention. ` +
-      `Read these as "here's the right tail of the distribution", not "here are plausible trades".`
+      `**Read this table with a grain of salt.** The Mode A calculation is ` +
+      `\`incoming goalie − outgoing goalie\`, so it automatically rewards combinations that ` +
+      `"replace" an underperforming goalie. Four of the five lines below have **Samuel Ersson** as ` +
+      `the outgoing goalie — a Philadelphia goalie coming off a tough recent stretch whose pooled ` +
+      `GSAx is well below average. Practically anyone in his net gives a big positive number.\n\n` +
+      `**Except Ersson isn't a goalie EDM could have "replaced".** He plays for PHI. The random sampler ` +
+      `picks him often as "outgoing" because his salary passes the budget filter — not because it was ` +
+      `a realistic swap. Several "alternatives that beat EDM" in this table are therefore ` +
+      `**sampling artifacts, not plausible transactions**. Read these as "the right tail of the ` +
+      `distribution", not "a transaction calendar".`
     ),
 
     h_bottom: 'For perspective — Bowman could have done worse',
@@ -457,39 +504,42 @@ function actualSection(t, lang) {
       'Frederic',
       dol(actual.skater_aav),
       `iso ${fmtN(actual.skater_iso_net60, 3)}, déploiement ${Math.round(actual.skater_projected_5v5_min)} min`,
-      `${fmtN(actual.skater_season_value_xg, 2)} ± ${fmtN(actual.skater_season_value_se, 2)}`,
+      fmtN(actual.skater_season_value_xg, 2),
+      ciStr(actual.skater_season_value_xg, actual.skater_season_value_se, fmtN),
     ],
     [
-      'Jarry (in)',
+      'Jarry (entrant)',
       dol(5375000),
-      `GSAx/60 ${fmtN(actual.in_gsax_per_60, 3)}, pool ${Math.round(actual.in_toi)} min, ${actual.in_ga} GA`,
-      '—',
+      `GSAx/60 ${fmtN(actual.in_gsax_per_60, 3)}, pool ${Math.round(actual.in_toi)} min, ${actual.in_ga} BA`,
+      '—', '—',
     ],
     [
-      'Skinner (out)',
+      'Skinner (sortant)',
       dol(2600000),
-      `GSAx/60 ${fmtN(actual.out_gsax_per_60, 3)}, pool ${Math.round(actual.out_toi)} min, ${actual.out_ga} GA`,
-      '—',
+      `GSAx/60 ${fmtN(actual.out_gsax_per_60, 3)}, pool ${Math.round(actual.out_toi)} min, ${actual.out_ga} BA`,
+      '—', '—',
     ],
     [
       `Δ ${lang === 'fr' ? 'gardien' : 'goalie'}`,
       dol(actual.goalie_aav_cost),
       `Δ GSAx/60 ${fmtN(actual.diff_gsax_per_60, 3)} × ${Math.round(actual.goalie_reference_toi)} min ref.`,
-      `${fmtN(actual.goalie_season_value_xg, 2)} ± ${fmtN(actual.goalie_season_value_se, 2)}`,
+      fmtN(actual.goalie_season_value_xg, 2),
+      ciStr(actual.goalie_season_value_xg, actual.goalie_season_value_se, fmtN),
     ],
     [
       { runs: [new TextRun({ text: 'TOTAL', bold: true, font: 'Arial', size: 16, color: BRAND.ink })] },
       { runs: [new TextRun({ text: dol(actual.total_cost), bold: true, font: 'Arial', size: 16, color: BRAND.ink })] },
-      { runs: [new TextRun({ text: `IC 80 % [${fmtN(actual.total_value_ci80_low, 2)} ; ${fmtN(actual.total_value_ci80_high, 2)}]`, italics: true, font: 'Arial', size: 16, color: BRAND.mute })] },
-      { runs: [new TextRun({ text: `${fmtN(actual.total_value_xg, 2)} ± ${fmtN(actual.total_value_se, 2)}`, bold: true, font: 'Arial', size: 16, color: BRAND.ink })] },
+      '',
+      { runs: [new TextRun({ text: fmtN(actual.total_value_xg, 2), bold: true, font: 'Arial', size: 16, color: BRAND.ink })] },
+      { runs: [new TextRun({ text: `[${fmtN(actual.total_value_ci80_low, 2)}, ${fmtN(actual.total_value_ci80_high, 2)}]`, bold: true, font: 'Arial', size: 16, color: BRAND.ink })] },
     ],
   ];
   return [
     h1(t.h_actual), para(t.actual_intro, { italics: true }),
     dataTable(
-      [t.th_component, t.th_cost, t.th_metric, t.th_value],
+      [t.th_component, t.th_cost, t.th_metric, t.th_value, t.th_ci],
       rows.map(r => Array.isArray(r) ? { cells: r } : r),
-      [2000, 1700, 4500, 2000]
+      [1700, 1500, 3700, 1500, 1900]
     ),
   ];
 }
@@ -532,8 +582,8 @@ function sensitivitySection(t, lang) {
       : '';
     return [
       `${ref} min`, interp,
-      `${fmtN(v.season_value_xg, 2)} ± ${fmtN(v.season_value_se, 2)}`,
-      `[${fmtN(v.ci80[0], 2)} ; ${fmtN(v.ci80[1], 2)}]`,
+      fmtN(v.season_value_xg, 2),
+      `[${fmtN(v.ci80[0], 2)}, ${fmtN(v.ci80[1], 2)}]`,
     ];
   });
   return [
@@ -541,48 +591,55 @@ function sensitivitySection(t, lang) {
     dataTable(
       [lang === 'fr' ? 'TOI référence' : 'Reference TOI',
        lang === 'fr' ? 'Interprétation' : 'Interpretation',
-       lang === 'fr' ? 'Valeur ± SE' : 'Value ± SE',
-       lang === 'fr' ? 'IC 80 %' : '80% CI'],
-      rows, [1500, 3500, 2500, 3000]
+       lang === 'fr' ? 'Valeur xG/saison' : 'xG/season value',
+       lang === 'fr' ? 'Intervalle à 80 %' : '80% interval'],
+      rows, [1500, 3500, 2200, 2800]
     ),
   ];
 }
 
 function topAlternativesSection(t, lang) {
   const fmtN = lang === 'fr' ? fmtFr : fmt;
+  const valHdr = lang === 'fr' ? 'Valeur xG/saison' : 'xG/season value';
+  const ciHdr = lang === 'fr' ? 'Intervalle à 80 %' : '80% interval';
   const rowsA = topA.slice(0, 5).map(c => [
     c.skater, `${c.in_goalie} ↑↑ ${c.out_goalie}`,
-    `${fmtN(c.season_value_xg, 2)} ± ${fmtN(c.season_value_se, 2)}`,
+    fmtN(c.season_value_xg, 2),
+    ciStr(c.season_value_xg, c.season_value_se, fmtN),
   ]);
   const rowsB = topB.slice(0, 5).map(c => [
     c.players.join(' + '),
-    `${fmtN(c.season_value_xg, 2)} ± ${fmtN(c.season_value_se, 2)}`,
+    fmtN(c.season_value_xg, 2),
+    ciStr(c.season_value_xg, c.season_value_se, fmtN),
   ]);
   return [
-    h1(t.h_top), para(t.top_intro, { italics: true }),
+    h1(t.h_top), para(t.top_intro),
     h2(lang === 'fr' ? 'Top 5 — Mode A' : 'Top 5 — Mode A'),
     dataTable(
       [lang === 'fr' ? 'Attaquant' : 'Skater',
        lang === 'fr' ? 'Échange de gardien' : 'Goalie swap',
-       lang === 'fr' ? 'Valeur ± SE' : 'Value ± SE'],
-      rowsA, [3000, 5500, 2000]
+       valHdr, ciHdr],
+      rowsA, [2400, 4400, 1500, 2200]
     ),
     h2(lang === 'fr' ? 'Top 5 — Mode B' : 'Top 5 — Mode B'),
     dataTable(
-      [lang === 'fr' ? 'Combinaison' : 'Combo',
-       lang === 'fr' ? 'Valeur ± SE' : 'Value ± SE'],
-      rowsB, [8000, 2500]
+      [lang === 'fr' ? 'Combinaison' : 'Combo', valHdr, ciHdr],
+      rowsB, [6800, 1500, 2200]
     ),
     h2(t.h_bottom), para(t.bottom_intro, { italics: true }),
     dataTable(
       [lang === 'fr' ? 'Mode' : 'Mode',
        lang === 'fr' ? 'Combinaison' : 'Combo',
-       lang === 'fr' ? 'Valeur ± SE' : 'Value ± SE'],
+       valHdr, ciHdr],
       [
-        ...bottomA.slice(0, 3).map(c => ['A', `${c.skater} + ${c.in_goalie} ↑↑ ${c.out_goalie}`, `${fmtN(c.season_value_xg, 2)} ± ${fmtN(c.season_value_se, 2)}`]),
-        ...bottomB.slice(0, 3).map(c => ['B', c.players.join(' + '), `${fmtN(c.season_value_xg, 2)} ± ${fmtN(c.season_value_se, 2)}`]),
+        ...bottomA.slice(0, 3).map(c => ['A', `${c.skater} + ${c.in_goalie} ↑↑ ${c.out_goalie}`,
+                                          fmtN(c.season_value_xg, 2),
+                                          ciStr(c.season_value_xg, c.season_value_se, fmtN)]),
+        ...bottomB.slice(0, 3).map(c => ['B', c.players.join(' + '),
+                                          fmtN(c.season_value_xg, 2),
+                                          ciStr(c.season_value_xg, c.season_value_se, fmtN)]),
       ],
-      [800, 7700, 2000]
+      [600, 6500, 1500, 1900]
     ),
   ];
 }
