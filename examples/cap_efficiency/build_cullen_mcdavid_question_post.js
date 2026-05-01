@@ -1,8 +1,5 @@
-// Cullen-McDavid question — chronique-au-bar register, FR primary.
-// Inputs:
-//   - cullen_mcdavid_question.numbers.json
-// Run:
-//   node examples/cap_efficiency/build_cullen_mcdavid_question_post.js
+// Cullen-McDavid question — rigorous v2 with GSAx + projected deployment + 80% CI.
+// FR primary register. Run: node examples/cap_efficiency/build_cullen_mcdavid_question_post.js
 
 const fs = require('fs');
 const path = require('path');
@@ -28,7 +25,7 @@ const fmt = (n, p = 2) => {
 };
 const fmtFr = (n, p = 2) => fmt(n, p).replace('.', ',');
 const dollars = (n) => '$' + Math.round(n).toLocaleString('en-US');
-const dollarsFr = (n) => Math.round(n).toLocaleString('fr-CA').replace(/ /g, ' ') + ' $';
+const dollarsFr = (n) => Math.round(n).toLocaleString('en-US').replace(/,/g, ' ') + ' $';
 
 const thinBorder = { style: BorderStyle.SINGLE, size: 4, color: BRAND.rule };
 const cellBorders = { top: thinBorder, bottom: thinBorder, left: thinBorder, right: thinBorder };
@@ -115,12 +112,14 @@ function dataTable(headers, rows, widths) {
 
 // ---------- helpers from data ----------
 const actual = D.actual_edm_choice;
+const sens = D.goalie_sensitivity_by_ref_toi;
 const sumA = D.summary.mode_a;
 const sumB = D.summary.mode_b;
 const topA = D.mode_a_top10_beating_edm;
 const topB = D.mode_b_top10_beating_edm;
 const bottomA = D.mode_a_bottom5_random;
 const bottomB = D.mode_b_bottom5_random;
+const ciStraddles = (actual.total_value_ci80_low < 0 && actual.total_value_ci80_high > 0);
 
 function rankColor(pct) {
   if (pct >= 70) return BRAND.pos;
@@ -128,181 +127,299 @@ function rankColor(pct) {
   return BRAND.neg;
 }
 
-// ---------- I18N ----------
 const T = {
   fr: {
-    title: 'Le « rabais McDavid » de 7 M$ — Bowman l\'a-t-il bien dépensé?',
-    subtitle: 'Chronique stat · 1ᵉʳ mai 2026 · échantillon de 4 000 combinaisons aléatoires',
-    banner: 'Survol Lemieux · données ouvertes, lecture honnête, registre chronique.',
+    title: 'McDavid lui a donné 7 M$. Bowman les a-t-il jetés au gardien?',
+    subtitle: 'Chronique stat rigoureuse · 1ᵉʳ mai 2026 · GSAx + déploiement projeté + IC 80 %',
+    banner: 'Lemieux · données ouvertes, méthode documentée, conclusions honnêtes même quand elles dérangent.',
 
-    h_premise: 'Le tweet qui a parti la conversation',
+    h_premise: 'Le tweet qui nous a fait fouiller',
     premise_box: (
-      `**John Cullen (@cullenthecomic, 30 avril 2026)**:\n\n` +
-      `« I mean it was the most obvious thing imaginable but it remains awesome that ` +
-      `McDavid took roughly $7M under market value on his extension and Bowman spent that money ` +
+      `**John Cullen (@cullenthecomic, 30 avril 2026):**\n\n` +
+      `« McDavid took roughly $7M under market value on his extension and Bowman spent that money ` +
       `on Trent Frederic and the difference in cap hit between Stuart Skinner and Tristan Jarry. »\n\n` +
-      `Ce qu'on a fait : on a pris la donnée. Connor McDavid à 12,5 M$/an. Frederic à 3,85 M$. ` +
-      `Skinner (parti à PIT) à 2,6 M$. Jarry (arrivé à EDM) à 5,375 M$. Le « 7 M$ » de Cullen, dans ` +
-      `notre base de données, donne **6,625 M$** exactement (Frederic + (Jarry − Skinner)). ` +
-      `Et on s'est demandé : que vaut ce 6,625 M$ versus 4 000 combinaisons aléatoires de joueurs ` +
-      `LNH au même prix?`
+      `Question naïve mais utile : avec ce 6,625 M$ exactement (Frederic + (Jarry − Skinner)), ` +
+      `Bowman aurait pu acheter à peu près n'importe quoi dans la LNH. Donc on a fait à peu près ` +
+      `n'importe quoi — **4 000 fois** — et on a comparé. Cette version est la deuxième passe : ` +
+      `**plus rigoureuse**, avec GSAx, déploiement projeté joueur-par-joueur, et intervalles de ` +
+      `confiance à 80 % par-dessus tout.`
     ),
 
-    h_verdict: 'Le verdict en une phrase',
+    h_verdict: 'Le verdict, version honnête',
     verdict_box: (
-      `**Sur papier — strictement sur l'iso et le pourcentage d'arrêts regroupés des deux ` +
-      `dernières saisons (régulière + séries) — le choix d'EDM ressort à environ ` +
-      `${fmtFr(actual.total_value_xg, 1)} buts attendus par saison.** Mauvaise nouvelle : c'est ` +
-      `**négatif**, et ça classe au **${sumA.actual_percentile_rank.toFixed(0)}ᵉ centile** parmi 2 000 ` +
-      `combinaisons aléatoires de même structure (un attaquant + un changement de gardien). Autrement dit, ` +
-      `**${(100 - sumA.actual_percentile_rank).toFixed(0)} % des combinaisons aléatoires** au même prix produisaient une meilleure ` +
-      `valeur dans notre modèle. Le coupable principal n'est pas Frederic (essentiellement neutre, ` +
-      `${fmtFr(actual.skater_iso_net60, 3)} d'iso net60) — c'est **le gardien**. Jarry a un ` +
-      `% d'arrêts regroupé de ${actual.in_sv_pct.toFixed(4).replace('.', ',')}, Skinner de ${actual.out_sv_pct.toFixed(4).replace('.', ',')}. ` +
-      `Sur 1 500 tirs/saison, **changer Skinner pour Jarry coûte environ 5,8 buts encaissés en plus**. ` +
-      `Mais avant de crucifier Bowman, lis les mises en garde — ce n'est pas une note de DG, c'est un ` +
-      `contrefactuel.`
+      `**Valeur projetée du choix d'EDM : ${fmtFr(actual.total_value_xg, 1)} ± ${fmtFr(actual.total_value_se, 1)} buts attendus / saison.** ` +
+      `Intervalle de confiance à 80 % : **[${fmtFr(actual.total_value_ci80_low, 1)} ; ${fmtFr(actual.total_value_ci80_high, 1)}]**. ` +
+      `${ciStraddles ? '**L\'IC chevauche zéro** — direction négative claire, ampleur statistiquement floue. ' : '**L\'IC exclut zéro.** '}` +
+      `Sur 2 000 combinaisons aléatoires de même structure (1 attaquant + 1 changement de gardien), ` +
+      `EDM se classe au **${sumA.actual_percentile_rank.toFixed(0)}ᵉ centile** ` +
+      `(${(100 - sumA.actual_percentile_rank).toFixed(0)} % des permutations aléatoires produisaient plus de valeur).\n\n` +
+      `**Le coupable, ce n'est pas Frederic.** Son iso net60 de ${fmtFr(actual.skater_iso_net60, 3)} sur ` +
+      `${Math.round(actual.skater_pool_toi)} minutes pooled est essentiellement neutre. ` +
+      `À son déploiement projeté de ${Math.round(actual.skater_projected_5v5_min)} minutes, sa contribution est ` +
+      `${fmtFr(actual.skater_season_value_xg, 2)} ± ${fmtFr(actual.skater_season_value_se, 2)} xG. Pas un cadeau. Pas un problème.\n\n` +
+      `**Le coupable, c'est le gardien.** GSAx (saves above expected) ramène les deux gardiens sur la même règle ` +
+      `en ajustant pour la qualité des tirs subis. Sur les deux dernières saisons régulière + séries combinées : ` +
+      `Skinner a un GSAx/60 de **${fmtFr(actual.out_gsax_per_60, 3)}** (au-dessus de l'attendu) ; Jarry a ` +
+      `**${fmtFr(actual.in_gsax_per_60, 3)}** (en-dessous). À 3 000 minutes de référence (≈ 55 GP, partant 1A), ` +
+      `c'est **${fmtFr(actual.goalie_season_value_xg, 1)} ± ${fmtFr(actual.goalie_season_value_se, 1)} xG/saison** de coût. ` +
+      `Et tu paies ${dollarsFr(actual.goalie_aav_cost)} de plus pour ce « downgrade ».\n\n` +
+      `Avant de conclure « Bowman a fait pire que la moyenne aléatoire » : c'est un contrefactuel ` +
+      `mathématique, pas une note de DG. La méthodologie complète est en section 5.`
     ),
 
-    h_actual: '1 · Le choix réel d\'EDM, en chiffres',
-    actual_intro: 'Tirés directement de notre table player_contracts (CapWages) + skater_stats + goalie_stats (NST), regroupés sur 24-25 + 25-26 saison régulière + séries.',
+    h_actual: '1 · Le choix réel — démonté ligne par ligne',
+    actual_intro: ('Tout sort de notre table player_contracts (CapWages) jointe à skater_stats + ' +
+                   'goalie_stats (NST). Deux fenêtres : 24-25 + 25-26, saison régulière + séries.'),
+    th_component: 'Composante', th_cost: 'Coût annuel',
+    th_metric: 'Métrique', th_value: 'Valeur xG/saison ± SE',
+
+    h_methodology: '5 · Méthodologie — pourquoi ces choix, pas d\'autres',
+    methodology_intro: ('Pour que les chiffres veuillent dire quelque chose, il faut documenter ' +
+                       'les choix. Voici les nôtres, et pourquoi.'),
+    methodology_choice_skater_title: 'Côté patineur : iso net60 × déploiement projeté',
+    methodology_choice_skater: (
+      `**Métrique** : iso net60 = (xGF/60 quand le joueur est sur la glace) − (xGF/60 quand il n'y est pas), ` +
+      `moins la même chose pour les xGA. C'est un *delta* contre l'équipe sans lui — donc le bruit du ` +
+      `coéquipier de trio et du contexte d'équipe est partiellement isolé. C'est la métrique qu'utilise ` +
+      `le moteur d'échange Lemieux pour tous les autres scénarios.\n\n` +
+      `**Déploiement projeté** : on prend les minutes 5 c. 5 par match jouées du joueur en 25-26 saison régulière ` +
+      `et on multiplie par 82. Pour Frederic, ça donne ${Math.round(actual.skater_projected_5v5_min)} minutes (vs. l'option ` +
+      `« 1 000 minutes fixes » de la v1 du rapport). Plancher 300 / plafond 1 500 pour les outliers. C'est ` +
+      `joueur-par-joueur, pas une constante.\n\n` +
+      `**Variance** : approximation Poisson sur xGF + xGA. SE(iso_net60) ≈ √(xGF + xGA) × 60 / TOI. ` +
+      `Multipliée par les minutes projetées pour donner SE(season_value_xg).`
+    ),
+    methodology_choice_goalie_title: 'Côté gardien : GSAx, pas SV%',
+    methodology_choice_goalie: (
+      `**Pourquoi pas le SV% brut?** Parce qu'il ne tient pas compte de la qualité des tirs subis. Un gardien ` +
+      `derrière une bonne défense voit moins de chances de qualité ; son SV% paraît bon ` +
+      `pour une raison qui n'est pas son talent. Inversement, un gardien derrière une défense pourrie est ` +
+      `pénalisé. Le SV% brut compare deux taux dans des contextes différents.\n\n` +
+      `**GSAx (Goals Saved Above Expected)** = xGA − GA. C'est, pour chaque tir, l'écart entre la ` +
+      `probabilité que le tir rentre (selon le modèle xG de NST) et le résultat (0 ou 1). On somme. Si c'est ` +
+      `positif, le gardien a stoppé plus que la valeur attendue. Si c'est négatif, l'inverse. La métrique ` +
+      `est déjà ajustée pour la qualité des tirs ; on peut comparer directement deux gardiens.\n\n` +
+      `**Per-60** : on normalise par TOI, comme pour les patineurs. Δ GSAx/60 = GSAx/60 du gardien entrant ` +
+      `moins celui du sortant.\n\n` +
+      `**Référence TOI** : on multiplie le Δ GSAx/60 par 3 000 minutes (≈ 55 matchs joués, charge d'un partant 1A ` +
+      `dans un tandem). Choix défendable mais arbitraire — la sensibilité à ce paramètre est explicite ` +
+      `en section 4.\n\n` +
+      `**Variance** : approximation Poisson sur les buts accordés. SE(GSAx) ≈ √GA. Per-60 normalisé. La ` +
+      `variance combinée du Δ est √(SE_in² + SE_out²).`
+    ),
+    methodology_choice_combine_title: 'Combiner patineur + gardien : c\'est défendable parce que…',
+    methodology_choice_combine: (
+      `Les deux mesures se ramènent à la **même unité — buts attendus par saison** — par construction. ` +
+      `L'iso d'un patineur, multipliée par ses minutes, donne « buts attendus net cette saison à ce déploiement ». ` +
+      `Le Δ GSAx d'un gardien, multiplié par sa charge de tirs, donne « buts épargnés cette saison vs l'autre gardien ». ` +
+      `Les deux sont en **buts**. On peut les additionner sans commettre un crime contre la physique.\n\n` +
+      `Trois bémols qu'on assume :\n\n` +
+      `**(1)** L'iso ajuste pour le contexte d'équipe (on/off split). Le GSAx ajuste pour la qualité des tirs ` +
+      `mais pas pour le contexte d'équipe (ex: défense devant le gardien). On n'a pas la couche d'ajustement ` +
+      `parfaite. Les deux mesures sont les meilleures options publiques pour leur catégorie.\n\n` +
+      `**(2)** Le déploiement projeté pour les patineurs est joueur-par-joueur ; le déploiement de gardien est ` +
+      `une référence fixe (3 000 min). On a aussi calculé la sensibilité à 1 500, 2 000, 2 500, 3 500 — voir ` +
+      `section 4. Le verdict reste « négatif » dans tous les cas raisonnables.\n\n` +
+      `**(3)** L'IC à 80 % suppose l'indépendance entre patineur et gardien. C'est OK ici parce que Frederic ` +
+      `et Jarry n'ont rien à voir l'un avec l'autre. Si on comparait deux patineurs sur le même trio, il ` +
+      `faudrait modéliser la covariance — pas le cas ici.`
+    ),
 
     h_distribution: '2 · La distribution aléatoire — où atterrit EDM?',
     distribution_intro: (
-      `On a tiré **2 000 combinaisons aléatoires** au même budget (6,625 M$ ± 300 K$) ` +
-      `dans deux modes : (Mode A) un attaquant + une mise à niveau de gardien, comme EDM ; ` +
-      `(Mode B) un paquet de 1 à 3 attaquants seulement, sans toucher au gardien. ` +
-      `Pour chaque combinaison, on a calculé la même valeur (iso × ~1 000 minutes 5 c. 5/saison + diff de % d'arrêts × ~1 500 tirs).`
+      `Imagine un chapeau avec **424 attaquants LNH** entre 0,8 et 5 M$ et **55 gardiens** avec ≥ 50 GP ` +
+      `joués. On y a piqué 2 000 fois en deux modes :\n\n` +
+      `**Mode A** — un attaquant + une mise à niveau de gardien (la même structure qu'EDM).\n` +
+      `**Mode B** — juste 1 à 3 attaquants pour 6,625 M$, sans toucher au gardien.\n\n` +
+      `Pour chaque combinaison, on calcule la même valeur (iso × minutes projetées + Δ GSAx/60 × 3 000 min).`
     ),
 
-    h_top_alternatives: '3 · Les meilleures alternatives aléatoires',
+    h_sensitivity: '3 · Sensibilité au déploiement de gardien',
+    sensitivity_intro: (
+      `Le verdict change de combien si on suppose que Jarry partage le filet 50/50 avec Pickard ` +
+      `(2 000 min) ou s'il joue 60 GP solo (3 500 min)? Voici la sensibilité, avec IC 80 % à chaque ` +
+      `point. Le coût grandit avec la charge de travail — logique : plus Jarry voit de tirs, plus son ` +
+      `under-performance se manifeste en buts encaissés.`
+    ),
+
+    h_top: '4 · Les pires bons coups que Bowman aurait pu frapper',
     top_intro: (
-      `Voici les 5 combinaisons aléatoires qui battent le plus largement le choix d'EDM. ` +
-      `Important : ces noms ne sont **pas** des recommandations — ce sont des permutations ` +
-      `aléatoires que la machine a tirées du chapeau. La plupart impliquent des joueurs avec des ` +
-      `clauses de non-mouvement, des contrats RFA non négociables, ou des gardiens dont la valeur ` +
-      `est gonflée par un petit échantillon. Le but est de montrer la **forme** de la distribution, ` +
-      `pas de proposer des transactions.`
+      `Voici 5 combinaisons aléatoires qui battent EDM par une marge gênante. **Important** : ces noms ` +
+      `incluent presque tous Samuel Ersson dans la colonne « sortant ». Ersson est un gardien dont le ` +
+      `petit échantillon récent à PHI tire sa valeur vers le bas — donc « le remplacer par n'importe quoi » ` +
+      `gonfle artificiellement le Δ GSAx/60 du Mode A. C'est exactement le genre de biais d'échantillonnage ` +
+      `que les caveats en section 5 mentionnent. Lis ces lignes comme « voici la queue droite de la ` +
+      `distribution », pas « voici des transactions plausibles ».`
     ),
 
-    h_bottom: '4 · Pour la mise en perspective : les pires alternatives',
+    h_bottom: 'Pour le contexte — Bowman aurait pu faire pire',
     bottom_intro: (
-      `Pour montrer que c'est facile aussi de mal dépenser 6,6 M$ — voici les pires combinaisons ` +
-      `aléatoires. Ça aide à voir qu'EDM n'est pas catastrophique. Ils sont juste sous la médiane.`
+      `EDM n'est pas dans le caniveau. Voici les pires combinaisons aléatoires de notre tirage. ` +
+      `Quelqu'un peut spectaculairement claquer 6,6 M$ — Bowman ne l'a pas fait. Il a juste ` +
+      `mal investi un budget que McDavid lui a offert sur un plateau.`
     ),
 
-    h_caveats: '5 · Mises en garde — à lire avant de partager ce graphique sans contexte',
+    h_caveats: '6 · Mises en garde — à lire avant de partager ce graphique sans contexte',
     caveats: [
-      `**L'échantillon aléatoire suppose qu'EDM avait accès à n'importe quelle combinaison de joueurs LNH.** Faux : la plupart de ces joueurs avaient des clauses NMC/NTC, étaient sous contrat sans pouvoir être échangés, ou étaient des RFA avec leurs propres dynamiques de négociation. C'est un contrefactuel mathématique, pas un calendrier de transactions plausible.`,
-      `**Le % d'arrêts regroupé sur 4 fenêtres lisse beaucoup.** Jarry a eu de mauvais matchs récents qui pèsent dans son chiffre. Sur la prochaine saison, sa moyenne pourrait remonter (ou pas). Le modèle suppose la régression vers sa propre moyenne récente, pas vers une moyenne de carrière idéale.`,
-      `**L'iso de Frederic est neutre, pas négatif.** ${fmtFr(actual.skater_iso_net60, 3)} sur ${Math.round(actual.skater_pool_toi)} minutes. Ça veut dire que le « problème » du choix EDM, c'est principalement la dégradation au gardien — Frederic n'est pas l'éléphant dans la pièce.`,
-      `**On ne modélise pas la durée du contrat, l'âge, la chimie, le rôle, ou l'intangible.** Frederic peut être exactement le bon ajustement de vestiaire et l'iso ne le verra jamais. Le modèle est délibérément étroit pour pouvoir comparer 4 000 alternatives sur la même règle.`,
-      `**Et il y a aussi le côté positif évident** : EDM économise 7 M$ sur McDavid. Toute combinaison à 6,625 M$ qui ne perd pas de série de premier tour est une victoire de gestion de masse. Le modèle ne récompense pas ça — il regarde seulement la valeur xG d'une saison.`,
-    ],
-
-    h_what_unlocks: '6 · Ce que cette analyse débloque',
-    what_unlocks: [
-      `**Cap-aware swap engine** : propose-swap-scenario peut maintenant flagger « ce trade est cap-illégal » avant de projeter, et générer des alternatives au même budget.`,
-      `**Études value-vs-cost** par tranche de contrat : « les contrats UFA de 7 M$ sur 6+ ans produisent quoi en séries? »`,
-      `**Cohort-effects par strate de salaire** : comparer les comparables d'un joueur entre eux par classe de salaire — les warriors qui surperforment, mais à 3 M$ vs 7 M$.`,
-      `**Audit de signature** : pour n'importe quel contrat, classer le signataire dans la distribution de ce que le même argent aurait acheté.`,
+      `**Le sampler suppose qu'EDM pouvait piger n'importe quel joueur de la LNH.** Faux. La plupart de ces noms avaient des clauses NMC/NTC, étaient des RFA, ou étaient sous contrat ailleurs. Le contrefactuel teste la valeur du marché du salaire, pas la faisabilité d'un calendrier de transactions.`,
+      `**Les chiffres GSAx supposent que le modèle xG de NST est exact.** Il ne l'est pas — c'est un modèle parmi d'autres, avec ses biais. MoneyPuck, Evolving-Hockey ont leurs propres modèles xG qui donneraient des chiffres légèrement différents. On utilise NST parce que c'est notre source ; on l'admet.`,
+      `**Le pool de gardiens (≥ 50 GP) inclut des goalies dont la performance récente est volatile.** Samuel Ersson, Calvin Pickard, Anthony Stolarz — leurs GSAx pooled sur 4 fenêtres peuvent encore être trompeurs. Le filtre de 50 GP réduit le bruit mais ne l'élimine pas.`,
+      `**On ne modélise pas la durée du contrat, l'âge, la chimie, le rôle, ou l'intangible.** Frederic peut être exactement la voix manquante au vestiaire. Le modèle ne le verra jamais. Le but est de comparer 4 000 alternatives sur la même règle stricte, pas de capturer toute la complexité du métier de DG.`,
+      `**Et — surtout — EDM économise 7 M$ × 2 ans = 14 M$ de marge supplémentaire grâce au rabais McDavid.** Toute dépense à 6,625 M$ qui ne fait pas exploser le vestiaire est déjà un gain de gestion de masse. Le modèle ne récompense pas ça — il regarde seulement la valeur xG d'une saison.`,
     ],
 
     h_sources: 'Sources',
     sources: [
       ['Tweet original — John Cullen @cullenthecomic', 'https://x.com/cullenthecomic'],
       ['CapWages — données contractuelles LNH', 'https://capwages.com/'],
-      ['Natural Stat Trick — splits sur la glace + gardiens', 'https://www.naturalstattrick.com/'],
+      ['Natural Stat Trick — splits sur la glace + GSAx + xGA gardiens', 'https://www.naturalstattrick.com/'],
       ['Cadriciel ouvert Lemieux', 'https://github.com/lemieuxAI/framework-private'],
     ],
 
-    footer_left: 'Lemieux · chronique cap-efficiency · question Cullen',
+    footer_left: 'Lemieux · cap-efficiency rigoureux · question Cullen v2',
     footer_right: 'Page',
   },
   en: {
-    title: 'The McDavid $7M discount — did Bowman use it well?',
-    subtitle: 'Stat column · May 1, 2026 · 4 000-combination random sample',
-    banner: 'Lemieux brief · open data, honest read, column register.',
+    title: 'McDavid gave him $7M. Did Bowman throw it at the goalie?',
+    subtitle: 'Rigorous stat column · May 1, 2026 · GSAx + projected deployment + 80% CIs',
+    banner: 'Lemieux · open data, documented method, honest conclusions even when uncomfortable.',
 
     h_premise: 'The tweet that started this',
     premise_box: (
       `**John Cullen (@cullenthecomic, April 30, 2026):**\n\n` +
-      `"I mean it was the most obvious thing imaginable but it remains awesome that ` +
-      `McDavid took roughly $7M under market value on his extension and Bowman spent that money ` +
-      `on Trent Frederic and the difference in cap hit between Stuart Skinner and Tristan Jarry."\n\n` +
-      `What we did: pulled the data. Connor McDavid at $12.5M/year. Frederic at $3.85M. ` +
-      `Skinner (now in PIT) at $2.6M. Jarry (now in EDM) at $5.375M. Cullen's "$7M" works out to ` +
-      `**$6.625M** in our database (Frederic + (Jarry − Skinner)). And we asked: ` +
-      `what's that $6.625M worth versus 4 000 random NHL-player combinations at the same price?`
+      `"McDavid took roughly $7M under market value on his extension and Bowman spent that money on ` +
+      `Trent Frederic and the difference in cap hit between Stuart Skinner and Tristan Jarry."\n\n` +
+      `Naïve but useful question: with that exact $6.625M (Frederic + (Jarry − Skinner)), Bowman could ` +
+      `have bought just about anything in the NHL. So we did just about anything — **4 000 times** — ` +
+      `and compared. This version is the second pass: **rigorous**, with GSAx, per-player projected ` +
+      `deployment, and 80% confidence intervals throughout.`
     ),
 
-    h_verdict: 'The bottom line',
+    h_verdict: 'The bottom line, honestly',
     verdict_box: (
-      `**On paper — strictly by pooled iso and pooled save percentage from the last two seasons ` +
-      `(reg + playoff) — EDM's actual choice grades at about ${fmt(actual.total_value_xg, 1)} expected ` +
-      `goals per season.** Bad news: that's **negative**, and it ranks at the ` +
-      `**${sumA.actual_percentile_rank.toFixed(0)}th percentile** among 2 000 random combinations of the same ` +
-      `structure (one skater + one goalie change). Translation: ` +
-      `**${(100 - sumA.actual_percentile_rank).toFixed(0)}% of random combinations** at the same price produced ` +
-      `more value in our model. The main culprit isn't Frederic (essentially neutral, ` +
-      `${fmt(actual.skater_iso_net60, 3)} iso net60) — it's **the goalie change**. Jarry's pooled ` +
-      `SV% is ${actual.in_sv_pct.toFixed(4)}, Skinner's is ${actual.out_sv_pct.toFixed(4)}. Over 1 500 ` +
-      `shots-against per season, **swapping Skinner out for Jarry costs about 5.8 extra goals allowed**. ` +
-      `Before crucifying Bowman, read the caveats — this is a counterfactual, not a GM grade.`
+      `**Projected value of EDM's choice: ${fmt(actual.total_value_xg, 1)} ± ${fmt(actual.total_value_se, 1)} expected goals / season.** ` +
+      `80% CI: **[${fmt(actual.total_value_ci80_low, 1)}, ${fmt(actual.total_value_ci80_high, 1)}]**. ` +
+      `${ciStraddles ? '**The CI straddles zero** — direction is clearly negative, magnitude statistically uncertain. ' : '**The CI excludes zero.** '}` +
+      `Out of 2 000 random combinations of the same structure (1 skater + 1 goalie change), EDM ranks at the ` +
+      `**${sumA.actual_percentile_rank.toFixed(0)}th percentile** ` +
+      `(${(100 - sumA.actual_percentile_rank).toFixed(0)}% of random combinations produced more value).\n\n` +
+      `**Frederic isn't the culprit.** His iso net60 of ${fmt(actual.skater_iso_net60, 3)} over ` +
+      `${Math.round(actual.skater_pool_toi)} pooled minutes is essentially neutral. At his projected ` +
+      `${Math.round(actual.skater_projected_5v5_min)} 5v5 min, his contribution is ${fmt(actual.skater_season_value_xg, 2)} ± ` +
+      `${fmt(actual.skater_season_value_se, 2)} xG. Not a gift. Not a problem.\n\n` +
+      `**The culprit is the goalie.** GSAx (goals saved above expected) puts both goalies on the same ruler ` +
+      `by adjusting for shot quality. Over the last two reg + playoff seasons combined: Skinner has a ` +
+      `GSAx/60 of **${fmt(actual.out_gsax_per_60, 3)}** (above expected); Jarry has **${fmt(actual.in_gsax_per_60, 3)}** ` +
+      `(below). At 3 000 reference minutes (~ 55 GP, 1A starter), that's **${fmt(actual.goalie_season_value_xg, 1)} ± ` +
+      `${fmt(actual.goalie_season_value_se, 1)} xG/season** of cost. And you pay ${dollars(actual.goalie_aav_cost)} extra ` +
+      `for that "downgrade".\n\n` +
+      `Before concluding "Bowman did worse than the random average": this is a mathematical counterfactual, ` +
+      `not a GM grade. Full methodology in section 5.`
     ),
 
-    h_actual: '1 · EDM\'s actual choice, by the numbers',
-    actual_intro: 'Pulled directly from our player_contracts table (CapWages) + skater_stats + goalie_stats (NST), pooled across 24-25 + 25-26 reg + playoff windows.',
+    h_actual: '1 · The actual choice — broken down line by line',
+    actual_intro: ('Pulled from our player_contracts table (CapWages) joined with skater_stats + ' +
+                   'goalie_stats (NST). Two windows: 24-25 + 25-26, regular season + playoffs.'),
+    th_component: 'Component', th_cost: 'Annual cost',
+    th_metric: 'Metric', th_value: 'xG/season value ± SE',
+
+    h_methodology: '5 · Methodology — why these choices, not others',
+    methodology_intro: ('For the numbers to mean something, the choices must be documented. ' +
+                       'Here are ours, and why.'),
+    methodology_choice_skater_title: 'Skater side: iso net60 × projected deployment',
+    methodology_choice_skater: (
+      `**Metric**: iso net60 = (xGF/60 when the player is on the ice) − (xGF/60 when they're not), minus the ` +
+      `same thing for xGA. It's a *delta* against the team without them — so linemate noise and team-context ` +
+      `noise are partially isolated. It's the same metric the Lemieux swap engine uses for every other scenario.\n\n` +
+      `**Projected deployment**: we take the player's 25-26 reg-season 5v5 minutes per game and multiply by ` +
+      `82. For Frederic, that gives ${Math.round(actual.skater_projected_5v5_min)} minutes (vs the v1's "fixed 1 000 ` +
+      `minutes" assumption). Floor 300 / ceiling 1 500 for outliers. Player-by-player, not a constant.\n\n` +
+      `**Variance**: Poisson approximation on xGF + xGA. SE(iso_net60) ≈ √(xGF + xGA) × 60 / TOI. Multiplied ` +
+      `by the projected minutes to give SE(season_value_xg).`
+    ),
+    methodology_choice_goalie_title: 'Goalie side: GSAx, not SV%',
+    methodology_choice_goalie: (
+      `**Why not raw SV%?** Because it ignores shot quality. A goalie behind a strong defense sees fewer ` +
+      `high-danger chances; their SV% looks great for reasons unrelated to their talent. Conversely, a goalie ` +
+      `behind a bad defense gets penalized. Raw SV% compares two rates in different contexts.\n\n` +
+      `**GSAx (Goals Saved Above Expected)** = xGA − GA. For each shot, the gap between the probability ` +
+      `it goes in (per NST's xG model) and the result (0 or 1). Sum. Positive = goalie stopped more than ` +
+      `expected. Negative = the opposite. The metric is already shot-quality adjusted; we can compare ` +
+      `two goalies directly.\n\n` +
+      `**Per-60**: we normalize by TOI, like for skaters. Δ GSAx/60 = incoming goalie's GSAx/60 minus ` +
+      `outgoing goalie's.\n\n` +
+      `**Reference TOI**: we multiply Δ GSAx/60 by 3 000 minutes (~ 55 GP, 1A-in-tandem starter load). ` +
+      `Defensible but arbitrary choice — sensitivity to this parameter is explicit in section 3.\n\n` +
+      `**Variance**: Poisson approximation on goals allowed. SE(GSAx) ≈ √GA. Per-60 normalized. Combined ` +
+      `Δ variance is √(SE_in² + SE_out²).`
+    ),
+    methodology_choice_combine_title: 'Combining skater + goalie: it works because…',
+    methodology_choice_combine: (
+      `Both metrics reduce to the **same unit — expected goals per season** — by construction. A skater's iso ` +
+      `times their minutes gives "net expected goals this season at this deployment". A goalie's Δ GSAx ` +
+      `times their shot load gives "saved goals this season vs the other goalie". Both are in **goals**. ` +
+      `You can add them without committing a crime against physics.\n\n` +
+      `Three honest caveats:\n\n` +
+      `**(1)** Iso adjusts for team context (on/off split). GSAx adjusts for shot quality but not team ` +
+      `context (e.g., defense in front of the goalie). We don't have the perfect adjustment layer. Both ` +
+      `metrics are the best public options for their category.\n\n` +
+      `**(2)** Skater deployment is player-by-player; goalie deployment is a fixed reference (3 000 min). ` +
+      `We also computed sensitivity at 1 500, 2 000, 2 500, 3 500 — see section 3. The verdict stays "negative" ` +
+      `under all reasonable assumptions.\n\n` +
+      `**(3)** The 80% CI assumes independence between skater and goalie. That's fine here because Frederic ` +
+      `and Jarry have nothing to do with each other. If we were comparing two skaters on the same line, we'd ` +
+      `need to model covariance — not the case here.`
+    ),
 
     h_distribution: '2 · The random distribution — where does EDM land?',
     distribution_intro: (
-      `We sampled **2 000 random combinations** at the same budget ($6.625M ± $300K) in ` +
-      `two modes: (Mode A) one skater + one goalie upgrade, like EDM; (Mode B) a bundle of 1-3 ` +
-      `skaters with no goalie change. For each combination, we computed the same value metric ` +
-      `(iso × ~1 000 5v5 minutes/season + goalie-SV%-diff × ~1 500 shots-against).`
+      `Imagine a hat with **424 NHL skaters** between $0.8M-$5M and **55 goalies** with ≥ 50 GP played. ` +
+      `We pulled from it 2 000 times in two modes:\n\n` +
+      `**Mode A** — one skater + one goalie change (same structure as EDM).\n` +
+      `**Mode B** — 1-3 skaters totaling $6.625M, no goalie change.\n\n` +
+      `For each combination we compute the same value (iso × projected min + Δ GSAx/60 × 3 000 min).`
     ),
 
-    h_top_alternatives: '3 · The best random alternatives',
+    h_sensitivity: '3 · Goalie deployment sensitivity',
+    sensitivity_intro: (
+      `How does the verdict change if Jarry splits the net 50/50 with Pickard (2 000 min) or plays 60 GP solo ` +
+      `(3 500 min)? Here's the sensitivity, with 80% CI at each point. The cost grows with the workload — ` +
+      `obvious: the more shots Jarry sees, the more his under-performance shows up as goals allowed.`
+    ),
+
+    h_top: '4 · The "almost-good" alternatives Bowman could have grabbed',
     top_intro: (
-      `Here are the 5 random combinations that beat EDM's choice by the widest margin. Important: ` +
-      `these names are **not** recommendations — they're permutations the machine pulled out of ` +
-      `the hat. Most involve players with no-movement clauses, untradeable RFA contracts, or goalies ` +
-      `whose value is inflated by small samples. The point is to show the **shape** of the distribution, ` +
-      `not to suggest trades.`
+      `Here are 5 random combinations that beat EDM by an embarrassing margin. **Important**: almost all ` +
+      `of these include Samuel Ersson in the "outgoing goalie" column. Ersson is a goalie whose recent ` +
+      `small-sample performance at PHI drags his value down — so "replace him with anything" artificially ` +
+      `inflates the Mode A Δ GSAx/60. This is exactly the sampling bias the section 5 caveats mention. ` +
+      `Read these as "here's the right tail of the distribution", not "here are plausible trades".`
     ),
 
-    h_bottom: '4 · For perspective — the worst random alternatives',
+    h_bottom: 'For perspective — Bowman could have done worse',
     bottom_intro: (
-      `To show that it\'s also easy to spend $6.6M badly — here are the worst random combos. ` +
-      `It helps see that EDM isn\'t catastrophic. They\'re just below the median.`
+      `EDM isn't in the gutter. Here are the worst random combos from our pull. Someone could ` +
+      `spectacularly blow $6.6M — Bowman didn't. He just badly invested a budget McDavid handed him on a plate.`
     ),
 
-    h_caveats: '5 · Caveats — read these before sharing the chart out of context',
+    h_caveats: '6 · Caveats — read these before sharing the chart out of context',
     caveats: [
-      `**The random sample assumes EDM had access to any league-wide combination.** False: most of those players had NMC/NTC, were locked into deals that couldn't be moved, or were RFAs with their own negotiation dynamics. This is a mathematical counterfactual, not a plausible transaction calendar.`,
-      `**Pooled SV% over 4 windows smooths a lot.** Jarry has had bad recent stretches that pull his number down. Next season he might revert (or not). The model assumes regression to his own recent mean, not toward an idealized career baseline.`,
-      `**Frederic's iso is neutral, not negative.** ${fmt(actual.skater_iso_net60, 3)} over ${Math.round(actual.skater_pool_toi)} minutes. So the "problem" with EDM's choice is mostly the goalie downgrade — Frederic isn't the elephant in the room.`,
-      `**We don't model contract length, age, chemistry, role, or intangibles.** Frederic might be exactly the right room fit and the iso will never see it. The model is deliberately narrow so we can compare 4 000 alternatives on the same yardstick.`,
-      `**And there's also the obvious positive side**: EDM saves $7M on McDavid. Any $6.625M combination that doesn't lose a Round 1 series is a cap-management win. The model doesn't reward that — it only looks at one season's xG value.`,
-    ],
-
-    h_what_unlocks: '6 · What this analysis unlocks',
-    what_unlocks: [
-      `**Cap-aware swap engine**: propose-swap-scenario can now flag "this trade is cap-illegal" before projecting, and generate alternative-budget combinations.`,
-      `**Value-vs-cost cohort studies** by contract band: "what do $7M UFA deals on 6+ years produce in playoffs?"`,
-      `**Cohort effects by salary stratum**: compare a player's comparables within their salary class — warriors who outperform, but at $3M vs $7M.`,
-      `**Signing-audit framing**: for any contract, rank the signing in the distribution of what the same money could have bought.`,
+      `**The sampler assumes EDM could pull any NHL player.** False. Most of these names had NMC/NTC clauses, were RFAs, or were under contract elsewhere. The counterfactual tests salary-market value, not transaction calendar feasibility.`,
+      `**The GSAx numbers assume NST's xG model is correct.** It isn't — it's one model among others, with its own biases. MoneyPuck and Evolving-Hockey have their own xG models that would give slightly different numbers. We use NST because it's our source; we admit it.`,
+      `**The goalie pool (≥ 50 GP) includes goalies whose recent performance is volatile.** Samuel Ersson, Calvin Pickard, Anthony Stolarz — their pooled GSAx over 4 windows can still mislead. The 50-GP filter reduces noise but doesn't eliminate it.`,
+      `**We don't model contract length, age, chemistry, role, or intangibles.** Frederic might be exactly the missing voice in the room. The model will never see it. The point is to compare 4 000 alternatives on the same strict ruler, not to capture all the complexity of GM-ing.`,
+      `**And — most importantly — EDM saves $7M × 2 years = $14M of extra cap room from the McDavid discount.** Any $6.625M spend that doesn't blow up the room is already a cap-management win. The model doesn't reward that — it only looks at one season's xG value.`,
     ],
 
     h_sources: 'Sources',
     sources: [
       ['Original tweet — John Cullen @cullenthecomic', 'https://x.com/cullenthecomic'],
       ['CapWages — NHL contract data', 'https://capwages.com/'],
-      ['Natural Stat Trick — on-ice + goalie splits', 'https://www.naturalstattrick.com/'],
+      ['Natural Stat Trick — on-ice + GSAx + xGA goalie splits', 'https://www.naturalstattrick.com/'],
       ['Lemieux open-source framework', 'https://github.com/lemieuxAI/framework-private'],
     ],
 
-    footer_left: 'Lemieux · cap-efficiency column · Cullen question',
+    footer_left: 'Lemieux · rigorous cap-efficiency · Cullen question v2',
     footer_right: 'Page',
   },
 };
@@ -326,79 +443,66 @@ function titleBlock(t) {
   ];
 }
 
-function premiseSection(t) {
-  return [h1(t.h_premise, BRAND.navy), calloutBox(t.premise_box, BRAND.gold)];
-}
-
+function premiseSection(t) { return [h1(t.h_premise), calloutBox(t.premise_box, BRAND.gold)]; }
 function verdictSection(t) {
   return [h1(t.h_verdict, BRAND.red),
           calloutBox(t.verdict_box, rankColor(sumA.actual_percentile_rank))];
 }
 
 function actualSection(t, lang) {
-  const dol = lang === 'fr' ? dollarsFr : dollars;
   const fmtN = lang === 'fr' ? fmtFr : fmt;
+  const dol = lang === 'fr' ? dollarsFr : dollars;
   const rows = [
     [
-      lang === 'fr' ? 'Frederic — attaquant entrant' : 'Frederic — incoming skater',
+      'Frederic',
       dol(actual.skater_aav),
-      `${fmtN(actual.skater_iso_net60, 3)}`,
-      `${fmtN(actual.skater_season_value_xg, 2)}`,
+      `iso ${fmtN(actual.skater_iso_net60, 3)}, déploiement ${Math.round(actual.skater_projected_5v5_min)} min`,
+      `${fmtN(actual.skater_season_value_xg, 2)} ± ${fmtN(actual.skater_season_value_se, 2)}`,
     ],
     [
-      lang === 'fr' ? 'Jarry — gardien entrant' : 'Jarry — incoming goalie',
-      dol(5375000),  // Jarry AAV
-      `SV% ${actual.in_sv_pct.toFixed(4).replace('.', lang === 'fr' ? ',' : '.')}`,
+      'Jarry (in)',
+      dol(5375000),
+      `GSAx/60 ${fmtN(actual.in_gsax_per_60, 3)}, pool ${Math.round(actual.in_toi)} min, ${actual.in_ga} GA`,
       '—',
     ],
     [
-      lang === 'fr' ? 'Skinner — gardien sortant' : 'Skinner — outgoing goalie',
+      'Skinner (out)',
       dol(2600000),
-      `SV% ${actual.out_sv_pct.toFixed(4).replace('.', lang === 'fr' ? ',' : '.')}`,
+      `GSAx/60 ${fmtN(actual.out_gsax_per_60, 3)}, pool ${Math.round(actual.out_toi)} min, ${actual.out_ga} GA`,
       '—',
     ],
     [
-      lang === 'fr' ? 'Δ gardien (entrant − sortant)' : 'Δ goalie (in − out)',
+      `Δ ${lang === 'fr' ? 'gardien' : 'goalie'}`,
       dol(actual.goalie_aav_cost),
-      `Δ SV% ${fmtN(actual.diff_sv_pct, 4)}`,
-      `${fmtN(actual.goalie_season_value_xg, 2)}`,
+      `Δ GSAx/60 ${fmtN(actual.diff_gsax_per_60, 3)} × ${Math.round(actual.goalie_reference_toi)} min ref.`,
+      `${fmtN(actual.goalie_season_value_xg, 2)} ± ${fmtN(actual.goalie_season_value_se, 2)}`,
     ],
     [
-      { runs: [new TextRun({ text: lang === 'fr' ? 'TOTAL' : 'TOTAL', bold: true, font: 'Arial', size: 16, color: BRAND.ink })] },
+      { runs: [new TextRun({ text: 'TOTAL', bold: true, font: 'Arial', size: 16, color: BRAND.ink })] },
       { runs: [new TextRun({ text: dol(actual.total_cost), bold: true, font: 'Arial', size: 16, color: BRAND.ink })] },
-      '',
-      { runs: [new TextRun({ text: fmtN(actual.total_value_xg, 2), bold: true, font: 'Arial', size: 16, color: BRAND.ink })] },
+      { runs: [new TextRun({ text: `IC 80 % [${fmtN(actual.total_value_ci80_low, 2)} ; ${fmtN(actual.total_value_ci80_high, 2)}]`, italics: true, font: 'Arial', size: 16, color: BRAND.mute })] },
+      { runs: [new TextRun({ text: `${fmtN(actual.total_value_xg, 2)} ± ${fmtN(actual.total_value_se, 2)}`, bold: true, font: 'Arial', size: 16, color: BRAND.ink })] },
     ],
   ];
   return [
     h1(t.h_actual), para(t.actual_intro, { italics: true }),
     dataTable(
-      [lang === 'fr' ? 'Composante' : 'Component',
-       lang === 'fr' ? 'Coût annuel' : 'Annual cost',
-       lang === 'fr' ? 'Iso ou SV%' : 'Iso or SV%',
-       lang === 'fr' ? 'Valeur xG/saison' : 'xG value/season'],
-      rows.map(r => Array.isArray(r) ? { cells: r.map(c => typeof c === 'string' ? c : c) } : r),
-      [3500, 2500, 2500, 1500]
+      [t.th_component, t.th_cost, t.th_metric, t.th_value],
+      rows.map(r => Array.isArray(r) ? { cells: r } : r),
+      [2000, 1700, 4500, 2000]
     ),
   ];
 }
 
 function distributionSection(t, lang) {
   const fmtN = lang === 'fr' ? fmtFr : fmt;
-  const tA = sumA;
-  const tB = sumB;
-  // Build one combined view
+  const tA = sumA, tB = sumB;
   const rows = [
-    [lang === 'fr' ? '10ᵉ centile (mauvais)' : '10th percentile (bad)',
-     fmtN(tA.p10, 2), fmtN(tB.p10, 2)],
-    [lang === 'fr' ? '25ᵉ centile' : '25th percentile',
-     fmtN(tA.p25, 2), fmtN(tB.p25, 2)],
-    [lang === 'fr' ? 'Médiane' : 'Median',
-     fmtN(tA.median, 2), fmtN(tB.median, 2)],
-    [lang === 'fr' ? '75ᵉ centile' : '75th percentile',
-     fmtN(tA.p75, 2), fmtN(tB.p75, 2)],
-    [lang === 'fr' ? '90ᵉ centile (excellent)' : '90th percentile (excellent)',
-     fmtN(tA.p90, 2), fmtN(tB.p90, 2)],
+    [lang === 'fr' ? '10ᵉ centile' : '10th percentile', fmtN(tA.p10, 2), fmtN(tB.p10, 2)],
+    [lang === 'fr' ? '25ᵉ centile' : '25th percentile', fmtN(tA.p25, 2), fmtN(tB.p25, 2)],
+    [lang === 'fr' ? 'Médiane' : 'Median', fmtN(tA.median, 2), fmtN(tB.median, 2)],
+    [lang === 'fr' ? '75ᵉ centile' : '75th percentile', fmtN(tA.p75, 2), fmtN(tB.p75, 2)],
+    [lang === 'fr' ? '90ᵉ centile' : '90th percentile', fmtN(tA.p90, 2), fmtN(tB.p90, 2)],
     [
       { runs: [new TextRun({ text: lang === 'fr' ? 'EDM (rang centile)' : 'EDM (percentile rank)', bold: true, font: 'Arial', size: 16, color: BRAND.red })] },
       { runs: [new TextRun({ text: `${tA.actual_percentile_rank.toFixed(0)}ᵉ`, bold: true, font: 'Arial', size: 16, color: BRAND.red })] },
@@ -406,82 +510,97 @@ function distributionSection(t, lang) {
     ],
   ];
   return [
-    h1(t.h_distribution),
-    para(t.distribution_intro, { italics: true }),
+    h1(t.h_distribution), para(t.distribution_intro, { italics: true }),
     dataTable(
       [lang === 'fr' ? 'Centile' : 'Percentile',
-       lang === 'fr' ? 'Mode A (att. + diff gardien)' : 'Mode A (skater + goalie diff)',
-       lang === 'fr' ? 'Mode B (1-3 attaquants)' : 'Mode B (1-3 skaters)'],
-      rows, [3500, 3500, 3500]
+       lang === 'fr' ? 'Mode A (att. + Δ gardien)' : 'Mode A (skater + goalie Δ)',
+       lang === 'fr' ? 'Mode B (1-3 patineurs)' : 'Mode B (1-3 skaters)'],
+      rows.map(r => Array.isArray(r) ? { cells: r } : r),
+      [3500, 3500, 3500]
+    ),
+  ];
+}
+
+function sensitivitySection(t, lang) {
+  const fmtN = lang === 'fr' ? fmtFr : fmt;
+  const rows = Object.entries(sens).map(([ref, v]) => {
+    const interp = ref === '1500' ? (lang === 'fr' ? 'remplaçant léger' : 'occasional backup')
+      : ref === '2000' ? (lang === 'fr' ? '1A en tandem 50/50' : '1A in 50/50 tandem')
+      : ref === '2500' ? (lang === 'fr' ? 'partant ~45 matchs' : 'starter ~45 GP')
+      : ref === '3000' ? (lang === 'fr' ? 'partant ~55 matchs (référence)' : 'starter ~55 GP (reference)')
+      : ref === '3500' ? (lang === 'fr' ? 'cheval de trait, ~60-65 matchs' : 'workhorse ~60-65 GP')
+      : '';
+    return [
+      `${ref} min`, interp,
+      `${fmtN(v.season_value_xg, 2)} ± ${fmtN(v.season_value_se, 2)}`,
+      `[${fmtN(v.ci80[0], 2)} ; ${fmtN(v.ci80[1], 2)}]`,
+    ];
+  });
+  return [
+    h1(t.h_sensitivity), para(t.sensitivity_intro, { italics: true }),
+    dataTable(
+      [lang === 'fr' ? 'TOI référence' : 'Reference TOI',
+       lang === 'fr' ? 'Interprétation' : 'Interpretation',
+       lang === 'fr' ? 'Valeur ± SE' : 'Value ± SE',
+       lang === 'fr' ? 'IC 80 %' : '80% CI'],
+      rows, [1500, 3500, 2500, 3000]
     ),
   ];
 }
 
 function topAlternativesSection(t, lang) {
   const fmtN = lang === 'fr' ? fmtFr : fmt;
-
   const rowsA = topA.slice(0, 5).map(c => [
-    `${c.skater}`,
-    `${c.in_goalie} ↑↑ ${c.out_goalie}`,
-    fmtN(c.season_value_xg, 2),
+    c.skater, `${c.in_goalie} ↑↑ ${c.out_goalie}`,
+    `${fmtN(c.season_value_xg, 2)} ± ${fmtN(c.season_value_se, 2)}`,
   ]);
   const rowsB = topB.slice(0, 5).map(c => [
     c.players.join(' + '),
-    fmtN(c.season_value_xg, 2),
+    `${fmtN(c.season_value_xg, 2)} ± ${fmtN(c.season_value_se, 2)}`,
   ]);
-
   return [
-    h1(t.h_top_alternatives),
-    para(t.top_intro, { italics: true }),
+    h1(t.h_top), para(t.top_intro, { italics: true }),
     h2(lang === 'fr' ? 'Top 5 — Mode A' : 'Top 5 — Mode A'),
     dataTable(
       [lang === 'fr' ? 'Attaquant' : 'Skater',
        lang === 'fr' ? 'Échange de gardien' : 'Goalie swap',
-       lang === 'fr' ? 'Valeur xG' : 'xG value'],
-      rowsA, [3500, 5500, 1500]
+       lang === 'fr' ? 'Valeur ± SE' : 'Value ± SE'],
+      rowsA, [3000, 5500, 2000]
     ),
     h2(lang === 'fr' ? 'Top 5 — Mode B' : 'Top 5 — Mode B'),
     dataTable(
-      [lang === 'fr' ? 'Combinaison de patineurs' : 'Skater combo',
-       lang === 'fr' ? 'Valeur xG' : 'xG value'],
-      rowsB, [8500, 2000]
+      [lang === 'fr' ? 'Combinaison' : 'Combo',
+       lang === 'fr' ? 'Valeur ± SE' : 'Value ± SE'],
+      rowsB, [8000, 2500]
+    ),
+    h2(t.h_bottom), para(t.bottom_intro, { italics: true }),
+    dataTable(
+      [lang === 'fr' ? 'Mode' : 'Mode',
+       lang === 'fr' ? 'Combinaison' : 'Combo',
+       lang === 'fr' ? 'Valeur ± SE' : 'Value ± SE'],
+      [
+        ...bottomA.slice(0, 3).map(c => ['A', `${c.skater} + ${c.in_goalie} ↑↑ ${c.out_goalie}`, `${fmtN(c.season_value_xg, 2)} ± ${fmtN(c.season_value_se, 2)}`]),
+        ...bottomB.slice(0, 3).map(c => ['B', c.players.join(' + '), `${fmtN(c.season_value_xg, 2)} ± ${fmtN(c.season_value_se, 2)}`]),
+      ],
+      [800, 7700, 2000]
     ),
   ];
 }
 
-function bottomSection(t, lang) {
-  const fmtN = lang === 'fr' ? fmtFr : fmt;
-  const rowsA = bottomA.slice(0, 3).map(c => [
-    `${c.skater}`,
-    `${c.in_goalie} ↑↑ ${c.out_goalie}`,
-    fmtN(c.season_value_xg, 2),
-  ]);
-  const rowsB = bottomB.slice(0, 3).map(c => [
-    c.players.join(' + '),
-    fmtN(c.season_value_xg, 2),
-  ]);
+function methodologySection(t) {
   return [
-    h1(t.h_bottom),
-    para(t.bottom_intro, { italics: true }),
-    h2(lang === 'fr' ? 'Bottom 3 — Mode A' : 'Bottom 3 — Mode A'),
-    dataTable(
-      [lang === 'fr' ? 'Attaquant' : 'Skater',
-       lang === 'fr' ? 'Échange de gardien' : 'Goalie swap',
-       lang === 'fr' ? 'Valeur xG' : 'xG value'],
-      rowsA, [3500, 5500, 1500]
-    ),
-    h2(lang === 'fr' ? 'Bottom 3 — Mode B' : 'Bottom 3 — Mode B'),
-    dataTable(
-      [lang === 'fr' ? 'Combinaison' : 'Combo',
-       lang === 'fr' ? 'Valeur xG' : 'xG value'],
-      rowsB, [8500, 2000]
-    ),
+    h1(t.h_methodology),
+    para(t.methodology_intro, { italics: true }),
+    h2(t.methodology_choice_skater_title),
+    para(t.methodology_choice_skater),
+    h2(t.methodology_choice_goalie_title),
+    para(t.methodology_choice_goalie),
+    h2(t.methodology_choice_combine_title),
+    para(t.methodology_choice_combine),
   ];
 }
 
 function caveatsSection(t) { return [h1(t.h_caveats), ...bulletList(t.caveats)]; }
-function unlocksSection(t) { return [h1(t.h_what_unlocks), ...bulletList(t.what_unlocks)]; }
-
 function sourcesSection(t) {
   const out = [h1(t.h_sources)];
   for (const [txt, url] of t.sources) {
@@ -553,14 +672,15 @@ function buildDoc(lang) {
         ...verdictSection(t),
         new Paragraph({ children: [new PageBreak()] }),
         ...actualSection(t, lang),
+        new Paragraph({ children: [new PageBreak()] }),
         ...distributionSection(t, lang),
+        ...sensitivitySection(t, lang),
         new Paragraph({ children: [new PageBreak()] }),
         ...topAlternativesSection(t, lang),
         new Paragraph({ children: [new PageBreak()] }),
-        ...bottomSection(t, lang),
-        ...caveatsSection(t),
+        ...methodologySection(t),
         new Paragraph({ children: [new PageBreak()] }),
-        ...unlocksSection(t),
+        ...caveatsSection(t),
         ...sourcesSection(t),
       ],
     }],
