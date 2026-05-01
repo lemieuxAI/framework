@@ -27,6 +27,16 @@ This file lists every data source Lemieux actually connects to today. Sources we
 - **Safe to cache**: Yes; TTL by staleness (live games 6h, completed 7d, historical 30d).
 - **Key handling**: Each user supplies their own key via `.env`. Never commit a key. Never share across users.
 
+## CapWages (`capwages.com`)
+
+- **What's there**: NHL contract + salary cap data — AAV, current-season cap hit, year-by-year salary breakdown, total contract value, expiry status (UFA/RFA), clauses (NMC / M-NTC / NTC / 10-team etc.), signing dates, signing teams. Team pages also surface team-level totals (cap hit, cap space, playoff cap, upper / lower limits).
+- **Access**: Free, public-facing site. No API key. Server-rendered Next.js pages with a `__NEXT_DATA__` JSON blob that the connector parses (much more stable than HTML-table scraping).
+- **Rate limit**: `robots.txt` permits all crawlers (`Allow: /`). We default to 1 req/sec with 24h cache TTL — the data changes only on signing days. Be polite anyway.
+- **Redistribution**: Cite source. Do not republish raw tables. Derived analyses (e.g., "this swap is cap-illegal" callouts in the swap engine) are the intended use.
+- **Connector**: `lemieux-connectors/capwages`
+- **Safe to cache**: Yes; default 24h TTL.
+- **Stability**: Site is run by a small operator post-CapFriendly. If they migrate away from Next.js, the parser will raise a clear error pointing at the missing `__NEXT_DATA__` script tag.
+
 ## DuckDuckGo search + Anthropic API — for the GenAI scouting layer
 
 - **What's there**: DDG returns short snippets from public web pages (player profiles, beat coverage, scouting reports). Anthropic's Claude Sonnet 4.5 extracts a structured JSON profile (continuous attributes + archetype tags + comparable mentions) from those snippets.

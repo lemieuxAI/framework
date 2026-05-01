@@ -90,6 +90,31 @@ CREATE TABLE IF NOT EXISTS quotes (
     entered_by TEXT,
     entered_at TEXT DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE IF NOT EXISTS player_contracts (
+    player_name TEXT NOT NULL,
+    player_slug TEXT NOT NULL,
+    team TEXT,
+    position TEXT,
+    age INTEGER,
+    contract_signed_date TEXT,
+    contract_length_years INTEGER,
+    aav REAL,
+    cap_hit REAL,
+    total_value REAL,
+    expiry_status TEXT,
+    clause TEXT,
+    roster_group TEXT,         -- forwards, defense, goalies, non-roster
+    status TEXT,                -- NHL, IR, AHL, etc
+    acquired TEXT,              -- Trade, Draft, Signing, Waivers
+    team_cap_hit_total REAL,    -- snapshot at fetch time
+    team_cap_space REAL,
+    team_upper_limit REAL,
+    team_playoff_cap REAL,
+    source_url TEXT,
+    fetched_at TEXT,
+    PRIMARY KEY (player_slug, contract_signed_date)
+);
 """
 
 

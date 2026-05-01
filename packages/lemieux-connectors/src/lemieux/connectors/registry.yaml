@@ -22,6 +22,15 @@ connectors:
     description_en: "Natural Stat Trick advanced stats (team, skater, goalie, line combos)."
     description_fr: "Statistiques avancées Natural Stat Trick (équipe, joueur, gardien, trios)."
 
+  - id: capwages
+    module: lemieux.connectors.capwages
+    class: CapWagesClient
+    status: stable
+    key_required: false
+    rate_limit_per_sec: 1
+    description_en: "CapWages.com — NHL contract + salary cap data (AAV, cap hit, expiry, clauses)."
+    description_fr: "CapWages.com — Contrats et plafond salarial LNH (AAV, impact masse, statut, clauses)."
+
   - id: moneypuck
     status: roadmap
     description_en: "CSV exports of MoneyPuck's independent xG model. (Planned)"
