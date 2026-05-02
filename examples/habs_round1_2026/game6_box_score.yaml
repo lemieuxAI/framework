@@ -1,0 +1,142 @@
+# Game 6 box score — TBL @ MTL, 2026-05-01.
+# Source: NHL.com recap + ESPN + CBS Sports box score, fetched morning-after.
+# This yaml is the authoritative fact base for the post-game brief.
+
+game_id: "2025030126"
+date: "2026-05-01"
+matchup: "TBL @ MTL"
+final_score: "TBL 1 - MTL 0 (OT)"
+result: "TBL win"
+series_state_after_game: "Series tied 3-3, Game 7 in Tampa May 3"
+venue: "Bell Centre, Montreal"
+
+# Per-team aggregate
+team_stats:
+  MTL:
+    goals: 0
+    shots: 30
+    hits: 49
+    pim: 10
+    pp_attempts: 4
+    pp_goals: 0
+    faceoff_win_pct: 50.8
+  TBL:
+    goals: 1
+    shots: 33
+    hits: 36
+    pim: 12
+    pp_attempts: 4
+    pp_goals: 0
+    faceoff_win_pct: 49.2
+
+periods:
+  - { period: 1, mtl_g: 0, tbl_g: 0 }
+  - { period: 2, mtl_g: 0, tbl_g: 0 }
+  - { period: 3, mtl_g: 0, tbl_g: 0 }
+  - { period: 'OT', mtl_g: 0, tbl_g: 1 }
+
+# Goal sequence (only one goal scored this game)
+goal_sequence:
+  - period: 'OT'
+    time_in_period: "09:03"
+    team: "TBL"
+    scorer: "Gage Goncalves"
+    primary_assist: "Dominic James"
+    secondary_assist: "Brandon Hagel"
+    situation: "5v5"
+    note: "Loose puck in the crease after TBL killed off a Kucherov tripping minor. Goncalves' 2nd goal in 2 games — also scored TBL's only goal in G5."
+
+# Goalies
+goalies:
+  MTL:
+    name: "Jakub Dobeš"
+    shots_against: 33
+    saves: 32
+    goals_against: 1
+    sv_pct: 0.970
+    toi: "69:03"
+  TBL:
+    name: "Andrei Vasilevskiy"
+    shots_against: 30
+    saves: 30
+    goals_against: 0
+    sv_pct: 1.000
+    toi: "69:03"
+    note: "8th career Stanley Cup Playoff shutout. Bounced back from .875 in G5."
+
+# Skater box score
+skaters:
+  MTL:
+    - { name: "Lane Hutson",         pos: "D", g: 0, a: 0, plus_minus: 0,  sog: 2, toi: "30:44", hits: 0, pim: 0 }
+    - { name: "Mike Matheson",       pos: "D", g: 0, a: 0, plus_minus: 0,  sog: 0, toi: "28:47", hits: 1, pim: 0 }
+    - { name: "Nick Suzuki",         pos: "C", g: 0, a: 0, plus_minus: 0,  sog: 0, toi: "24:55", hits: 3, pim: 0 }
+    - { name: "Alexandre Carrier",   pos: "D", g: 0, a: 0, plus_minus: 0,  sog: 0, toi: "24:29", hits: 1, pim: 0 }
+    - { name: "Kaiden Guhle",        pos: "D", g: 0, a: 0, plus_minus: -1, sog: 1, toi: "24:14", hits: 3, pim: 2 }
+    - { name: "Juraj Slafkovský",    pos: "L", g: 0, a: 0, plus_minus: 0,  sog: 2, toi: "22:31", hits: 3, pim: 0 }
+    - { name: "Cole Caufield",       pos: "R", g: 0, a: 0, plus_minus: 0,  sog: 4, toi: "19:41", hits: 2, pim: 0 }
+    - { name: "Phillip Danault",     pos: "C", g: 0, a: 0, plus_minus: 0,  sog: 2, toi: "19:31", hits: 3, pim: 0 }
+    - { name: "Josh Anderson",       pos: "R", g: 0, a: 0, plus_minus: 0,  sog: 3, toi: "18:53", hits: 9, pim: 0 }
+    - { name: "Ivan Demidov",        pos: "R", g: 0, a: 0, plus_minus: 0,  sog: 5, toi: "17:38", hits: 1, pim: 2 }
+    - { name: "Alexandre Texier",    pos: "L", g: 0, a: 0, plus_minus: -1, sog: 3, toi: "17:05", hits: 1, pim: 2 }
+    - { name: "Jake Evans",          pos: "C", g: 0, a: 0, plus_minus: 0,  sog: 2, toi: "16:08", hits: 6, pim: 0 }
+    - { name: "Zachary Bolduc",      pos: "C", g: 0, a: 0, plus_minus: -1, sog: 3, toi: "15:39", hits: 3, pim: 0 }
+    - { name: "Alex Newhook",        pos: "C", g: 0, a: 0, plus_minus: 0,  sog: 1, toi: "14:31", hits: 0, pim: 0 }
+    - { name: "Jayden Struble",      pos: "D", g: 0, a: 0, plus_minus: -1, sog: 0, toi: "12:55", hits: 5, pim: 2 }
+    - { name: "Kirby Dach",          pos: "C", g: 0, a: 0, plus_minus: -1, sog: 1, toi: "12:09", hits: 0, pim: 0 }
+    - { name: "Arber Xhekaj",        pos: "D", g: 0, a: 0, plus_minus: -1, sog: 1, toi: "11:46", hits: 7, pim: 0 }
+    - { name: "Brendan Gallagher",   pos: "R", g: 0, a: 0, plus_minus: 0,  sog: 0, toi: "05:39", hits: 2, pim: 0 }
+  TBL:
+    - { name: "Brandon Hagel",       pos: "L", g: 0, a: 1, plus_minus: 1,  sog: 3, toi: "29:05", hits: 2, pim: 0 }
+    - { name: "Darren Raddysh",      pos: "D", g: 0, a: 0, plus_minus: 0,  sog: 6, toi: "28:11", hits: 1, pim: 0 }
+    - { name: "Janis Moser",         pos: "D", g: 0, a: 0, plus_minus: 1,  sog: 1, toi: "25:34", hits: 1, pim: 2 }
+    - { name: "Anthony Cirelli",     pos: "C", g: 0, a: 0, plus_minus: 0,  sog: 0, toi: "23:11", hits: 2, pim: 0 }
+    - { name: "Erik Cernak",         pos: "D", g: 0, a: 0, plus_minus: 0,  sog: 2, toi: "23:10", hits: 3, pim: 0 }
+    - { name: "Nikita Kucherov",     pos: "R", g: 0, a: 0, plus_minus: 0,  sog: 6, toi: "22:50", hits: 1, pim: 2 }
+    - { name: "Ryan McDonagh",       pos: "D", g: 0, a: 0, plus_minus: 0,  sog: 0, toi: "21:52", hits: 1, pim: 0 }
+    - { name: "Jake Guentzel",       pos: "C", g: 0, a: 0, plus_minus: 0,  sog: 3, toi: "20:55", hits: 0, pim: 2 }
+    - { name: "Charle-Edward D'Astous", pos: "D", g: 0, a: 0, plus_minus: 0,  sog: 4, toi: "18:29", hits: 4, pim: 2 }
+    - { name: "Brayden Point",       pos: "C", g: 0, a: 0, plus_minus: 0,  sog: 1, toi: "17:21", hits: 1, pim: 0 }
+    - { name: "Emil Lilleberg",      pos: "D", g: 0, a: 0, plus_minus: 1,  sog: 0, toi: "16:26", hits: 3, pim: 0 }
+    - { name: "Gage Goncalves",      pos: "C", g: 1, a: 0, plus_minus: 1,  sog: 2, toi: "15:26", hits: 1, pim: 0 }
+    - { name: "Yanni Gourde",        pos: "C", g: 0, a: 0, plus_minus: 0,  sog: 2, toi: "13:53", hits: 2, pim: 0 }
+    - { name: "Dominic James",       pos: "C", g: 0, a: 1, plus_minus: 1,  sog: 3, toi: "13:36", hits: 0, pim: 0 }
+    - { name: "Nick Paul",           pos: "C", g: 0, a: 0, plus_minus: 0,  sog: 0, toi: "12:25", hits: 4, pim: 0 }
+    - { name: "Zemgus Girgensons",   pos: "C", g: 0, a: 0, plus_minus: 0,  sog: 0, toi: "12:44", hits: 5, pim: 0 }
+    - { name: "Oliver Bjorkstrand",  pos: "R", g: 0, a: 0, plus_minus: 0,  sog: 0, toi: "12:24", hits: 4, pim: 0 }
+    - { name: "Corey Perry",         pos: "R", g: 0, a: 0, plus_minus: 0,  sog: 0, toi: "09:43", hits: 2, pim: 0 }
+
+# Notable narrative anchors (manual)
+narrative_anchors:
+  vasilevskiy_bounceback:
+    significance: |
+      30 saves on 30 shots — Vasilevskiy's 8th career Stanley Cup Playoff
+      shutout. Notable because his .875 in G5 had been the obvious cause of
+      the MTL win that game; the G5 brief explicitly flagged "expect him at
+      .920+ in G6." He delivered 1.000.
+  goncalves_two_in_two:
+    significance: |
+      Goncalves scored TBL's only goal in G5 (2nd-period equalizer) and
+      now the OT winner in G6. Two of his 3 series goals are in elimination
+      games. He plays 13-15 min/game in a 4th-line role; this is the kind of
+      depth-scoring inversion that decides 1-goal series.
+  l1_5v5_drought:
+    significance: |
+      Suzuki–Caufield–Slafkovský combined for 0 points on 6 SOG at 5v5 in
+      G6. Through 6 games, the L1 has 0 5v5 goals — Slafkovský's 3 series
+      goals are all PP, Caufield's series total is split between 5v5
+      assists and PP, and Suzuki has been pure playmaker (mostly PP).
+      The trio outshot TBL's L1 (Hagel-Point-Kucherov) but the Suzuki
+      line still hasn't beaten Vasilevskiy at even strength.
+  series_competitiveness:
+    significance: |
+      All 6 games decided by 1 goal. 4 of 6 went to overtime (G2, G3, G4, G6).
+      Combined goal differential: 12-13 in MTL's favor. This is the most
+      evenly contested series of Round 1 by any margin metric — both teams
+      effectively split equally.
+  demidov_5_shots:
+    significance: |
+      5 SOG in 17:38 — Demidov's most active offensive game of the series
+      by SOG count. 0 points and a goalie-interference penalty late, but
+      the shot volume + ixG buildup says he's beating defenders to the
+      slot with increasing regularity. The rookie nerves on finishing
+      remain (still 0 G at 5v5 in series).
