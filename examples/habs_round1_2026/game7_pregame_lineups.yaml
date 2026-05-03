@@ -1,0 +1,157 @@
+# Game 7 projected lineups — MTL @ TBL, 2026-05-03 18:00 ET, Benchmark International Arena.
+# Source: NHL.com Game 7 preview + Habs Eyes On The Prize G7 preview + Tampa Bay Lightning beats.
+# Both lineups subject to game-time decisions (Dobson, Hedman both confirmed game-time decisions
+# at morning skate). This file represents the most likely deployment given pre-game reporting.
+
+game_id: "2025030127"
+date: "2026-05-03"
+matchup: "MTL @ TBL Game 7"
+venue: "Benchmark International Arena, Tampa"
+last_change: "TBL"
+series_state_pre: "Tied 3-3, winner advances to Round 2 (vs FLA)"
+
+teams:
+  MTL:
+    forwards:
+      - line: "L1"
+        players:
+          - { name: "Cole Caufield",      position: "L" }   # Caufield-Suzuki-Slaf has been L1 all series
+          - { name: "Nick Suzuki",        position: "C" }
+          - { name: "Juraj Slafkovský",   position: "R" }
+      - line: "L2"
+        players:
+          - { name: "Josh Anderson",      position: "L" }
+          - { name: "Jake Evans",         position: "C" }
+          - { name: "Ivan Demidov",       position: "R" }   # Demidov stays at L2 — coming off 5 SOG G6
+      - line: "L3"
+        players:
+          - { name: "Alexandre Texier",   position: "L" }
+          - { name: "Kirby Dach",         position: "C" }
+          - { name: "Zachary Bolduc",     position: "R" }
+      - line: "L4"
+        players:
+          - { name: "Alex Newhook",       position: "L" }
+          - { name: "Phillip Danault",    position: "C" }
+          - { name: "Brendan Gallagher",  position: "R" }
+    defense:
+      - pair: "D1"
+        players:
+          - { name: "Mike Matheson",      position: "D", side: "L" }
+          - { name: "Noah Dobson",        position: "D", side: "R" }   # IF Dobson dresses (game-time decision)
+      - pair: "D2"
+        players:
+          - { name: "Kaiden Guhle",       position: "D", side: "L" }
+          - { name: "Jayden Struble",     position: "D", side: "L" }   # Struble plays his off-side here
+      - pair: "D3"
+        players:
+          - { name: "Alex Carrier",       position: "D", side: "R" }
+          - { name: "Lane Hutson",        position: "D", side: "L" }   # Hutson drops to D3 in this scenario
+    goalie: "Jakub Dobeš"
+    backup: "Jacob Fowler"
+    pp1: ["Lane Hutson", "Nick Suzuki", "Cole Caufield", "Juraj Slafkovský", "Mike Matheson"]
+    pp2: ["Noah Dobson", "Ivan Demidov", "Alex Newhook", "Kirby Dach", "Zachary Bolduc"]
+    scratches: ["Arber Xhekaj", "Oliver Kapanen", "Joe Veleno", "Adam Engstrom"]
+    injured: ["Patrik Laine"]
+    game_time_decisions: ["Noah Dobson"]
+  TBL:
+    forwards:
+      - line: "L1"
+        players:
+          - { name: "Brandon Hagel",      position: "L" }
+          - { name: "Anthony Cirelli",    position: "C" }
+          - { name: "Nikita Kucherov",    position: "R" }
+      - line: "L2"
+        players:
+          - { name: "Jake Guentzel",      position: "L" }
+          - { name: "Brayden Point",      position: "C" }
+          - { name: "Gage Goncalves",     position: "R" }   # Goncalves PROMOTED L4→L2 after 2-in-2 elimination goals
+      - line: "L3"
+        players:
+          - { name: "Zemgus Girgensons",  position: "L" }
+          - { name: "Yanni Gourde",       position: "C" }
+          - { name: "Nick Paul",          position: "R" }
+      - line: "L4"
+        players:
+          - { name: "Oliver Bjorkstrand", position: "L" }
+          - { name: "Dominic James",      position: "C" }
+          - { name: "Corey Perry",        position: "R" }
+    defense:
+      - pair: "D1"
+        players:
+          - { name: "J.J. Moser",         position: "D", side: "L" }
+          - { name: "Darren Raddysh",     position: "D", side: "R" }
+      - pair: "D2"
+        players:
+          - { name: "Ryan McDonagh",      position: "D", side: "L" }
+          - { name: "Erik Cernak",        position: "D", side: "R" }
+      - pair: "D3"
+        players:
+          - { name: "Charle-Edouard D'Astous", position: "D", side: "L" }
+          - { name: "Emil Lilleberg",     position: "D", side: "R" }
+    goalie: "Andrei Vasilevskiy"
+    backup: "Jonas Johansson"
+    scratches: ["Scott Sabourin", "Conor Geekie", "Max Crozier"]
+    injured: ["Pontus Holmberg"]
+    game_time_decisions: ["Victor Hedman"]   # doubtful — practiced w/ team but not skating optional Sunday
+
+# Deployed in Game 6 (for delta analysis)
+previous_game:
+  MTL:
+    forwards:
+      L1: ["Cole Caufield", "Nick Suzuki", "Juraj Slafkovský"]
+      L2: ["Josh Anderson", "Jake Evans", "Ivan Demidov"]
+      L3: ["Alexandre Texier", "Kirby Dach", "Zachary Bolduc"]
+      L4: ["Alex Newhook", "Phillip Danault", "Brendan Gallagher"]
+    defense:
+      D1: ["Mike Matheson", "Lane Hutson"]
+      D2: ["Kaiden Guhle", "Alex Carrier"]
+      D3: ["Jayden Struble", "Arber Xhekaj"]
+    goalie: "Jakub Dobeš"
+  TBL:
+    forwards:
+      L1: ["Brandon Hagel", "Anthony Cirelli", "Nikita Kucherov"]
+      L2: ["Jake Guentzel", "Brayden Point", "Oliver Bjorkstrand"]
+      L3: ["Zemgus Girgensons", "Yanni Gourde", "Nick Paul"]
+      L4: ["Dominic James", "Gage Goncalves", "Corey Perry"]
+    defense:
+      D1: ["J.J. Moser", "Darren Raddysh"]
+      D2: ["Ryan McDonagh", "Erik Cernak"]
+      D3: ["Charle-Edouard D'Astous", "Emil Lilleberg"]
+    goalie: "Andrei Vasilevskiy"
+
+changes_vs_previous_game:
+  MTL:
+    summary: "If Dobson dresses: he slots in at RD1 with Matheson, Hutson drops to D3 with Carrier, Xhekaj scratched. Forwards unchanged."
+    line_reshuffles: []
+    defense_changes:
+      - description: "Dobson IN, Xhekaj OUT — Dobson plays his first game of the series (3 weeks post thumb surgery)"
+        moved_player: "Lane Hutson"
+        from: "D1 with Matheson"
+        to: "D3 with Carrier"
+        reason: "Dobson is the natural RD1, Hutson takes Carrier's spot to maintain a Hutson-Carrier reunion at D3"
+  TBL:
+    summary: "Goncalves promoted L4→L2 between Guentzel and Point (Bjorkstrand drops to L4). Hedman remains out (doubtful), so D3 stays D'Astous-Lilleberg."
+    line_reshuffles:
+      - description: "Goncalves up to L2 with Guentzel-Point after scoring TBL's only G5 and G6 goals"
+        moved_player: "Gage Goncalves"
+        from: "L4 with James-Perry"
+        to: "L2 with Guentzel-Point"
+      - description: "Bjorkstrand demoted L2→L4 with James-Perry"
+        moved_player: "Oliver Bjorkstrand"
+        from: "L2 with Guentzel-Point"
+        to: "L4 with James-Perry"
+    defense_changes:
+      - description: "Hedman doubtful (game-time decision); D3 stays D'Astous-Lilleberg as in G6"
+
+# Pre-game narrative anchors
+narrative_anchors:
+  dobson_return:
+    significance: "Dobson missed all 6 series games (thumb surgery April 11). Career averages 22:29/game — adds a true top-pair RD if he plays. Even at 80% he changes MTL's matchups."
+  hedman_doubtful:
+    significance: "Hedman has played only 449 reg-season 5v5 minutes in 25-26 (chronic injury year). His absence forces TBL to lean on Moser-Raddysh (already 25-29 min/g this series). At G7, that's a fatigue concern."
+  goncalves_promotion:
+    significance: "TBL's biggest tactical shift of the series. Goncalves goes from 13-15 min L4 minutes to L2 with two of TBL's top-3 forwards. Tests whether his elimination-game scoring (G5 OT-tying goal, G6 OT winner) is real chemistry or noise."
+  l1_5v5_drought:
+    significance: "Suzuki-Caufield-Slafkovský through 6 games: 0 goals at 5v5. All MTL goals came on the PP, in transition, or from defensemen. G7 against Vasilevskiy demands the L1 finally beats him at even strength."
+  vasilevskiy_swing:
+    significance: "Vasilevskiy across the series: .920+ in G1-G4, .875 in G5 (TBL's only loss factor), 1.000 in G6. Variance is high. The G7 question is which Vasilevskiy shows up."
