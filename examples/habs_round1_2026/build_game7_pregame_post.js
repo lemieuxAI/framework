@@ -142,16 +142,15 @@ const T = {
 
     verdict_title: 'En une phrase',
     verdict_prose: (
-      `**Hedman dehors. Dobson incertain. Match 7 dans la balance.** Si on regarde uniquement ` +
-      `les calculs de formation, l\'écart projeté entre les deux équipes par rapport au Match 6 ` +
-      `est de **${fmtFr(V.net_lineup_swing_for_mtl, 2)} buts attendus/match à 5 c. 5** en faveur du Canadien. ` +
-      `C\'est ${V.label === 'lineup math is essentially a wash' ? 'essentiellement nul' : 'minuscule'}. ` +
-      `Si Dobson joue, il améliore le 1ᵉʳ duo nominalement (+${fmtFr(SD.delta_net, 2)} BAF/match en isolation), ` +
-      `mais Hutson glisse au 3ᵉ duo et perd 7 minutes à 5 c. 5 — c\'est un coût structurel que l\'isolation ` +
-      `pure ne capte pas. Tampa, de son côté, joue son 7ᵉ match consécutif sans son capitaine. ` +
-      `**La conclusion mathématique : la formation décide rien.** Ce qui décide le Match 7, c\'est ` +
-      `la variance de finition, qui des deux gardiens va voler son équipe, et si le 1ᵉʳ trio du ` +
-      `Canadien va finalement marquer à 5 c. 5 après 6 matchs blanchis.`
+      `**Hedman dehors. Dobson incertain. Si Dobson joue, le Canadien gagne du terrain en math pure.** ` +
+      `Le swap Dobson IN / Xhekaj OUT au créneau de 6ᵉ défenseur (Dobson prend les 12-14 minutes de Xhekaj, ` +
+      `le reste de l\'alignement est inchangé — Hutson joue ses 22+ minutes peu importe ce que dit la feuille ` +
+      `de match) vaut **${fmtFr(SD.delta_net, 2)} BAF/match** en isolation. Net pour le Canadien après le ` +
+      `remaniement de Tampa (Goncalves promu au 2ᵉ trio) : **${fmtFr(V.net_lineup_swing_for_mtl, 2)} BAF/match** ` +
+      `en faveur du CH. C\'est petit mais clairement positif. Tampa joue son 7ᵉ match consécutif sans son ` +
+      `capitaine — un désavantage structurel qui s\'accumule. **La formation aide le Canadien sur papier. ` +
+      `Ce qui décide le Match 7 reste la variance de finition, quel gardien va voler son équipe, et si le ` +
+      `1ᵉʳ trio va finalement marquer à 5 c. 5 après 6 matchs blanchis.**`
     ),
 
     tldr_title: 'Trois choses à surveiller',
@@ -162,12 +161,14 @@ const T = {
       `C\'est l\'écart entre le Tampa qu\'on voit (Moser-Raddysh à 25-29 min/match, fatigue qui s\'accumule) ` +
       `et le Tampa nominal. Le Match 7, c\'est le 7ᵉ match d\'affilée que Hedman manque. La fatigue cumulée ` +
       `est le risque que ce calcul ne mesure pas.`,
-      `**Dobson incertain — et même s\'il joue, l\'effet net n\'est pas évident.** En isolation, le swap ` +
-      `Dobson IN / Xhekaj OUT au créneau D1 vaut **${fmtFr(SD.delta_net, 2)} BAF/match** (IC à 80 % sur les BAF ` +
-      `[${fmtFr(SD.delta_xgf_ci80[0], 2)} ; ${fmtFr(SD.delta_xgf_ci80[1], 2)}]). Mais ça suppose Dobson à plein régime — ` +
-      `il revient de 22 jours d\'arrêt après une chirurgie au pouce. Et ça force Hutson à descendre au 3ᵉ duo, ` +
-      `ce qui lui retire ~7 minutes 5 c. 5 sur un iso net60 séries de **${fmtFr(KP['Lane Hutson']?.oi_5v5?.iso_net60, 2)}**. ` +
-      `Net du remaniement complet : **${fmtFr(M.total_5v5_xg_swing_per_game, 2)} BAF/match**. Petite amélioration sur papier.`,
+      `**Si Dobson joue, c\'est de la valeur ajoutée nette.** Le swap au créneau de 6ᵉ défenseur (Dobson prend ` +
+      `les 12-14 min de Xhekaj, et St-Louis garde Hutson à ses 22+ min peu importe la feuille de match) vaut ` +
+      `**${fmtFr(SD.delta_net, 2)} BAF/match** — IC à 80 % sur les BAF [${fmtFr(SD.delta_xgf_ci80[0], 2)} ; ` +
+      `${fmtFr(SD.delta_xgf_ci80[1], 2)}], sur les BCA [${fmtFr(SD.delta_xga_ci80[0], 2)} ; ` +
+      `${fmtFr(SD.delta_xga_ci80[1], 2)}]. Caveat : Dobson n\'a pas joué depuis 22 jours (chirurgie au pouce). ` +
+      `Un dégradé de 30-50 % pour la rouille serait raisonnable. Sa saison régulière 25-26 a été difficile en ` +
+      `iso (xGF on-ice 63,8 vs xGA 71,9 sur 1404 min) — c\'est pas un retour héroïque qui se dessine, mais une ` +
+      `amélioration claire sur le 6ᵉ défenseur sortant.`,
       `**Le 1ᵉʳ trio du Canadien n\'a pas marqué à 5 c. 5 dans la série.** ${L1 ? `Suzuki ${L1['Nick Suzuki']['5v5_g']} but, Caufield ${L1['Cole Caufield']['5v5_g']}, Slafkovský ${L1['Juraj Slafkovský']['5v5_g']}. **${L1.combined_5v5_g} buts combinés** sur 6 matchs en moyenne ${(L1['Nick Suzuki']['5v5_toi']/6).toFixed(1).replace('.', ',')} min de glace 5 c. 5/match pour Suzuki.` : ''} ` +
       `Tous les buts du Canadien dans la série viennent de l\'avantage numérique, des défenseurs ou des ` +
       `trios secondaires. À Match 7, contre Vasilevskiy, contre l\'élimination — il faut que ça craque.`,
@@ -179,21 +180,22 @@ const T = {
                   'Le Canadien a son alignement habituel à l\'avant; Tampa promeut Goncalves au 2ᵉ trio.'),
 
     swap_title: '2 · Les trois pivots du Match 7',
-    swap_dobson_title: 'Pivot 1 — Dobson IN, Xhekaj OUT, Hutson au 3ᵉ duo',
+    swap_dobson_title: 'Pivot 1 — Dobson IN, Xhekaj OUT au 6ᵉ défenseur',
     swap_dobson_prose: (
-      `Le swap mécanique au créneau D1 : Dobson (~19 min) remplace Xhekaj (~12 min). En iso pur, ` +
-      `**${fmtFr(SD.delta_net, 2)} BAF/match**, IC à 80 % sur les BAF [${fmtFr(SD.delta_xgf_ci80[0], 2)} ; ` +
-      `${fmtFr(SD.delta_xgf_ci80[1], 2)}], sur les BCA [${fmtFr(SD.delta_xga_ci80[0], 2)} ; ${fmtFr(SD.delta_xga_ci80[1], 2)}]. ` +
-      `Lecture de l\'IC : la **plage où on s\'attend à ce que la vraie valeur tombe 80 fois sur 100**. ` +
-      `Ça inclut zéro côté défensif — donc l\'effet pourrait être nul. Côté offensif, c\'est franchement positif.`
+      `Le swap mécanique : Dobson prend les 12-14 minutes de Xhekaj. Hutson reste à ses 22+ minutes — ` +
+      `St-Louis ne va pas commencer le Match 7 en bénéficiant moins de son défenseur le plus déployé. La ` +
+      `feuille de match peut bien dire "Hutson au 3ᵉ duo avec Carrier" ; en réalité, Hutson double-shifte ` +
+      `partout où ça compte. Le calcul d\'iso pure : **${fmtFr(SD.delta_net, 2)} BAF/match**, IC à 80 % sur ` +
+      `les BAF [${fmtFr(SD.delta_xgf_ci80[0], 2)} ; ${fmtFr(SD.delta_xgf_ci80[1], 2)}], sur les BCA ` +
+      `[${fmtFr(SD.delta_xga_ci80[0], 2)} ; ${fmtFr(SD.delta_xga_ci80[1], 2)}]. Lecture de l\'IC : ` +
+      `**la plage où on s\'attend à ce que la vraie valeur tombe 80 fois sur 100**.`
     ),
     swap_dobson_caveat: (
-      `**Trois mises en garde** sur ce calcul : (a) Dobson n\'a pas joué depuis 22 jours, on assume ici ` +
-      `qu\'il joue à plein régime — un dégradé de 30-50 % pour la rouille serait raisonnable. (b) Le calcul ` +
-      `ignore le coût structurel : Hutson descend au 3ᵉ duo et perd 7 minutes 5 c. 5. Avec son iso net60 séries ` +
-      `de **${fmtFr(KP['Lane Hutson']?.oi_5v5?.iso_net60, 3)}**, ces 7 minutes valent ~0,02 BAF/match qui sortent ` +
-      `de la formation. (c) Dobson a eu une saison 25-26 difficile en termes d\'iso (xGF on-ice 63,8 vs xGA 71,9 ` +
-      `sur 1404 min) — sa saison régulière ne suggère pas un retour héroïque.`
+      `**Deux mises en garde** : (a) Dobson revient de 22 jours d\'arrêt et d\'une chirurgie au pouce — ` +
+      `on assume ici qu\'il joue à plein régime. Un dégradé de 30-50 % pour la rouille serait raisonnable, ` +
+      `ce qui ramènerait le swap autour de **+${fmtFr(SD.delta_net * 0.65, 2)} à +${fmtFr(SD.delta_net * 0.5, 2)} BAF/match**. ` +
+      `(b) Sa saison régulière 25-26 a été difficile en iso (xGF on-ice 63,8 vs xGA 71,9 sur 1404 min) — ` +
+      `il est meilleur que Xhekaj même à 50 % de son meilleur niveau, mais ne pas s\'attendre à un retour héroïque.`
     ),
     swap_hedman_title: 'Pivot 2 — L\'absence de Hedman, déjà 7 matchs de suite',
     swap_hedman_prose: (
@@ -306,8 +308,9 @@ const T = {
       `Lecture : la plage où on s\'attend à ce que la vraie valeur tombe 80 fois sur 100.`,
       `Le swap Dobson assume qu\'il joue à plein régime. Réaliste : un dégradé de 30-50 % pour la rouille (22 jours d\'arrêt, ` +
       `chirurgie au pouce). Les buts attendus projetés sont une borne supérieure.`,
-      `Le coût structurel de Hutson glissant au 3ᵉ duo n\'est pas modélisé directement par le swap — il est intégré dans ` +
-      `le total de remaniement (${fmtFr(M.total_5v5_xg_swing_per_game, 2)} BAF/match) à travers la moyenne des duos.`,
+      `La feuille de match de St-Louis liste Hutson au 3ᵉ duo avec Carrier, mais en pratique Hutson joue 22+ minutes ` +
+      `5 c. 5 peu importe le duo nominal — il double-shifte sur les principales situations. Le swap calculé reflète ` +
+      `cette réalité (Dobson prend les minutes de Xhekaj, le reste est inchangé).`,
       `Aucune prédiction du résultat du Match 7. Le cadriciel évalue des scénarios; il ne prédit pas.`,
     ],
 
@@ -338,14 +341,15 @@ const T = {
 
     verdict_title: 'The bottom line',
     verdict_prose: (
-      `**Hedman out. Dobson maybe. Game 7 in the balance.** On lineup math alone, the projected ` +
-      `swing between the two teams vs Game 6 is **${fmt(V.net_lineup_swing_for_mtl, 2)} expected goals per game ` +
-      `at 5v5** in MTL's favor. That's essentially nothing. If Dobson plays, he nominally upgrades the top ` +
-      `pair (+${fmt(SD.delta_net, 2)} xG/g in isolation), but Hutson drops to D3 and loses ~7 minutes of 5v5 — ` +
-      `a structural cost the iso swap doesn't capture. Tampa is heading into its 7th straight game without ` +
-      `their captain. **The mathematical conclusion: lineups don't decide this game.** What decides Game 7 ` +
-      `is finishing variance, which goalie steals it for his team, and whether MTL's top line finally beats ` +
-      `Vasilevskiy at even strength after 6 games of zero.`
+      `**Hedman out. Dobson maybe. If Dobson plays, MTL gains real ground on lineup math alone.** ` +
+      `The Dobson IN / Xhekaj OUT swap at the 6th-D slot (Dobson takes Xhekaj's 12-14 minutes; the rest of ` +
+      `the lineup is unchanged — Hutson plays his 22+ minutes regardless of what the lineup card says) is worth ` +
+      `**${fmt(SD.delta_net, 2)} xG/g** in isolation. Net for MTL after Tampa's reshuffle (Goncalves promoted ` +
+      `to L2): **${fmt(V.net_lineup_swing_for_mtl, 2)} xG/g** in MTL's favor. Small but clearly positive. ` +
+      `Tampa is heading into its 7th straight game without their captain — a structural disadvantage that ` +
+      `accumulates. **Lineups help MTL on paper. What still decides Game 7 is finishing variance, which ` +
+      `goalie steals it, and whether MTL's top line finally beats Vasilevskiy at even strength after 6 ` +
+      `games of zero.**`
     ),
 
     tldr_title: 'Three things to watch',
@@ -355,11 +359,12 @@ const T = {
       `${ciStr(SH.delta_xgf_ci80[0], SH.delta_xgf_ci80[1])}. That's the gap between the Tampa we see (Moser-Raddysh ` +
       `at 25-29 min/g, accumulating fatigue) and nominal Tampa. Game 7 is the 7th straight game Hedman misses. ` +
       `Cumulative fatigue is the second-order risk this calc doesn't measure.`,
-      `**Dobson is uncertain — and even if he plays, the net effect isn't obvious.** In isolation, the Dobson IN / ` +
-      `Xhekaj OUT swap at the D1 slot is worth **${fmt(SD.delta_net, 2)} xG/g** (80% CI on xGF ${ciStr(SD.delta_xgf_ci80[0], SD.delta_xgf_ci80[1])}). ` +
-      `But that assumes Dobson at full speed — he's been out 22 days post thumb surgery. And it forces Hutson to drop ` +
-      `to D3, removing ~7 minutes of 5v5 from a player whose series iso net60 is **${fmt(KP['Lane Hutson']?.oi_5v5?.iso_net60, 2)}**. ` +
-      `Net effect of the full reshuffle: **${fmt(M.total_5v5_xg_swing_per_game, 2)} xG/g**. Small upgrade on paper.`,
+      `**If Dobson plays, that's net added value.** The 6th-D-slot swap (Dobson takes Xhekaj's 12-14 minutes; ` +
+      `St-Louis keeps Hutson at his 22+ min regardless of what the lineup card says) is worth ` +
+      `**${fmt(SD.delta_net, 2)} xG/g** — 80% CI on xGF ${ciStr(SD.delta_xgf_ci80[0], SD.delta_xgf_ci80[1])}, ` +
+      `on xGA ${ciStr(SD.delta_xga_ci80[0], SD.delta_xga_ci80[1])}. Caveat: Dobson hasn't played in 22 days ` +
+      `(thumb surgery). A 30-50% rust haircut would be reasonable. His 25-26 reg-season was a tough iso year ` +
+      `(on-ice xGF 63.8 vs xGA 71.9 over 1404 min) — not a heroic return, but a clear upgrade on the outgoing 6th D.`,
       `**MTL's top line has not scored at 5v5 in this series.** ${L1 ? `Suzuki ${L1['Nick Suzuki']['5v5_g']} G, Caufield ${L1['Cole Caufield']['5v5_g']}, Slafkovský ${L1['Juraj Slafkovský']['5v5_g']}. **${L1.combined_5v5_g} combined 5v5 goals** in 6 games at an average of ${(L1['Nick Suzuki']['5v5_toi']/6).toFixed(1)} 5v5 min/g for Suzuki.` : ''} ` +
       `Every MTL goal in the series came on the PP, from defensemen, or from secondary lines. In Game 7, against ` +
       `Vasilevskiy, in elimination — it has to crack.`,
@@ -371,20 +376,20 @@ const T = {
                   'Tampa promotes Goncalves to L2.'),
 
     swap_title: '2 · The three pivots of Game 7',
-    swap_dobson_title: 'Pivot 1 — Dobson IN, Xhekaj OUT, Hutson down to D3',
+    swap_dobson_title: 'Pivot 1 — Dobson IN, Xhekaj OUT at the 6th-D slot',
     swap_dobson_prose: (
-      `The mechanical D1-slot swap: Dobson (~19 min) replaces Xhekaj (~12 min). In pure iso, ` +
+      `The mechanical swap: Dobson takes Xhekaj's 12-14 minutes. Hutson keeps his 22+ minutes — St-Louis isn't ` +
+      `going to start Game 7 by benching his most-deployed defenseman. The lineup card may say "Hutson on D3 ` +
+      `with Carrier"; in practice, Hutson double-shifts everywhere it counts. Pure iso math: ` +
       `**${fmt(SD.delta_net, 2)} xG/g**, 80% CI on xGF ${ciStr(SD.delta_xgf_ci80[0], SD.delta_xgf_ci80[1])}, on xGA ` +
-      `${ciStr(SD.delta_xga_ci80[0], SD.delta_xga_ci80[1])}. CI reading: **the range where the true value ` +
-      `should land 80 times out of 100**. The xGA interval crosses zero, so the defensive effect could be nothing. ` +
-      `The xGF side is solidly positive.`
+      `${ciStr(SD.delta_xga_ci80[0], SD.delta_xga_ci80[1])}. CI reading: **the range where the true value should ` +
+      `land 80 times out of 100**.`
     ),
     swap_dobson_caveat: (
-      `**Three caveats** on this number: (a) Dobson hasn't played in 22 days; we're assuming full speed — a 30-50% ` +
-      `haircut for rust would be reasonable. (b) The calc ignores the structural cost of Hutson dropping to D3 and ` +
-      `losing 7 minutes of 5v5. With his series iso net60 of **${fmt(KP['Lane Hutson']?.oi_5v5?.iso_net60, 3)}**, ` +
-      `that's ~0.02 xG/g coming out of the lineup. (c) Dobson's 25-26 reg-season was a tough iso year (on-ice xGF ` +
-      `63.8 vs xGA 71.9 over 1404 min) — his recent baseline doesn't promise a heroic return.`
+      `**Two caveats**: (a) Dobson is back from 22 days off and thumb surgery — we're assuming full speed. ` +
+      `A 30-50% rust haircut would be reasonable, which would bring the swap to **+${fmt(SD.delta_net * 0.65, 2)} ` +
+      `to +${fmt(SD.delta_net * 0.5, 2)} xG/g**. (b) His 25-26 reg-season was a tough iso year (on-ice xGF 63.8 ` +
+      `vs xGA 71.9 over 1404 min) — he's better than Xhekaj even at 50% of his best, but don't expect a heroic return.`
     ),
     swap_hedman_title: 'Pivot 2 — Hedman absent, 7 straight games and counting',
     swap_hedman_prose: (
@@ -489,8 +494,9 @@ const T = {
       `Reading: the range where the true value should land 80 times out of 100.`,
       `The Dobson swap assumes full speed. Realistic: a 30-50% rust haircut (22 days off, thumb surgery). The projected ` +
       `xG figure is an upper bound.`,
-      `The structural cost of Hutson moving to D3 isn't directly modeled by the swap — it's absorbed into the total ` +
-      `reshuffle (${fmt(M.total_5v5_xg_swing_per_game, 2)} xG/g) via the pair averages.`,
+      `St-Louis's lineup card lists Hutson at D3 with Carrier, but in practice Hutson plays 22+ 5v5 minutes ` +
+      `regardless of nominal pair label — he double-shifts onto every key situation. The swap calc reflects ` +
+      `that reality (Dobson takes Xhekaj's minutes; everything else holds).`,
       `No prediction of Game 7 outcome. The framework grades scenarios; it does not forecast.`,
     ],
 

@@ -24,11 +24,13 @@
     }
   },
   "verdict": {
-    "mtl_5v5_swing_xg_per_game": 0.07,
+    "mtl_paper_swing_xg_per_game": 0.07,
     "tbl_5v5_swing_xg_per_game": 0.005,
-    "net_lineup_swing_for_mtl": 0.065,
-    "label": "lineup math is essentially a wash",
-    "interpretation_short": "MTL projected change vs G6: +0.07 xG/g at 5v5 (Dobson IN, Hutson dropping to D3, Xhekaj scratched). TBL projected change: +0.01 xG/g (Goncalves promoted to L2). Net for MTL: +0.07 xG/g."
+    "net_paper_swing_for_mtl": 0.065,
+    "mtl_realistic_swing_xg_per_game": 0.19,
+    "net_lineup_swing_for_mtl": 0.185,
+    "label": "lineup math meaningfully favors MTL",
+    "interpretation_short": "MTL realistic change vs G6: +0.19 xG/g at 5v5 (Dobson IN at ~14 min taking Xhekaj's slot; Hutson keeps his 22+ min). TBL projected change: +0.01 xG/g (Goncalves promoted to L2). Net for MTL: +0.18 xG/g."
   },
   "mtl": {
     "lines_g6": {
@@ -410,21 +412,21 @@
     "total_5v5_xg_swing_per_game": 0.005
   },
   "swap_dobson_in": {
-    "out": "Arber Xhekaj (D6, ~12 min)",
-    "in": "Noah Dobson (D1, ~19 min)",
-    "slot_min": 19.0,
-    "delta_xgf60": 0.1869,
-    "delta_xga60": -0.0708,
-    "delta_net": 0.2577,
+    "out": "Arber Xhekaj (~12 min)",
+    "in": "Noah Dobson (~14 min, ramping back)",
+    "slot_min": 14.0,
+    "delta_xgf60": 0.1377,
+    "delta_xga60": -0.0522,
+    "delta_net": 0.1899,
     "delta_xgf_ci80": [
-      0.0101,
-      0.3637
+      0.0074,
+      0.268
     ],
     "delta_xga_ci80": [
-      -0.2585,
-      0.1169
+      -0.1905,
+      0.0861
     ],
-    "caveat": "Dobson hasn't played in 22 days (thumb surgery). The pooled iso baseline assumes he's at full speed. A reasonable haircut: take 30-50% off the projection for the rust factor. Also, Hutson dropping to D3 (-7 min) is a structural cost this swap doesn't capture — Hutson's iso is +0.193 net60 over 118 series min."
+    "caveat": "Dobson hasn't played in 22 days (thumb surgery). The pooled iso baseline assumes he's at full speed; a 30-50% haircut for rust would be reasonable. Hutson's minutes stay where they were (22+ min/g) regardless of pair label — the listed Carrier-Hutson D3 is paper deployment; St-Louis double-shifts Hutson onto every key situation. Dobson's 25-26 reg-season was a tough iso year (xGF 63.8 vs xGA 71.9 over 1404 min) — his recent baseline doesn't promise dominant return."
   },
   "swap_hedman_absence": {
     "out": "D'Astous (D6, ~12 min)",

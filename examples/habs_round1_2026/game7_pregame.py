@@ -201,34 +201,38 @@ def main():
     tbl_g6_pairs_iso = {role: line_avg_iso(impacts, p) for role, p in TBL_G6_PAIRS.items()}
     tbl_g7_pairs_iso = {role: line_avg_iso(impacts, p) for role, p in TBL_G7_PAIRS.items()}
 
-    # ---- Swap A: Dobson IN for Xhekaj OUT (D6 slot replacement) ----
-    # Mechanically: Xhekaj at D6 (12 min) is swapped out for Dobson, who plays 19 min
-    # at D1; Hutson moves from D1 → D3 (loses 7 min); Carrier rotates as well.
-    # We model the simplest version: Dobson (19 min) replaces Xhekaj (12 min); the
-    # extra 7 min comes from Hutson's redistribution.
+    # ---- Swap A: Dobson IN for Xhekaj OUT (pure D6-slot replacement) ----
+    # Realistic deployment: Hutson plays 22+ min regardless of pair label (he's the team's
+    # most-deployed defenseman and St-Louis won't bench him). Matheson keeps his 28+ min.
+    # The swap is therefore Dobson taking Xhekaj's ~14 min directly (Dobson ramps back from
+    # 22 days off; not playing his usual 22+ min in his first game back).
     swap_dobson = None
     if impacts.get("Noah Dobson") and impacts.get("Arber Xhekaj"):
+        # Dobson's ramp slot: midway between full Xhekaj minutes and his nominal D1 load.
+        dobson_slot = 14.0
         s = project_swap(
             out_player=impacts["Arber Xhekaj"],
             in_player=impacts["Noah Dobson"],
-            slot_minutes=SLOT_TIMES_D["D1"],
+            slot_minutes=dobson_slot,
             strength_state="5v5",
             confidence=0.80,
         )
         swap_dobson = {
-            "out": "Arber Xhekaj (D6, ~12 min)",
-            "in": "Noah Dobson (D1, ~19 min)",
-            "slot_min": SLOT_TIMES_D["D1"],
+            "out": "Arber Xhekaj (~12 min)",
+            "in": "Noah Dobson (~14 min, ramping back)",
+            "slot_min": dobson_slot,
             "delta_xgf60": round(s.delta_xgf60, 4),
             "delta_xga60": round(s.delta_xga60, 4),
             "delta_net": round(s.delta_xgf60 - s.delta_xga60, 4),
             "delta_xgf_ci80": [round(s.delta_xgf60_ci80[0], 4), round(s.delta_xgf60_ci80[1], 4)],
             "delta_xga_ci80": [round(s.delta_xga60_ci80[0], 4), round(s.delta_xga60_ci80[1], 4)],
             "caveat": (
-                "Dobson hasn't played in 22 days (thumb surgery). The pooled iso baseline "
-                "assumes he's at full speed. A reasonable haircut: take 30-50% off the projection "
-                "for the rust factor. Also, Hutson dropping to D3 (-7 min) is a structural cost "
-                "this swap doesn't capture — Hutson's iso is +0.193 net60 over 118 series min."
+                "Dobson hasn't played in 22 days (thumb surgery). The pooled iso baseline assumes "
+                "he's at full speed; a 30-50% haircut for rust would be reasonable. Hutson's minutes "
+                "stay where they were (22+ min/g) regardless of pair label — the listed Carrier-Hutson "
+                "D3 is paper deployment; St-Louis double-shifts Hutson onto every key situation. "
+                "Dobson's 25-26 reg-season was a tough iso year (xGF 63.8 vs xGA 71.9 over 1404 min) — "
+                "his recent baseline doesn't promise dominant return."
             ),
         }
 
@@ -362,24 +366,34 @@ def main():
         }
 
     # ---- Verdict assembly ----
+    # Realistic-deployment swing: Dobson swap value applied directly (Hutson minutes preserved).
+    realistic_mtl_swing = swap_dobson["delta_net"] if swap_dobson else 0.0
+    realistic_net = realistic_mtl_swing - tbl_total_5v5_xg_swing
     verdict = {
-        "mtl_5v5_swing_xg_per_game": round(mtl_total_5v5_xg_swing, 3),
+        "mtl_paper_swing_xg_per_game": round(mtl_total_5v5_xg_swing, 3),
         "tbl_5v5_swing_xg_per_game": round(tbl_total_5v5_xg_swing, 3),
-        "net_lineup_swing_for_mtl": round(mtl_total_5v5_xg_swing - tbl_total_5v5_xg_swing, 3),
+        "net_paper_swing_for_mtl": round(mtl_total_5v5_xg_swing - tbl_total_5v5_xg_swing, 3),
+        "mtl_realistic_swing_xg_per_game": round(realistic_mtl_swing, 3),
+        "net_lineup_swing_for_mtl": round(realistic_net, 3),  # primary swing for prose
         "label": None,
         "interpretation_short": None,
     }
-    net = verdict["net_lineup_swing_for_mtl"]
-    if net > 0.10:
-        verdict["label"] = "lineup math favors MTL"
-    elif net < -0.10:
-        verdict["label"] = "lineup math favors TBL"
+    # Use realistic_net for the label (Hutson minutes are preserved).
+    label_net = realistic_net
+    if label_net > 0.15:
+        verdict["label"] = "lineup math meaningfully favors MTL"
+    elif label_net > 0.05:
+        verdict["label"] = "lineup math slightly favors MTL"
+    elif label_net < -0.15:
+        verdict["label"] = "lineup math meaningfully favors TBL"
+    elif label_net < -0.05:
+        verdict["label"] = "lineup math slightly favors TBL"
     else:
         verdict["label"] = "lineup math is essentially a wash"
     verdict["interpretation_short"] = (
-        f"MTL projected change vs G6: {mtl_total_5v5_xg_swing:+.2f} xG/g at 5v5 (Dobson IN, "
-        f"Hutson dropping to D3, Xhekaj scratched). TBL projected change: {tbl_total_5v5_xg_swing:+.2f} "
-        f"xG/g (Goncalves promoted to L2). Net for MTL: {net:+.2f} xG/g."
+        f"MTL realistic change vs G6: {realistic_mtl_swing:+.2f} xG/g at 5v5 (Dobson IN at ~14 min "
+        f"taking Xhekaj's slot; Hutson keeps his 22+ min). TBL projected change: "
+        f"{tbl_total_5v5_xg_swing:+.2f} xG/g (Goncalves promoted to L2). Net for MTL: {realistic_net:+.2f} xG/g."
     )
 
     payload = {
