@@ -1,0 +1,1531 @@
+{
+  "meta": {
+    "as_of": "2026-05-03",
+    "matchup": "MTL @ TBL Game 7",
+    "result": "MTL 2 - TBL 1, MTL wins series 4-3",
+    "next": "Round 2 vs Buffalo Sabres, G1 Wed May 6 in Buffalo"
+  },
+  "g7_box": {
+    "game_id": "2025030127",
+    "date": "2026-05-03",
+    "matchup": "MTL @ TBL",
+    "final_score": "MTL 2 - TBL 1",
+    "result": "MTL win, advances to Round 2",
+    "series_state_after_game": "MTL wins series 4-3, Buffalo in Round 2",
+    "venue": "Benchmark International Arena, Tampa",
+    "regulation_or_overtime": "REG",
+    "team_stats": {
+      "MTL": {
+        "goals": 2,
+        "shots": 9,
+        "shots_p1": 4,
+        "shots_p2": 0,
+        "shots_p3": 5,
+        "pp_attempts": 1,
+        "pp_goals": 0
+      },
+      "TBL": {
+        "goals": 1,
+        "shots": 29,
+        "shots_p1": 9,
+        "pp_attempts": 2,
+        "pp_goals": 1
+      }
+    },
+    "goal_sequence": [
+      {
+        "period": 1,
+        "time_in_period": "~16-19:00",
+        "team": "MTL",
+        "scorer": "Nick Suzuki",
+        "primary_assist": "Kaiden Guhle",
+        "secondary_assist": "Josh Anderson",
+        "situation": "5v5",
+        "note": "Suzuki's first goal of the series — and his first 5v5 goal in 6+ games against Vasilevskiy. The L1 drought ends in the most leverage moment possible."
+      },
+      {
+        "period": 2,
+        "time_in_period": "TBC",
+        "team": "TBL",
+        "scorer": "Dominic James",
+        "primary_assist": "Charle-Edouard D'Astous",
+        "secondary_assist": "Gage Goncalves",
+        "situation": "5v4 (PP)",
+        "note": "Tip-deflection from a point shot. The night's only Tampa breakthrough — and from a 4th-line center."
+      },
+      {
+        "period": 3,
+        "time_in_period": "11:07",
+        "team": "MTL",
+        "scorer": "Alex Newhook",
+        "primary_assist": "Lane Hutson",
+        "secondary_assist": "Kaiden Guhle",
+        "situation": "5v5",
+        "note": "Newhook batted a backhand from behind the net that squeezed past Vasilevskiy. A second-quality chance that became the series winner. Hutson set it up off a zone entry."
+      }
+    ],
+    "goalies": {
+      "MTL": {
+        "name": "Jakub Dobeš",
+        "shots_against": 29,
+        "saves": 28,
+        "goals_against": 1,
+        "sv_pct": 0.966,
+        "note": "The performance of his career. .966 in a Game 7. The single goal allowed was a tip on the PP. Series final: .921 5v5 SV% over 7 games."
+      },
+      "TBL": {
+        "name": "Andrei Vasilevskiy",
+        "shots_against": 9,
+        "saves": 7,
+        "goals_against": 2,
+        "sv_pct": 0.778,
+        "note": "Faced only 9 shots and let in 2. The Newhook backhander from below the goal line is the kind of goal that won't go on his career reel. Series ends with the .875-1.000 oscillation."
+      }
+    },
+    "skaters": {
+      "MTL_key": [
+        {
+          "name": "Nick Suzuki",
+          "pos": "C",
+          "g": 1,
+          "a": 0
+        },
+        {
+          "name": "Kaiden Guhle",
+          "pos": "D",
+          "g": 0,
+          "a": 2
+        },
+        {
+          "name": "Josh Anderson",
+          "pos": "L",
+          "g": 0,
+          "a": 1
+        },
+        {
+          "name": "Alex Newhook",
+          "pos": "C",
+          "g": 1,
+          "a": 0
+        },
+        {
+          "name": "Lane Hutson",
+          "pos": "D",
+          "g": 0,
+          "a": 1
+        }
+      ],
+      "TBL_key": [
+        {
+          "name": "Dominic James",
+          "pos": "C",
+          "g": 1,
+          "a": 0
+        },
+        {
+          "name": "Charle-Edouard D'Astous",
+          "pos": "D",
+          "g": 0,
+          "a": 1
+        },
+        {
+          "name": "Gage Goncalves",
+          "pos": "C",
+          "g": 0,
+          "a": 1
+        }
+      ]
+    },
+    "lineup_confirmation": {
+      "MTL": {
+        "dobson_played": true,
+        "xhekaj_scratched": true
+      },
+      "TBL": {
+        "hedman_played": false
+      }
+    },
+    "narrative_anchors": {
+      "dobes_heist": {
+        "significance": "9 shots vs 29. .966 save percentage. The L1 drought ending was\nclutch storytelling, but the actual reason MTL advances is a 24-year-old\nrookie in his first playoff series. Dobes was the canonical\n\"stand-on-your-head\" performance of the 2026 playoffs.\n"
+      },
+      "l1_drought_ends": {
+        "significance": "Six games of 0 5v5 goals for Suzuki-Caufield-Slafkovsky. The first\ngoal of Game 7, late P1, came from Suzuki off a Guhle-Anderson rush.\nVindication of the iso-says-they're-creating-just-not-finishing read.\n"
+      },
+      "newhook_winner": {
+        "significance": "Hutson set up an entry, Newhook batted at a backhand from below the\ngoal line, the puck found a way past Vasilevskiy. Low-quality goal\nthat decides the series. Newhook is the L4 center promoted to that\nrole in G5; this is his second 5v5 series-winning shift.\n"
+      },
+      "zero_shots_p2": {
+        "significance": "MTL's second period: zero shots on goal. Tampa took over the period\nafter the James PP goal. The Habs' game plan from then on was visibly\nshell up and trust Dobes. It worked.\n"
+      },
+      "outshot_9_29": {
+        "significance": "The ratio of 9 shots for vs 29 against is one of the most extreme\noutshot Game 7 wins in modern playoff history. Most \"stolen\" Game 7s\nrun more like 18-30 — this was a complete defensive shell + a goalie\nstealing it.\n"
+      },
+      "series_competitiveness": {
+        "significance": "Final series: all 7 games decided by 1 goal. 4 of 7 in OT. Combined\ngoal differential: 14-13 MTL. The most tightly contested R1 series\nacross the entire 2026 bracket — and decided by the rookie goalie at\nthe end.\n"
+      }
+    }
+  },
+  "interpretation": {
+    "g7_recap": "Outshot 9-29. Won 2-1. Dobeš .966 in a Game 7 — the goalie heist that most rookies never get to author. Suzuki's L1 drought ended in P1, Newhook scored the winner from below the goal line in P3 on a backhand bat, and the Habs spent the second period without a single shot on goal.",
+    "series_end": "All 7 games decided by 1 goal. 4 of 7 in OT. Most evenly contested R1 series in the bracket. Decided not by stars finally producing but by the rookie at the back finally stealing one — and a series-long run of low-event hockey that favored MTL's defensive shape.",
+    "buf_preview_summary": "Buffalo enters R2 as the higher seed (Atlantic champ). They beat Boston 4-2 in 6 games on the back of Alex Lyon (.955 SV%, 4.6 GSAx — top-5 NHL playoff goalie). Their offense is led by Tuch and Thompson (7 pts each in 6 GP). Their D-corps is top-heavy: Dahlin + Byram are elite, Samuelsson + Power second pair, depth thin. Vulnerable in mid-pack 5v5 play-driving (xG share around break-even per Daily Faceoff). Strength: depth scoring (3 dangerous lines), shot-quality goaltending. Weakness: average 5v5 chance suppression behind their top D.",
+    "matchup_thesis": "Habs vs Sabres is the meeting of two not-supposed-to-be-here teams. Both finished R1 with goalies stealing critical games (Dobeš G7, Lyon all 5 of his starts). MTL's iso math says Suzuki-Caufield-Slaf are net positives at 5v5; Buffalo's says Tuch + Thompson generate but get scored on. The matchup that matters: MTL's Hutson vs Buffalo's PP1 (Dahlin running the point). Both teams' R1 PP was their key differentiator vs goal differential."
+  },
+  "mtl_series_final": {
+    "individual": [
+      {
+        "name": "Lane Hutson",
+        "position": "D",
+        "gp": 6,
+        "toi": 168.2,
+        "goals": 2,
+        "assists": 3,
+        "points": 5,
+        "shots": 14,
+        "ixg": 1.08,
+        "ihdcf": 1
+      },
+      {
+        "name": "Nick Suzuki",
+        "position": "C",
+        "gp": 6,
+        "toi": 137.3,
+        "goals": 0,
+        "assists": 5,
+        "points": 5,
+        "shots": 7,
+        "ixg": 1.63,
+        "ihdcf": 7
+      },
+      {
+        "name": "Alexandre Texier",
+        "position": "L",
+        "gp": 6,
+        "toi": 82.1,
+        "goals": 2,
+        "assists": 2,
+        "points": 4,
+        "shots": 9,
+        "ixg": 0.43,
+        "ihdcf": 2
+      },
+      {
+        "name": "Cole Caufield",
+        "position": "R",
+        "gp": 6,
+        "toi": 115.6,
+        "goals": 1,
+        "assists": 3,
+        "points": 4,
+        "shots": 11,
+        "ixg": 1.57,
+        "ihdcf": 3
+      },
+      {
+        "name": "Zachary Bolduc",
+        "position": "R",
+        "gp": 6,
+        "toi": 74.5,
+        "goals": 1,
+        "assists": 3,
+        "points": 4,
+        "shots": 10,
+        "ixg": 1.25,
+        "ihdcf": 4
+      },
+      {
+        "name": "Juraj Slafkovský",
+        "position": "L",
+        "gp": 6,
+        "toi": 125.6,
+        "goals": 3,
+        "assists": 0,
+        "points": 3,
+        "shots": 17,
+        "ixg": 3.58,
+        "ihdcf": 14
+      },
+      {
+        "name": "Kirby Dach",
+        "position": "C",
+        "gp": 6,
+        "toi": 67.2,
+        "goals": 2,
+        "assists": 1,
+        "points": 3,
+        "shots": 5,
+        "ixg": 0.69,
+        "ihdcf": 4
+      },
+      {
+        "name": "Josh Anderson",
+        "position": "R",
+        "gp": 6,
+        "toi": 94.7,
+        "goals": 2,
+        "assists": 0,
+        "points": 2,
+        "shots": 11,
+        "ixg": 1.31,
+        "ihdcf": 9
+      },
+      {
+        "name": "Kaiden Guhle",
+        "position": "D",
+        "gp": 6,
+        "toi": 138.2,
+        "goals": 0,
+        "assists": 2,
+        "points": 2,
+        "shots": 7,
+        "ixg": 0.31,
+        "ihdcf": 0
+      },
+      {
+        "name": "Brendan Gallagher",
+        "position": "R",
+        "gp": 2,
+        "toi": 12.4,
+        "goals": 1,
+        "assists": 0,
+        "points": 1,
+        "shots": 1,
+        "ixg": 0.27,
+        "ihdcf": 1
+      },
+      {
+        "name": "Phillip Danault",
+        "position": "C",
+        "gp": 6,
+        "toi": 101.5,
+        "goals": 0,
+        "assists": 1,
+        "points": 1,
+        "shots": 7,
+        "ixg": 0.82,
+        "ihdcf": 3
+      },
+      {
+        "name": "Mike Matheson",
+        "position": "D",
+        "gp": 6,
+        "toi": 156.1,
+        "goals": 0,
+        "assists": 1,
+        "points": 1,
+        "shots": 8,
+        "ixg": 0.51,
+        "ihdcf": 0
+      },
+      {
+        "name": "Jake Evans",
+        "position": "C",
+        "gp": 6,
+        "toi": 95.4,
+        "goals": 0,
+        "assists": 1,
+        "points": 1,
+        "shots": 8,
+        "ixg": 0.92,
+        "ihdcf": 4
+      },
+      {
+        "name": "Alexandre Carrier",
+        "position": "D",
+        "gp": 6,
+        "toi": 138.7,
+        "goals": 0,
+        "assists": 1,
+        "points": 1,
+        "shots": 1,
+        "ixg": 0.23,
+        "ihdcf": 0
+      },
+      {
+        "name": "Alex Newhook",
+        "position": "C",
+        "gp": 6,
+        "toi": 98.1,
+        "goals": 0,
+        "assists": 1,
+        "points": 1,
+        "shots": 6,
+        "ixg": 0.71,
+        "ihdcf": 4
+      },
+      {
+        "name": "Arber Xhekaj",
+        "position": "D",
+        "gp": 6,
+        "toi": 60.7,
+        "goals": 0,
+        "assists": 1,
+        "points": 1,
+        "shots": 5,
+        "ixg": 0.37,
+        "ihdcf": 1
+      },
+      {
+        "name": "Ivan Demidov",
+        "position": "R",
+        "gp": 6,
+        "toi": 99.0,
+        "goals": 0,
+        "assists": 1,
+        "points": 1,
+        "shots": 14,
+        "ixg": 1.92,
+        "ihdcf": 6
+      },
+      {
+        "name": "Jayden Struble",
+        "position": "D",
+        "gp": 6,
+        "toi": 70.3,
+        "goals": 0,
+        "assists": 0,
+        "points": 0,
+        "shots": 3,
+        "ixg": 0.05,
+        "ihdcf": 0
+      },
+      {
+        "name": "Oliver Kapanen",
+        "position": "C",
+        "gp": 4,
+        "toi": 34.6,
+        "goals": 0,
+        "assists": 0,
+        "points": 0,
+        "shots": 3,
+        "ixg": 0.22,
+        "ihdcf": 0
+      }
+    ],
+    "on_ice_5v5": [
+      {
+        "name": "Lane Hutson",
+        "oi_toi": 118.3,
+        "oi_xgf": 4.87,
+        "oi_xga": 4.49,
+        "oi_xg_diff_per60": 0.193
+      },
+      {
+        "name": "Kaiden Guhle",
+        "oi_toi": 111.7,
+        "oi_xgf": 4.48,
+        "oi_xga": 4.37,
+        "oi_xg_diff_per60": 0.059
+      },
+      {
+        "name": "Mike Matheson",
+        "oi_toi": 104.4,
+        "oi_xgf": 2.59,
+        "oi_xga": 3.96,
+        "oi_xg_diff_per60": -0.787
+      },
+      {
+        "name": "Alexandre Carrier",
+        "oi_toi": 98.8,
+        "oi_xgf": 2.43,
+        "oi_xga": 3.81,
+        "oi_xg_diff_per60": -0.838
+      },
+      {
+        "name": "Nick Suzuki",
+        "oi_toi": 89.6,
+        "oi_xgf": 2.48,
+        "oi_xga": 3.28,
+        "oi_xg_diff_per60": -0.536
+      },
+      {
+        "name": "Juraj Slafkovský",
+        "oi_toi": 84.9,
+        "oi_xgf": 2.64,
+        "oi_xga": 2.55,
+        "oi_xg_diff_per60": 0.064
+      },
+      {
+        "name": "Phillip Danault",
+        "oi_toi": 77.5,
+        "oi_xgf": 2.83,
+        "oi_xga": 3.54,
+        "oi_xg_diff_per60": -0.549
+      },
+      {
+        "name": "Josh Anderson",
+        "oi_toi": 77.0,
+        "oi_xgf": 2.62,
+        "oi_xga": 2.85,
+        "oi_xg_diff_per60": -0.179
+      },
+      {
+        "name": "Cole Caufield",
+        "oi_toi": 76.8,
+        "oi_xgf": 2.2,
+        "oi_xga": 2.6,
+        "oi_xg_diff_per60": -0.313
+      },
+      {
+        "name": "Alexandre Texier",
+        "oi_toi": 72.5,
+        "oi_xgf": 2.45,
+        "oi_xga": 3.29,
+        "oi_xg_diff_per60": -0.695
+      },
+      {
+        "name": "Jayden Struble",
+        "oi_toi": 68.6,
+        "oi_xgf": 3.19,
+        "oi_xga": 2.16,
+        "oi_xg_diff_per60": 0.901
+      },
+      {
+        "name": "Jake Evans",
+        "oi_toi": 68.4,
+        "oi_xgf": 2.81,
+        "oi_xga": 2.18,
+        "oi_xg_diff_per60": 0.552
+      },
+      {
+        "name": "Zachary Bolduc",
+        "oi_toi": 65.1,
+        "oi_xgf": 2.97,
+        "oi_xga": 2.92,
+        "oi_xg_diff_per60": 0.046
+      },
+      {
+        "name": "Alex Newhook",
+        "oi_toi": 63.2,
+        "oi_xgf": 2.18,
+        "oi_xga": 2.6,
+        "oi_xg_diff_per60": -0.399
+      },
+      {
+        "name": "Ivan Demidov",
+        "oi_toi": 62.4,
+        "oi_xgf": 2.31,
+        "oi_xga": 2.1,
+        "oi_xg_diff_per60": 0.202
+      }
+    ],
+    "goalies": [
+      {
+        "name": "Jakub Dobes",
+        "gp": 6,
+        "toi": 382.9,
+        "ga": 14,
+        "sa": 167,
+        "sv_pct": 0.916,
+        "xga": 19.59,
+        "gsax": 5.59,
+        "gsax_per60": 0.876
+      }
+    ],
+    "special_teams": {
+      "five_v_four": {
+        "toi": 31.1,
+        "xgf": 4.9,
+        "xga": 0.0,
+        "xgf60": 9.46
+      },
+      "four_v_five": null,
+      "five_v_five": {
+        "toi": 280.4,
+        "xgf": 10.1,
+        "xga": 10.67,
+        "xgf_pct": 48.6
+      }
+    }
+  },
+  "tbl_series_final": {
+    "individual": [
+      {
+        "name": "Brandon Hagel",
+        "position": "L",
+        "gp": 6,
+        "toi": 152.1,
+        "goals": 6,
+        "assists": 2,
+        "points": 8,
+        "shots": 17,
+        "ixg": 1.78,
+        "ihdcf": 10
+      },
+      {
+        "name": "Jake Guentzel",
+        "position": "C",
+        "gp": 6,
+        "toi": 138.2,
+        "goals": 2,
+        "assists": 6,
+        "points": 8,
+        "shots": 17,
+        "ixg": 3.27,
+        "ihdcf": 10
+      },
+      {
+        "name": "Nikita Kucherov",
+        "position": "R",
+        "gp": 6,
+        "toi": 129.1,
+        "goals": 1,
+        "assists": 5,
+        "points": 6,
+        "shots": 28,
+        "ixg": 2.88,
+        "ihdcf": 6
+      },
+      {
+        "name": "J.J. Moser",
+        "position": "D",
+        "gp": 6,
+        "toi": 142.6,
+        "goals": 1,
+        "assists": 2,
+        "points": 3,
+        "shots": 9,
+        "ixg": 0.79,
+        "ihdcf": 4
+      },
+      {
+        "name": "Darren Raddysh",
+        "position": "D",
+        "gp": 6,
+        "toi": 156.6,
+        "goals": 1,
+        "assists": 1,
+        "points": 2,
+        "shots": 26,
+        "ixg": 2.22,
+        "ihdcf": 5
+      },
+      {
+        "name": "Gage Goncalves",
+        "position": "C",
+        "gp": 6,
+        "toi": 86.8,
+        "goals": 1,
+        "assists": 1,
+        "points": 2,
+        "shots": 7,
+        "ixg": 0.88,
+        "ihdcf": 2
+      },
+      {
+        "name": "Dominic James",
+        "position": "C",
+        "gp": 6,
+        "toi": 71.3,
+        "goals": 1,
+        "assists": 1,
+        "points": 2,
+        "shots": 8,
+        "ixg": 0.71,
+        "ihdcf": 1
+      },
+      {
+        "name": "Anthony Cirelli",
+        "position": "C",
+        "gp": 6,
+        "toi": 121.1,
+        "goals": 0,
+        "assists": 2,
+        "points": 2,
+        "shots": 5,
+        "ixg": 0.49,
+        "ihdcf": 3
+      },
+      {
+        "name": "Brayden Point",
+        "position": "C",
+        "gp": 6,
+        "toi": 117.0,
+        "goals": 1,
+        "assists": 0,
+        "points": 1,
+        "shots": 10,
+        "ixg": 2.39,
+        "ihdcf": 12
+      },
+      {
+        "name": "Ryan McDonagh",
+        "position": "D",
+        "gp": 6,
+        "toi": 121.2,
+        "goals": 0,
+        "assists": 1,
+        "points": 1,
+        "shots": 3,
+        "ixg": 0.11,
+        "ihdcf": 0
+      }
+    ],
+    "goalies": [
+      {
+        "name": "Andrei Vasilevskiy",
+        "gp": 6,
+        "toi": 382.2,
+        "ga": 14,
+        "sa": 147,
+        "sv_pct": 0.905,
+        "xga": 17.85,
+        "gsax": 3.85,
+        "gsax_per60": 0.604
+      }
+    ],
+    "special_teams": {
+      "five_v_four": {
+        "toi": 32.2,
+        "xgf": 5.27,
+        "xga": 0.09,
+        "xgf60": 9.81
+      },
+      "four_v_five": null,
+      "five_v_five": {
+        "toi": 280.4,
+        "xgf": 10.67,
+        "xga": 10.1,
+        "xgf_pct": 51.4
+      }
+    }
+  },
+  "buffalo_r1_recap": {
+    "individual": [
+      {
+        "name": "Alex Tuch",
+        "position": "R",
+        "gp": 6,
+        "toi": 127.9,
+        "goals": 4,
+        "assists": 3,
+        "points": 7,
+        "shots": 20,
+        "ixg": 3.24,
+        "ihdcf": 8
+      },
+      {
+        "name": "Tage Thompson",
+        "position": "C",
+        "gp": 6,
+        "toi": 121.9,
+        "goals": 2,
+        "assists": 5,
+        "points": 7,
+        "shots": 26,
+        "ixg": 3.28,
+        "ihdcf": 7
+      },
+      {
+        "name": "Peyton Krebs",
+        "position": "C",
+        "gp": 6,
+        "toi": 98.1,
+        "goals": 2,
+        "assists": 4,
+        "points": 6,
+        "shots": 6,
+        "ixg": 1.37,
+        "ihdcf": 5
+      },
+      {
+        "name": "Bowen Byram",
+        "position": "D",
+        "gp": 6,
+        "toi": 137.2,
+        "goals": 3,
+        "assists": 2,
+        "points": 5,
+        "shots": 15,
+        "ixg": 0.97,
+        "ihdcf": 3
+      },
+      {
+        "name": "Rasmus Dahlin",
+        "position": "D",
+        "gp": 6,
+        "toi": 145.1,
+        "goals": 1,
+        "assists": 3,
+        "points": 4,
+        "shots": 21,
+        "ixg": 1.29,
+        "ihdcf": 3
+      },
+      {
+        "name": "Owen Power",
+        "position": "D",
+        "gp": 6,
+        "toi": 123.7,
+        "goals": 0,
+        "assists": 4,
+        "points": 4,
+        "shots": 7,
+        "ixg": 0.42,
+        "ihdcf": 2
+      },
+      {
+        "name": "Zach Benson",
+        "position": "L",
+        "gp": 6,
+        "toi": 88.3,
+        "goals": 2,
+        "assists": 1,
+        "points": 3,
+        "shots": 11,
+        "ixg": 1.55,
+        "ihdcf": 8
+      },
+      {
+        "name": "Josh Doan",
+        "position": "R",
+        "gp": 6,
+        "toi": 90.5,
+        "goals": 1,
+        "assists": 2,
+        "points": 3,
+        "shots": 13,
+        "ixg": 2.95,
+        "ihdcf": 13
+      },
+      {
+        "name": "Jack Quinn",
+        "position": "R",
+        "gp": 6,
+        "toi": 100.6,
+        "goals": 0,
+        "assists": 3,
+        "points": 3,
+        "shots": 12,
+        "ixg": 1.46,
+        "ihdcf": 6
+      },
+      {
+        "name": "Mattias Samuelsson",
+        "position": "D",
+        "gp": 6,
+        "toi": 125.6,
+        "goals": 2,
+        "assists": 0,
+        "points": 2,
+        "shots": 8,
+        "ixg": 0.19,
+        "ihdcf": 0
+      },
+      {
+        "name": "Beck Malenstyn",
+        "position": "L",
+        "gp": 6,
+        "toi": 67.2,
+        "goals": 1,
+        "assists": 1,
+        "points": 2,
+        "shots": 4,
+        "ixg": 0.21,
+        "ihdcf": 2
+      },
+      {
+        "name": "Noah Ostlund",
+        "position": "C",
+        "gp": 3,
+        "toi": 34.5,
+        "goals": 1,
+        "assists": 1,
+        "points": 2,
+        "shots": 4,
+        "ixg": 1.0,
+        "ihdcf": 0
+      },
+      {
+        "name": "Josh Norris",
+        "position": "C",
+        "gp": 3,
+        "toi": 49.9,
+        "goals": 1,
+        "assists": 0,
+        "points": 1,
+        "shots": 4,
+        "ixg": 0.79,
+        "ihdcf": 4
+      },
+      {
+        "name": "Jason Zucker",
+        "position": "L",
+        "gp": 6,
+        "toi": 101.0,
+        "goals": 0,
+        "assists": 1,
+        "points": 1,
+        "shots": 11,
+        "ixg": 2.64,
+        "ihdcf": 11
+      },
+      {
+        "name": "Jordan Greenway",
+        "position": "L",
+        "gp": 6,
+        "toi": 66.9,
+        "goals": 0,
+        "assists": 1,
+        "points": 1,
+        "shots": 2,
+        "ixg": 0.2,
+        "ihdcf": 0
+      }
+    ],
+    "on_ice_5v5": [
+      {
+        "name": "Bowen Byram",
+        "oi_toi": 108.1,
+        "oi_xgf": 5.79,
+        "oi_xga": 6.02,
+        "oi_xg_diff_per60": -0.128
+      },
+      {
+        "name": "Mattias Samuelsson",
+        "oi_toi": 104.5,
+        "oi_xgf": 3.59,
+        "oi_xga": 2.88,
+        "oi_xg_diff_per60": 0.408
+      },
+      {
+        "name": "Owen Power",
+        "oi_toi": 102.8,
+        "oi_xgf": 4.63,
+        "oi_xga": 4.7,
+        "oi_xg_diff_per60": -0.041
+      },
+      {
+        "name": "Rasmus Dahlin",
+        "oi_toi": 102.5,
+        "oi_xgf": 5.53,
+        "oi_xga": 2.67,
+        "oi_xg_diff_per60": 1.673
+      },
+      {
+        "name": "Peyton Krebs",
+        "oi_toi": 89.3,
+        "oi_xgf": 4.68,
+        "oi_xga": 3.59,
+        "oi_xg_diff_per60": 0.732
+      },
+      {
+        "name": "Tage Thompson",
+        "oi_toi": 85.0,
+        "oi_xgf": 4.51,
+        "oi_xga": 3.47,
+        "oi_xg_diff_per60": 0.734
+      },
+      {
+        "name": "Alex Tuch",
+        "oi_toi": 80.1,
+        "oi_xgf": 4.18,
+        "oi_xga": 3.46,
+        "oi_xg_diff_per60": 0.539
+      },
+      {
+        "name": "Conor Timmins",
+        "oi_toi": 76.9,
+        "oi_xgf": 3.26,
+        "oi_xga": 3.34,
+        "oi_xg_diff_per60": -0.062
+      },
+      {
+        "name": "Jack Quinn",
+        "oi_toi": 73.1,
+        "oi_xgf": 2.97,
+        "oi_xga": 4.03,
+        "oi_xg_diff_per60": -0.87
+      },
+      {
+        "name": "Zach Benson",
+        "oi_toi": 72.1,
+        "oi_xgf": 3.62,
+        "oi_xga": 2.69,
+        "oi_xg_diff_per60": 0.774
+      },
+      {
+        "name": "Ryan McLeod",
+        "oi_toi": 71.7,
+        "oi_xgf": 3.03,
+        "oi_xga": 4.09,
+        "oi_xg_diff_per60": -0.887
+      },
+      {
+        "name": "Josh Doan",
+        "oi_toi": 71.4,
+        "oi_xgf": 3.82,
+        "oi_xga": 2.19,
+        "oi_xg_diff_per60": 1.37
+      },
+      {
+        "name": "Jason Zucker",
+        "oi_toi": 66.2,
+        "oi_xgf": 2.82,
+        "oi_xga": 3.68,
+        "oi_xg_diff_per60": -0.779
+      },
+      {
+        "name": "Logan Stanley",
+        "oi_toi": 56.1,
+        "oi_xgf": 2.26,
+        "oi_xga": 2.64,
+        "oi_xg_diff_per60": -0.406
+      },
+      {
+        "name": "Beck Malenstyn",
+        "oi_toi": 52.1,
+        "oi_xgf": 1.62,
+        "oi_xga": 1.32,
+        "oi_xg_diff_per60": 0.345
+      }
+    ],
+    "goalies": [
+      {
+        "name": "Alex Lyon",
+        "gp": 5,
+        "toi": 263.0,
+        "ga": 5,
+        "sa": 111,
+        "sv_pct": 0.955,
+        "xga": 10.81,
+        "gsax": 5.81,
+        "gsax_per60": 1.325
+      },
+      {
+        "name": "Ukko-Pekka Luukkonen",
+        "gp": 2,
+        "toi": 100.2,
+        "ga": 7,
+        "sa": 40,
+        "sv_pct": 0.825,
+        "xga": 5.31,
+        "gsax": -1.69,
+        "gsax_per60": -1.012
+      }
+    ],
+    "special_teams": {
+      "five_v_four": {
+        "toi": 35.7,
+        "xgf": 4.47,
+        "xga": 0.68,
+        "xgf60": 7.51
+      },
+      "four_v_five": null,
+      "five_v_five": {
+        "toi": 277.2,
+        "xgf": 12.57,
+        "xga": 11.19,
+        "xgf_pct": 52.9
+      }
+    },
+    "series_result": "BUF beat BOS 4-2 in 6, first playoff series win since 2007",
+    "series_games": [
+      "G1: BUF 4, BOS 3 (BUF rallies with 4 in P3)",
+      "G2: BOS 4, BUF 2",
+      "G3: BUF 3, BOS 1",
+      "G4: BUF 6, BOS 1 (4 goals in P1)",
+      "G5: BOS 2, BUF 1 (OT)",
+      "G6: BUF 4, BOS 1 (Lyon 25 saves, series clincher in Boston)"
+    ],
+    "lyon_note": "Alex Lyon: 5 GP, 1.14 GAA, .955 SV%, 4.6 GSAx (5th-best NHL playoffs). Started Boston series after Luukkonen struggled in the first 2 games. Will likely keep the net for R2 G1 vs MTL."
+  },
+  "r2_head_to_head_forwards": [
+    {
+      "team": "MTL",
+      "name": "Nick Suzuki",
+      "indiv": {
+        "name": "Nick Suzuki",
+        "position": "C",
+        "gp": 6,
+        "toi": 137.3,
+        "goals": 0,
+        "assists": 5,
+        "points": 5,
+        "shots": 7,
+        "ixg": 1.63,
+        "ihdcf": 7
+      },
+      "on_ice": {
+        "name": "Nick Suzuki",
+        "oi_toi": 89.6,
+        "oi_xgf": 2.48,
+        "oi_xga": 3.28,
+        "oi_xg_diff_per60": -0.536,
+        "iso_per60": -0.536
+      }
+    },
+    {
+      "team": "MTL",
+      "name": "Cole Caufield",
+      "indiv": {
+        "name": "Cole Caufield",
+        "position": "R",
+        "gp": 6,
+        "toi": 115.6,
+        "goals": 1,
+        "assists": 3,
+        "points": 4,
+        "shots": 11,
+        "ixg": 1.57,
+        "ihdcf": 3
+      },
+      "on_ice": {
+        "name": "Cole Caufield",
+        "oi_toi": 76.8,
+        "oi_xgf": 2.2,
+        "oi_xga": 2.6,
+        "oi_xg_diff_per60": -0.313,
+        "iso_per60": -0.313
+      }
+    },
+    {
+      "team": "MTL",
+      "name": "Juraj Slafkovský",
+      "indiv": {
+        "name": "Juraj Slafkovský",
+        "position": "L",
+        "gp": 6,
+        "toi": 125.6,
+        "goals": 3,
+        "assists": 0,
+        "points": 3,
+        "shots": 17,
+        "ixg": 3.58,
+        "ihdcf": 14
+      },
+      "on_ice": {
+        "name": "Juraj Slafkovský",
+        "oi_toi": 84.9,
+        "oi_xgf": 2.64,
+        "oi_xga": 2.55,
+        "oi_xg_diff_per60": 0.064,
+        "iso_per60": 0.064
+      }
+    },
+    {
+      "team": "MTL",
+      "name": "Ivan Demidov",
+      "indiv": {
+        "name": "Ivan Demidov",
+        "position": "R",
+        "gp": 6,
+        "toi": 99.0,
+        "goals": 0,
+        "assists": 1,
+        "points": 1,
+        "shots": 14,
+        "ixg": 1.92,
+        "ihdcf": 6
+      },
+      "on_ice": {
+        "name": "Ivan Demidov",
+        "oi_toi": 62.4,
+        "oi_xgf": 2.31,
+        "oi_xga": 2.1,
+        "oi_xg_diff_per60": 0.202,
+        "iso_per60": 0.202
+      }
+    },
+    {
+      "team": "MTL",
+      "name": "Josh Anderson",
+      "indiv": {
+        "name": "Josh Anderson",
+        "position": "R",
+        "gp": 6,
+        "toi": 94.7,
+        "goals": 2,
+        "assists": 0,
+        "points": 2,
+        "shots": 11,
+        "ixg": 1.31,
+        "ihdcf": 9
+      },
+      "on_ice": {
+        "name": "Josh Anderson",
+        "oi_toi": 77.0,
+        "oi_xgf": 2.62,
+        "oi_xga": 2.85,
+        "oi_xg_diff_per60": -0.179,
+        "iso_per60": -0.179
+      }
+    },
+    {
+      "team": "MTL",
+      "name": "Jake Evans",
+      "indiv": {
+        "name": "Jake Evans",
+        "position": "C",
+        "gp": 6,
+        "toi": 95.4,
+        "goals": 0,
+        "assists": 1,
+        "points": 1,
+        "shots": 8,
+        "ixg": 0.92,
+        "ihdcf": 4
+      },
+      "on_ice": {
+        "name": "Jake Evans",
+        "oi_toi": 68.4,
+        "oi_xgf": 2.81,
+        "oi_xga": 2.18,
+        "oi_xg_diff_per60": 0.552,
+        "iso_per60": 0.552
+      }
+    },
+    {
+      "team": "BUF",
+      "name": "Tage Thompson",
+      "indiv": {
+        "name": "Tage Thompson",
+        "position": "C",
+        "gp": 6,
+        "toi": 121.9,
+        "goals": 2,
+        "assists": 5,
+        "points": 7,
+        "shots": 26,
+        "ixg": 3.28,
+        "ihdcf": 7
+      },
+      "on_ice": {
+        "name": "Tage Thompson",
+        "oi_toi": 85.0,
+        "oi_xgf": 4.51,
+        "oi_xga": 3.47,
+        "oi_xg_diff_per60": 0.734,
+        "iso_per60": 0.734
+      }
+    },
+    {
+      "team": "BUF",
+      "name": "Alex Tuch",
+      "indiv": {
+        "name": "Alex Tuch",
+        "position": "R",
+        "gp": 6,
+        "toi": 127.9,
+        "goals": 4,
+        "assists": 3,
+        "points": 7,
+        "shots": 20,
+        "ixg": 3.24,
+        "ihdcf": 8
+      },
+      "on_ice": {
+        "name": "Alex Tuch",
+        "oi_toi": 80.1,
+        "oi_xgf": 4.18,
+        "oi_xga": 3.46,
+        "oi_xg_diff_per60": 0.539,
+        "iso_per60": 0.539
+      }
+    },
+    {
+      "team": "BUF",
+      "name": "Peyton Krebs",
+      "indiv": {
+        "name": "Peyton Krebs",
+        "position": "C",
+        "gp": 6,
+        "toi": 98.1,
+        "goals": 2,
+        "assists": 4,
+        "points": 6,
+        "shots": 6,
+        "ixg": 1.37,
+        "ihdcf": 5
+      },
+      "on_ice": {
+        "name": "Peyton Krebs",
+        "oi_toi": 89.3,
+        "oi_xgf": 4.68,
+        "oi_xga": 3.59,
+        "oi_xg_diff_per60": 0.732,
+        "iso_per60": 0.732
+      }
+    },
+    {
+      "team": "BUF",
+      "name": "Jack Quinn",
+      "indiv": {
+        "name": "Jack Quinn",
+        "position": "R",
+        "gp": 6,
+        "toi": 100.6,
+        "goals": 0,
+        "assists": 3,
+        "points": 3,
+        "shots": 12,
+        "ixg": 1.46,
+        "ihdcf": 6
+      },
+      "on_ice": {
+        "name": "Jack Quinn",
+        "oi_toi": 73.1,
+        "oi_xgf": 2.97,
+        "oi_xga": 4.03,
+        "oi_xg_diff_per60": -0.87,
+        "iso_per60": -0.87
+      }
+    },
+    {
+      "team": "BUF",
+      "name": "Zach Benson",
+      "indiv": {
+        "name": "Zach Benson",
+        "position": "L",
+        "gp": 6,
+        "toi": 88.3,
+        "goals": 2,
+        "assists": 1,
+        "points": 3,
+        "shots": 11,
+        "ixg": 1.55,
+        "ihdcf": 8
+      },
+      "on_ice": {
+        "name": "Zach Benson",
+        "oi_toi": 72.1,
+        "oi_xgf": 3.62,
+        "oi_xga": 2.69,
+        "oi_xg_diff_per60": 0.774,
+        "iso_per60": 0.774
+      }
+    },
+    {
+      "team": "BUF",
+      "name": "Ryan McLeod",
+      "indiv": null,
+      "on_ice": {
+        "name": "Ryan McLeod",
+        "oi_toi": 71.7,
+        "oi_xgf": 3.03,
+        "oi_xga": 4.09,
+        "oi_xg_diff_per60": -0.887,
+        "iso_per60": -0.887
+      }
+    },
+    {
+      "team": "BUF",
+      "name": "Josh Doan",
+      "indiv": {
+        "name": "Josh Doan",
+        "position": "R",
+        "gp": 6,
+        "toi": 90.5,
+        "goals": 1,
+        "assists": 2,
+        "points": 3,
+        "shots": 13,
+        "ixg": 2.95,
+        "ihdcf": 13
+      },
+      "on_ice": {
+        "name": "Josh Doan",
+        "oi_toi": 71.4,
+        "oi_xgf": 3.82,
+        "oi_xga": 2.19,
+        "oi_xg_diff_per60": 1.37,
+        "iso_per60": 1.37
+      }
+    }
+  ],
+  "r2_head_to_head_defense": [
+    {
+      "team": "MTL",
+      "name": "Lane Hutson",
+      "indiv": {
+        "name": "Lane Hutson",
+        "position": "D",
+        "gp": 6,
+        "toi": 168.2,
+        "goals": 2,
+        "assists": 3,
+        "points": 5,
+        "shots": 14,
+        "ixg": 1.08,
+        "ihdcf": 1
+      },
+      "on_ice": {
+        "name": "Lane Hutson",
+        "oi_toi": 118.3,
+        "oi_xgf": 4.87,
+        "oi_xga": 4.49,
+        "oi_xg_diff_per60": 0.193,
+        "iso_per60": 0.193
+      }
+    },
+    {
+      "team": "MTL",
+      "name": "Mike Matheson",
+      "indiv": {
+        "name": "Mike Matheson",
+        "position": "D",
+        "gp": 6,
+        "toi": 156.1,
+        "goals": 0,
+        "assists": 1,
+        "points": 1,
+        "shots": 8,
+        "ixg": 0.51,
+        "ihdcf": 0
+      },
+      "on_ice": {
+        "name": "Mike Matheson",
+        "oi_toi": 104.4,
+        "oi_xgf": 2.59,
+        "oi_xga": 3.96,
+        "oi_xg_diff_per60": -0.787,
+        "iso_per60": -0.787
+      }
+    },
+    {
+      "team": "MTL",
+      "name": "Kaiden Guhle",
+      "indiv": {
+        "name": "Kaiden Guhle",
+        "position": "D",
+        "gp": 6,
+        "toi": 138.2,
+        "goals": 0,
+        "assists": 2,
+        "points": 2,
+        "shots": 7,
+        "ixg": 0.31,
+        "ihdcf": 0
+      },
+      "on_ice": {
+        "name": "Kaiden Guhle",
+        "oi_toi": 111.7,
+        "oi_xgf": 4.48,
+        "oi_xga": 4.37,
+        "oi_xg_diff_per60": 0.059,
+        "iso_per60": 0.059
+      }
+    },
+    {
+      "team": "MTL",
+      "name": "Alexandre Carrier",
+      "indiv": {
+        "name": "Alexandre Carrier",
+        "position": "D",
+        "gp": 6,
+        "toi": 138.7,
+        "goals": 0,
+        "assists": 1,
+        "points": 1,
+        "shots": 1,
+        "ixg": 0.23,
+        "ihdcf": 0
+      },
+      "on_ice": {
+        "name": "Alexandre Carrier",
+        "oi_toi": 98.8,
+        "oi_xgf": 2.43,
+        "oi_xga": 3.81,
+        "oi_xg_diff_per60": -0.838,
+        "iso_per60": -0.838
+      }
+    },
+    {
+      "team": "BUF",
+      "name": "Rasmus Dahlin",
+      "indiv": {
+        "name": "Rasmus Dahlin",
+        "position": "D",
+        "gp": 6,
+        "toi": 145.1,
+        "goals": 1,
+        "assists": 3,
+        "points": 4,
+        "shots": 21,
+        "ixg": 1.29,
+        "ihdcf": 3
+      },
+      "on_ice": {
+        "name": "Rasmus Dahlin",
+        "oi_toi": 102.5,
+        "oi_xgf": 5.53,
+        "oi_xga": 2.67,
+        "oi_xg_diff_per60": 1.673,
+        "iso_per60": 1.673
+      }
+    },
+    {
+      "team": "BUF",
+      "name": "Bowen Byram",
+      "indiv": {
+        "name": "Bowen Byram",
+        "position": "D",
+        "gp": 6,
+        "toi": 137.2,
+        "goals": 3,
+        "assists": 2,
+        "points": 5,
+        "shots": 15,
+        "ixg": 0.97,
+        "ihdcf": 3
+      },
+      "on_ice": {
+        "name": "Bowen Byram",
+        "oi_toi": 108.1,
+        "oi_xgf": 5.79,
+        "oi_xga": 6.02,
+        "oi_xg_diff_per60": -0.128,
+        "iso_per60": -0.128
+      }
+    },
+    {
+      "team": "BUF",
+      "name": "Owen Power",
+      "indiv": {
+        "name": "Owen Power",
+        "position": "D",
+        "gp": 6,
+        "toi": 123.7,
+        "goals": 0,
+        "assists": 4,
+        "points": 4,
+        "shots": 7,
+        "ixg": 0.42,
+        "ihdcf": 2
+      },
+      "on_ice": {
+        "name": "Owen Power",
+        "oi_toi": 102.8,
+        "oi_xgf": 4.63,
+        "oi_xga": 4.7,
+        "oi_xg_diff_per60": -0.041,
+        "iso_per60": -0.041
+      }
+    },
+    {
+      "team": "BUF",
+      "name": "Mattias Samuelsson",
+      "indiv": {
+        "name": "Mattias Samuelsson",
+        "position": "D",
+        "gp": 6,
+        "toi": 125.6,
+        "goals": 2,
+        "assists": 0,
+        "points": 2,
+        "shots": 8,
+        "ixg": 0.19,
+        "ihdcf": 0
+      },
+      "on_ice": {
+        "name": "Mattias Samuelsson",
+        "oi_toi": 104.5,
+        "oi_xgf": 3.59,
+        "oi_xga": 2.88,
+        "oi_xg_diff_per60": 0.408,
+        "iso_per60": 0.408
+      }
+    }
+  ]
+}

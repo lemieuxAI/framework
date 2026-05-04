@@ -1,0 +1,131 @@
+# Game 7 box score — MTL @ TBL, 2026-05-03.
+# Source: ESPN box score + NHL.com recap + TSN + ClutchPoints recap.
+# This yaml is the authoritative fact base for the post-game brief.
+
+game_id: "2025030127"
+date: "2026-05-03"
+matchup: "MTL @ TBL"
+final_score: "MTL 2 - TBL 1"
+result: "MTL win, advances to Round 2"
+series_state_after_game: "MTL wins series 4-3, Buffalo in Round 2"
+venue: "Benchmark International Arena, Tampa"
+regulation_or_overtime: "REG"
+
+# Per-team aggregate
+team_stats:
+  MTL:
+    goals: 2
+    shots: 9            # NINE shots total — extreme outshot game
+    shots_p1: 4
+    shots_p2: 0         # zero shots in the entire 2nd period
+    shots_p3: 5
+    pp_attempts: 1
+    pp_goals: 0
+  TBL:
+    goals: 1
+    shots: 29
+    shots_p1: 9
+    pp_attempts: 2
+    pp_goals: 1
+
+# Goals
+goal_sequence:
+  - period: 1
+    time_in_period: "~16-19:00"  # late P1, exact time TBC
+    team: "MTL"
+    scorer: "Nick Suzuki"
+    primary_assist: "Kaiden Guhle"
+    secondary_assist: "Josh Anderson"
+    situation: "5v5"
+    note: "Suzuki's first goal of the series — and his first 5v5 goal in 6+ games against Vasilevskiy. The L1 drought ends in the most leverage moment possible."
+  - period: 2
+    time_in_period: "TBC"
+    team: "TBL"
+    scorer: "Dominic James"
+    primary_assist: "Charle-Edouard D'Astous"
+    secondary_assist: "Gage Goncalves"
+    situation: "5v4 (PP)"
+    note: "Tip-deflection from a point shot. The night's only Tampa breakthrough — and from a 4th-line center."
+  - period: 3
+    time_in_period: "11:07"
+    team: "MTL"
+    scorer: "Alex Newhook"
+    primary_assist: "Lane Hutson"
+    secondary_assist: "Kaiden Guhle"
+    situation: "5v5"
+    note: "Newhook batted a backhand from behind the net that squeezed past Vasilevskiy. A second-quality chance that became the series winner. Hutson set it up off a zone entry."
+
+# Goalies
+goalies:
+  MTL:
+    name: "Jakub Dobeš"
+    shots_against: 29
+    saves: 28
+    goals_against: 1
+    sv_pct: 0.966
+    note: "The performance of his career. .966 in a Game 7. The single goal allowed was a tip on the PP. Series final: .921 5v5 SV% over 7 games."
+  TBL:
+    name: "Andrei Vasilevskiy"
+    shots_against: 9
+    saves: 7
+    goals_against: 2
+    sv_pct: 0.778
+    note: "Faced only 9 shots and let in 2. The Newhook backhander from below the goal line is the kind of goal that won't go on his career reel. Series ends with the .875-1.000 oscillation."
+
+# Skater stats — MTL (read from PBP later if needed)
+skaters:
+  MTL_key:
+    - { name: "Nick Suzuki",      pos: "C", g: 1, a: 0 }
+    - { name: "Kaiden Guhle",     pos: "D", g: 0, a: 2 }
+    - { name: "Josh Anderson",    pos: "L", g: 0, a: 1 }
+    - { name: "Alex Newhook",     pos: "C", g: 1, a: 0 }
+    - { name: "Lane Hutson",      pos: "D", g: 0, a: 1 }
+  TBL_key:
+    - { name: "Dominic James",      pos: "C", g: 1, a: 0 }
+    - { name: "Charle-Edouard D'Astous", pos: "D", g: 0, a: 1 }
+    - { name: "Gage Goncalves",     pos: "C", g: 0, a: 1 }
+
+# Lineup confirmation
+lineup_confirmation:
+  MTL:
+    dobson_played: true   # Dobson dressed and played
+    xhekaj_scratched: true
+  TBL:
+    hedman_played: false  # Hedman remained out
+
+# Narrative anchors (manual)
+narrative_anchors:
+  dobes_heist:
+    significance: |
+      9 shots vs 29. .966 save percentage. The L1 drought ending was
+      clutch storytelling, but the actual reason MTL advances is a 24-year-old
+      rookie in his first playoff series. Dobes was the canonical
+      "stand-on-your-head" performance of the 2026 playoffs.
+  l1_drought_ends:
+    significance: |
+      Six games of 0 5v5 goals for Suzuki-Caufield-Slafkovsky. The first
+      goal of Game 7, late P1, came from Suzuki off a Guhle-Anderson rush.
+      Vindication of the iso-says-they're-creating-just-not-finishing read.
+  newhook_winner:
+    significance: |
+      Hutson set up an entry, Newhook batted at a backhand from below the
+      goal line, the puck found a way past Vasilevskiy. Low-quality goal
+      that decides the series. Newhook is the L4 center promoted to that
+      role in G5; this is his second 5v5 series-winning shift.
+  zero_shots_p2:
+    significance: |
+      MTL's second period: zero shots on goal. Tampa took over the period
+      after the James PP goal. The Habs' game plan from then on was visibly
+      shell up and trust Dobes. It worked.
+  outshot_9_29:
+    significance: |
+      The ratio of 9 shots for vs 29 against is one of the most extreme
+      outshot Game 7 wins in modern playoff history. Most "stolen" Game 7s
+      run more like 18-30 — this was a complete defensive shell + a goalie
+      stealing it.
+  series_competitiveness:
+    significance: |
+      Final series: all 7 games decided by 1 goal. 4 of 7 in OT. Combined
+      goal differential: 14-13 MTL. The most tightly contested R1 series
+      across the entire 2026 bracket — and decided by the rookie goalie at
+      the end.
