@@ -13,6 +13,7 @@ const {
   ShadingType, VerticalAlign, PageNumber, Footer, ExternalHyperlink,
 } = require('docx');
 const yaml = require('yaml');
+const { runTeamStateGuard } = require('../../lib/team_state_guard');
 
 const D = JSON.parse(fs.readFileSync(path.join(__dirname, 'game7_postgame.numbers.json'), 'utf8'));
 
@@ -263,8 +264,10 @@ const T = {
 
     watch_title: '5 · Pour le Match 1 mercredi à Buffalo',
     watch: [
-      `**Le filet du CH au M1.** Dobeš ou Montembeault? Dobeš a éliminé Tampa avec ce qu\'on a vu, mais ` +
-      `St-Louis pourrait reposer le rookie pour le M1 de la série suivante. À surveiller au matinal de mardi.`,
+      `**Le filet du CH au M1.** Dobeš est le partant : il a éliminé Tampa avec ce qu\'on a vu, et la rotation ` +
+      `Dobeš-Fowler est claire depuis mars. La vraie question est plutôt physique — après 7 matchs serrés et ` +
+      `un .966 qui a sapé toutes les réserves, est-ce que St-Louis lui donne le repos d\'un demi-match? ` +
+      `À surveiller au matinal de mardi.`,
       `**La couverture de Dahlin sur le PP1 du CH.** Hutson contre Dahlin sur la 2ᵉ unité du PP est le duel le ` +
       `plus stylistique de la série. Deux quart-arrières de PP qui ne s\'aiment pas tellement structurellement ` +
       `(Hutson = mouvement, Dahlin = volume). Qui a le contrôle?`,
@@ -437,8 +440,9 @@ const T = {
 
     watch_title: '5 · For Game 1 Wednesday in Buffalo',
     watch: [
-      `**MTL net for G1.** Dobeš or Montembeault? Dobeš eliminated Tampa with what we saw, but St-Louis might ` +
-      `rest the rookie for G1 of the next series. Watch Tuesday morning skate.`,
+      `**MTL net for G1.** Dobeš starts: he eliminated Tampa with what we saw, and the Dobeš-Fowler rotation ` +
+      `has been the depth chart since March. The real question is physical — after 7 tight games and a .966 ` +
+      `that drained every reserve, does St-Louis give him a half-game off? Watch Tuesday morning skate.`,
       `**Dahlin coverage on MTL's PP1.** Hutson vs Dahlin on the 2nd PP units is the most stylistically interesting ` +
       `duel of the series. Two PP quarterbacks structurally opposed (Hutson = movement, Dahlin = volume). Who controls?`,
       `**The Samuelsson-on-Suzuki matchup.** Lindy Ruff has last change in Buffalo. Will he line Samuelsson (the ` +
@@ -676,6 +680,71 @@ function sourcesSection(t) {
   ];
 }
 
+// ---------- prose fact-check guard ----------
+function runProseFactCheck() {
+  const violations = [];
+
+  // Collect every prose surface a reader will see.
+  const corpus = [];
+  for (const lang of ['fr', 'en']) {
+    const t = T[lang];
+    corpus.push(
+      t.title, t.subtitle, t.banner,
+      t.verdict_prose,
+      ...(t.tldr || []),
+      t.g7_recap_intro, t.g7_goals_intro, t.g7_goals_p2, t.g7_goals_p3,
+      t.dobes_intro, t.dobes_prose,
+      t.series_intro, t.series_table_caption,
+      t.r2_intro, t.r2_buf_who_prose, t.r2_thesis_prose,
+      t.goalies_compare_intro, t.forwards_compare_intro,
+      t.defense_compare_intro, t.st_compare_intro,
+      ...(t.watch || []),
+      t.framework_intro,
+      ...(t.caveats || []),
+    );
+  }
+  const proseText = corpus.filter(Boolean).join(' \n ');
+
+  // Check 1: team_state guard (current depth-chart reality).
+  const ts = runTeamStateGuard({
+    prose: proseText,
+    teams: ['MTL', 'BUF'],
+    dataDir: path.join(__dirname, '..', '..', 'data', 'team_state'),
+  });
+  for (const w of ts.warnings) console.warn('  ! ' + w);
+  violations.push(...ts.violations);
+
+  // Check 2: scorer claims trace to the box-score goal sequence.
+  const scorers = new Set((box.goal_sequence || []).map(g => g.scorer));
+  const scorerPattern = /(?<![\-–])\b([A-ZÀ-ÿĀ-ž][\wÀ-ÿĀ-ž'\-]+(?:\s[A-ZÀ-ÿĀ-ž][\wÀ-ÿĀ-ž'\-]+){1,2})\s+(scored|a\s+marqué)\b/g;
+  let m;
+  while ((m = scorerPattern.exec(proseText)) !== null) {
+    const claimed = m[1];
+    if (scorers.has(claimed)) continue;
+    const lastName = claimed.split(/\s+/).pop();
+    const matchesActual = [...scorers].some(s => s.includes(lastName));
+    if (!matchesActual) {
+      violations.push(`[VIOLATION] possible scorer mis-attribution: "${claimed} ${m[2]}"`);
+    }
+  }
+
+  // Check 3: banned high-confidence patterns.
+  const banned = [
+    /\bMTL\s+wins\s+in\s+\d/i, /\bvictoire\s+du\s+CH\s+en\s+\d/i,
+    /\b(we|I)\s+predict\b/i, /\bnous\s+prédisons\b/i,
+  ];
+  for (const re of banned) {
+    const mm = proseText.match(re);
+    if (mm) violations.push(`[VIOLATION] banned pattern: "${mm[0]}"`);
+  }
+
+  if (violations.length) {
+    console.error('Prose guard:');
+    for (const v of violations) console.error('  ✗ ' + v);
+    process.exit(7);
+  }
+}
+
 // ---------- assemble ----------
 function buildDoc(lang) {
   const t = T[lang];
@@ -731,6 +800,7 @@ function buildDoc(lang) {
 }
 
 (async () => {
+  runProseFactCheck();
   for (const lang of ['fr', 'en']) {
     const doc = buildDoc(lang);
     const buf = await Packer.toBuffer(doc);
