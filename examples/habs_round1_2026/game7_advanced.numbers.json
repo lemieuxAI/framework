@@ -1,0 +1,2675 @@
+{
+  "meta": {
+    "as_of": "2026-05-04",
+    "purpose": "Deep advanced-stats look at G7. Did Tampa actually create high-danger chances behind their volume, or was 9-29 SOG an extreme expression of the series pattern: Tampa drives possession but generates few inner-slot looks?",
+    "game_id_g7": "2025030127",
+    "model_notes": "xG estimate: distance + angle logistic, ~50% at 12 ft straight-on, dampened by cosine of angle. Tip-ins +40% bump. Backhands -15%. Calibrated to ~8% per unblocked shot at NHL 5v5 baseline. NOT NST-identical — used for relative comparisons within and across series games. HDCF cutoff: 22 ft from net (NST 'home plate' proxy). Inner slot cutoff: 15 ft."
+  },
+  "g7_full_game": {
+    "game_id": "2025030127",
+    "home_team": "TBL",
+    "away_team": "MTL",
+    "home_id": 14,
+    "away_id": 8,
+    "final_score": {
+      "TBL": 1,
+      "MTL": 2
+    },
+    "by_period_situation": {
+      "1": {
+        "MTL": {
+          "sog": 4,
+          "missed": 8,
+          "blocked_for": 6,
+          "blocked_against": 4,
+          "cf": 16,
+          "ff": 12,
+          "hdcf": 1,
+          "inner_slot_cf": 0,
+          "slot_sog": 0,
+          "perim_sog": 4,
+          "goals": 1,
+          "xgf": 0.303,
+          "xgf_unblocked": 0.303,
+          "hits": 23,
+          "fo_won": 10,
+          "fo_lost": 6,
+          "shots_list": [
+            {
+              "type": "shot-on-goal",
+              "x": -34,
+              "y": -33,
+              "dist": 64.1,
+              "xg": 0.005,
+              "subtype": "snap",
+              "sit": "5v5",
+              "score_state_at_event": "TBL0-MTL0"
+            },
+            {
+              "type": "missed-shot",
+              "x": -42,
+              "y": -2,
+              "dist": 47.0,
+              "xg": 0.005,
+              "subtype": "wrist",
+              "sit": "5v5",
+              "score_state_at_event": "TBL0-MTL0"
+            },
+            {
+              "type": "missed-shot",
+              "x": -42,
+              "y": -26,
+              "dist": 53.7,
+              "xg": 0.005,
+              "subtype": "slap",
+              "sit": "5v5",
+              "score_state_at_event": "TBL0-MTL0"
+            },
+            {
+              "type": "missed-shot",
+              "x": -59,
+              "y": -22,
+              "dist": 37.2,
+              "xg": 0.012,
+              "subtype": "snap",
+              "sit": "5v5",
+              "score_state_at_event": "TBL0-MTL0"
+            },
+            {
+              "type": "shot-on-goal",
+              "x": -60,
+              "y": -20,
+              "dist": 35.2,
+              "xg": 0.016,
+              "subtype": "wrist",
+              "sit": "5v5",
+              "score_state_at_event": "TBL0-MTL0"
+            },
+            {
+              "type": "missed-shot",
+              "x": -80,
+              "y": 23,
+              "dist": 24.7,
+              "xg": 0.043,
+              "subtype": "backhand",
+              "sit": "5v5",
+              "score_state_at_event": "TBL0-MTL0"
+            },
+            {
+              "type": "missed-shot",
+              "x": -69,
+              "y": -27,
+              "dist": 33.6,
+              "xg": 0.019,
+              "subtype": "snap",
+              "sit": "5v5",
+              "score_state_at_event": "TBL0-MTL0"
+            },
+            {
+              "type": "missed-shot",
+              "x": -54,
+              "y": -27,
+              "dist": 44.2,
+              "xg": 0.005,
+              "subtype": "slap",
+              "sit": "5v5",
+              "score_state_at_event": "TBL0-MTL0"
+            },
+            {
+              "type": "shot-on-goal",
+              "x": -62,
+              "y": 10,
+              "dist": 28.8,
+              "xg": 0.033,
+              "subtype": "snap",
+              "sit": "5v5",
+              "score_state_at_event": "TBL0-MTL0"
+            },
+            {
+              "type": "missed-shot",
+              "x": -69,
+              "y": 5,
+              "dist": 20.6,
+              "xg": 0.076,
+              "subtype": "snap",
+              "sit": "5v5",
+              "score_state_at_event": "TBL0-MTL0"
+            },
+            {
+              "type": "missed-shot",
+              "x": -29,
+              "y": -41,
+              "dist": 72.7,
+              "xg": 0.005,
+              "subtype": "wrist",
+              "sit": "5v5",
+              "score_state_at_event": "TBL0-MTL0"
+            },
+            {
+              "type": "goal",
+              "x": -67,
+              "y": -9,
+              "dist": 23.8,
+              "xg": 0.078,
+              "subtype": "tip-in",
+              "sit": "5v5",
+              "score_state_at_event": "TBL0-MTL0"
+            }
+          ]
+        },
+        "TBL": {
+          "sog": 9,
+          "missed": 3,
+          "blocked_for": 4,
+          "blocked_against": 6,
+          "cf": 18,
+          "ff": 12,
+          "hdcf": 3,
+          "inner_slot_cf": 3,
+          "slot_sog": 3,
+          "perim_sog": 6,
+          "goals": 0,
+          "xgf": 0.622,
+          "xgf_unblocked": 0.622,
+          "hits": 9,
+          "fo_won": 6,
+          "fo_lost": 10,
+          "shots_list": [
+            {
+              "type": "shot-on-goal",
+              "x": 84,
+              "y": -34,
+              "dist": 34.4,
+              "xg": 0.017,
+              "subtype": "snap",
+              "sit": "5v5",
+              "score_state_at_event": "TBL0-MTL0"
+            },
+            {
+              "type": "shot-on-goal",
+              "x": 32,
+              "y": 35,
+              "dist": 66.9,
+              "xg": 0.005,
+              "subtype": "snap",
+              "sit": "5v5",
+              "score_state_at_event": "TBL0-MTL0"
+            },
+            {
+              "type": "shot-on-goal",
+              "x": 68,
+              "y": 11,
+              "dist": 23.7,
+              "xg": 0.056,
+              "subtype": "snap",
+              "sit": "5v5",
+              "score_state_at_event": "TBL0-MTL0"
+            },
+            {
+              "type": "shot-on-goal",
+              "x": 55,
+              "y": -25,
+              "dist": 42.2,
+              "xg": 0.007,
+              "subtype": "snap",
+              "sit": "5v5",
+              "score_state_at_event": "TBL0-MTL0"
+            },
+            {
+              "type": "shot-on-goal",
+              "x": 89,
+              "y": -15,
+              "dist": 15.0,
+              "xg": 0.122,
+              "subtype": "snap",
+              "sit": "5v5",
+              "score_state_at_event": "TBL0-MTL0"
+            },
+            {
+              "type": "shot-on-goal",
+              "x": 58,
+              "y": -10,
+              "dist": 32.6,
+              "xg": 0.021,
+              "subtype": "snap",
+              "sit": "5v5",
+              "score_state_at_event": "TBL0-MTL0"
+            },
+            {
+              "type": "missed-shot",
+              "x": 63,
+              "y": 9,
+              "dist": 27.5,
+              "xg": 0.038,
+              "subtype": "snap",
+              "sit": "5v5",
+              "score_state_at_event": "TBL0-MTL0"
+            },
+            {
+              "type": "missed-shot",
+              "x": 71,
+              "y": -39,
+              "dist": 43.0,
+              "xg": 0.006,
+              "subtype": "snap",
+              "sit": "5v5",
+              "score_state_at_event": "TBL0-MTL0"
+            },
+            {
+              "type": "shot-on-goal",
+              "x": 79,
+              "y": -1,
+              "dist": 10.0,
+              "xg": 0.168,
+              "subtype": "snap",
+              "sit": "5v5",
+              "score_state_at_event": "TBL0-MTL0"
+            },
+            {
+              "type": "missed-shot",
+              "x": 73,
+              "y": -39,
+              "dist": 42.2,
+              "xg": 0.006,
+              "subtype": "backhand",
+              "sit": "5v5",
+              "score_state_at_event": "TBL0-MTL0"
+            },
+            {
+              "type": "shot-on-goal",
+              "x": 82,
+              "y": -2,
+              "dist": 7.3,
+              "xg": 0.164,
+              "subtype": "backhand",
+              "sit": "5v5",
+              "score_state_at_event": "TBL0-MTL0"
+            },
+            {
+              "type": "shot-on-goal",
+              "x": 54,
+              "y": -15,
+              "dist": 38.1,
+              "xg": 0.011,
+              "subtype": "wrist",
+              "sit": "5v5",
+              "score_state_at_event": "TBL0-MTL0"
+            }
+          ]
+        }
+      },
+      "all": {
+        "MTL": {
+          "sog": 9,
+          "missed": 14,
+          "blocked_for": 17,
+          "blocked_against": 15,
+          "cf": 38,
+          "ff": 23,
+          "hdcf": 4,
+          "inner_slot_cf": 3,
+          "slot_sog": 1,
+          "perim_sog": 8,
+          "goals": 2,
+          "xgf": 1.015,
+          "xgf_unblocked": 1.015,
+          "hits": 43,
+          "fo_won": 32,
+          "fo_lost": 28,
+          "shots_list": []
+        },
+        "TBL": {
+          "sog": 29,
+          "missed": 12,
+          "blocked_for": 15,
+          "blocked_against": 17,
+          "cf": 58,
+          "ff": 41,
+          "hdcf": 9,
+          "inner_slot_cf": 7,
+          "slot_sog": 7,
+          "perim_sog": 22,
+          "goals": 1,
+          "xgf": 2.136,
+          "xgf_unblocked": 2.136,
+          "hits": 30,
+          "fo_won": 28,
+          "fo_lost": 32,
+          "shots_list": []
+        }
+      },
+      "1_5v5": {
+        "MTL": {
+          "sog": 4,
+          "missed": 8,
+          "blocked_for": 0,
+          "blocked_against": 0,
+          "cf": 12,
+          "ff": 12,
+          "hdcf": 1,
+          "inner_slot_cf": 0,
+          "slot_sog": 0,
+          "perim_sog": 4,
+          "goals": 1,
+          "xgf": 0.303,
+          "xgf_unblocked": 0.303,
+          "hits": 23,
+          "fo_won": 10,
+          "fo_lost": 0,
+          "shots_list": []
+        },
+        "TBL": {
+          "sog": 9,
+          "missed": 3,
+          "blocked_for": 0,
+          "blocked_against": 0,
+          "cf": 12,
+          "ff": 12,
+          "hdcf": 3,
+          "inner_slot_cf": 3,
+          "slot_sog": 3,
+          "perim_sog": 6,
+          "goals": 0,
+          "xgf": 0.622,
+          "xgf_unblocked": 0.622,
+          "hits": 9,
+          "fo_won": 6,
+          "fo_lost": 0,
+          "shots_list": []
+        }
+      },
+      "all_5v5": {
+        "MTL": {
+          "sog": 9,
+          "missed": 12,
+          "blocked_for": 0,
+          "blocked_against": 0,
+          "cf": 21,
+          "ff": 21,
+          "hdcf": 3,
+          "inner_slot_cf": 2,
+          "slot_sog": 1,
+          "perim_sog": 8,
+          "goals": 2,
+          "xgf": 0.761,
+          "xgf_unblocked": 0.761,
+          "hits": 42,
+          "fo_won": 26,
+          "fo_lost": 0,
+          "shots_list": []
+        },
+        "TBL": {
+          "sog": 23,
+          "missed": 11,
+          "blocked_for": 0,
+          "blocked_against": 0,
+          "cf": 34,
+          "ff": 34,
+          "hdcf": 8,
+          "inner_slot_cf": 6,
+          "slot_sog": 6,
+          "perim_sog": 17,
+          "goals": 0,
+          "xgf": 1.813,
+          "xgf_unblocked": 1.813,
+          "hits": 26,
+          "fo_won": 24,
+          "fo_lost": 0,
+          "shots_list": []
+        }
+      },
+      "2": {
+        "MTL": {
+          "sog": 0,
+          "missed": 3,
+          "blocked_for": 2,
+          "blocked_against": 4,
+          "cf": 7,
+          "ff": 3,
+          "hdcf": 1,
+          "inner_slot_cf": 1,
+          "slot_sog": 0,
+          "perim_sog": 0,
+          "goals": 0,
+          "xgf": 0.259,
+          "xgf_unblocked": 0.259,
+          "hits": 11,
+          "fo_won": 12,
+          "fo_lost": 10,
+          "shots_list": [
+            {
+              "type": "missed-shot",
+              "x": 32,
+              "y": -31,
+              "dist": 64.9,
+              "xg": 0.005,
+              "subtype": "slap",
+              "sit": "5v5",
+              "score_state_at_event": "TBL1-MTL1"
+            },
+            {
+              "type": "missed-shot",
+              "x": 40,
+              "y": -25,
+              "dist": 55.0,
+              "xg": 0.005,
+              "subtype": "wrist",
+              "sit": "pp",
+              "score_state_at_event": "TBL1-MTL1"
+            },
+            {
+              "type": "missed-shot",
+              "x": 80,
+              "y": 0,
+              "dist": 9.0,
+              "xg": 0.249,
+              "subtype": "tip-in",
+              "sit": "pp",
+              "score_state_at_event": "TBL1-MTL1"
+            }
+          ]
+        },
+        "TBL": {
+          "sog": 12,
+          "missed": 4,
+          "blocked_for": 4,
+          "blocked_against": 2,
+          "cf": 18,
+          "ff": 16,
+          "hdcf": 3,
+          "inner_slot_cf": 3,
+          "slot_sog": 3,
+          "perim_sog": 9,
+          "goals": 1,
+          "xgf": 0.984,
+          "xgf_unblocked": 0.984,
+          "hits": 9,
+          "fo_won": 10,
+          "fo_lost": 12,
+          "shots_list": [
+            {
+              "type": "shot-on-goal",
+              "x": -62,
+              "y": 10,
+              "dist": 28.8,
+              "xg": 0.033,
+              "subtype": "snap",
+              "sit": "5v5",
+              "score_state_at_event": "TBL0-MTL1"
+            },
+            {
+              "type": "shot-on-goal",
+              "x": -69,
+              "y": 15,
+              "dist": 25.0,
+              "xg": 0.049,
+              "subtype": "snap",
+              "sit": "5v5",
+              "score_state_at_event": "TBL0-MTL1"
+            },
+            {
+              "type": "shot-on-goal",
+              "x": -60,
+              "y": 22,
+              "dist": 36.4,
+              "xg": 0.014,
+              "subtype": "snap",
+              "sit": "5v5",
+              "score_state_at_event": "TBL0-MTL1"
+            },
+            {
+              "type": "shot-on-goal",
+              "x": -56,
+              "y": 30,
+              "dist": 44.6,
+              "xg": 0.005,
+              "subtype": "slap",
+              "sit": "all",
+              "score_state_at_event": "TBL0-MTL1"
+            },
+            {
+              "type": "shot-on-goal",
+              "x": -46,
+              "y": -7,
+              "dist": 43.6,
+              "xg": 0.006,
+              "subtype": "slap",
+              "sit": "all",
+              "score_state_at_event": "TBL0-MTL1"
+            },
+            {
+              "type": "shot-on-goal",
+              "x": -70,
+              "y": -22,
+              "dist": 29.1,
+              "xg": 0.032,
+              "subtype": "snap",
+              "sit": "pp",
+              "score_state_at_event": "TBL0-MTL1"
+            },
+            {
+              "type": "shot-on-goal",
+              "x": -60,
+              "y": -18,
+              "dist": 34.1,
+              "xg": 0.018,
+              "subtype": "wrist",
+              "sit": "pp",
+              "score_state_at_event": "TBL0-MTL1"
+            },
+            {
+              "type": "shot-on-goal",
+              "x": -70,
+              "y": 19,
+              "dist": 26.9,
+              "xg": 0.057,
+              "subtype": "tip-in",
+              "sit": "5v5",
+              "score_state_at_event": "TBL0-MTL1"
+            },
+            {
+              "type": "shot-on-goal",
+              "x": -84,
+              "y": 7,
+              "dist": 8.6,
+              "xg": 0.181,
+              "subtype": "snap",
+              "sit": "5v5",
+              "score_state_at_event": "TBL0-MTL1"
+            },
+            {
+              "type": "missed-shot",
+              "x": -68,
+              "y": -17,
+              "dist": 27.0,
+              "xg": 0.04,
+              "subtype": "wrist",
+              "sit": "5v5",
+              "score_state_at_event": "TBL0-MTL1"
+            },
+            {
+              "type": "shot-on-goal",
+              "x": -32,
+              "y": 8,
+              "dist": 57.6,
+              "xg": 0.005,
+              "subtype": "snap",
+              "sit": "5v5",
+              "score_state_at_event": "TBL0-MTL1"
+            },
+            {
+              "type": "missed-shot",
+              "x": -57,
+              "y": -3,
+              "dist": 32.1,
+              "xg": 0.022,
+              "subtype": "snap",
+              "sit": "pp",
+              "score_state_at_event": "TBL0-MTL1"
+            },
+            {
+              "type": "goal",
+              "x": -79,
+              "y": 1,
+              "dist": 10.0,
+              "xg": 0.235,
+              "subtype": "tip-in",
+              "sit": "pp",
+              "score_state_at_event": "TBL0-MTL1"
+            },
+            {
+              "type": "shot-on-goal",
+              "x": -81,
+              "y": -1,
+              "dist": 8.1,
+              "xg": 0.261,
+              "subtype": "tip-in",
+              "sit": "5v5",
+              "score_state_at_event": "TBL1-MTL1"
+            },
+            {
+              "type": "missed-shot",
+              "x": -58,
+              "y": 23,
+              "dist": 38.6,
+              "xg": 0.01,
+              "subtype": "snap",
+              "sit": "5v5",
+              "score_state_at_event": "TBL1-MTL1"
+            },
+            {
+              "type": "missed-shot",
+              "x": -58,
+              "y": 21,
+              "dist": 37.4,
+              "xg": 0.017,
+              "subtype": "tip-in",
+              "sit": "5v5",
+              "score_state_at_event": "TBL1-MTL1"
+            }
+          ]
+        }
+      },
+      "2_5v5": {
+        "MTL": {
+          "sog": 0,
+          "missed": 1,
+          "blocked_for": 0,
+          "blocked_against": 0,
+          "cf": 1,
+          "ff": 1,
+          "hdcf": 0,
+          "inner_slot_cf": 0,
+          "slot_sog": 0,
+          "perim_sog": 0,
+          "goals": 0,
+          "xgf": 0.005,
+          "xgf_unblocked": 0.005,
+          "hits": 10,
+          "fo_won": 9,
+          "fo_lost": 0,
+          "shots_list": []
+        },
+        "TBL": {
+          "sog": 7,
+          "missed": 3,
+          "blocked_for": 0,
+          "blocked_against": 0,
+          "cf": 10,
+          "ff": 10,
+          "hdcf": 2,
+          "inner_slot_cf": 2,
+          "slot_sog": 2,
+          "perim_sog": 5,
+          "goals": 0,
+          "xgf": 0.666,
+          "xgf_unblocked": 0.666,
+          "hits": 7,
+          "fo_won": 8,
+          "fo_lost": 0,
+          "shots_list": []
+        }
+      },
+      "2_pk": {
+        "MTL": {
+          "sog": 0,
+          "missed": 0,
+          "blocked_for": 0,
+          "blocked_against": 0,
+          "cf": 0,
+          "ff": 0,
+          "hdcf": 0,
+          "inner_slot_cf": 0,
+          "slot_sog": 0,
+          "perim_sog": 0,
+          "goals": 0,
+          "xgf": 0.0,
+          "xgf_unblocked": 0.0,
+          "hits": 1,
+          "fo_won": 3,
+          "fo_lost": 0,
+          "shots_list": []
+        },
+        "TBL": {
+          "sog": 0,
+          "missed": 0,
+          "blocked_for": 0,
+          "blocked_against": 0,
+          "cf": 0,
+          "ff": 0,
+          "hdcf": 0,
+          "inner_slot_cf": 0,
+          "slot_sog": 0,
+          "perim_sog": 0,
+          "goals": 0,
+          "xgf": 0.0,
+          "xgf_unblocked": 0.0,
+          "hits": 2,
+          "fo_won": 1,
+          "fo_lost": 0,
+          "shots_list": []
+        }
+      },
+      "all_pk": {
+        "MTL": {
+          "sog": 0,
+          "missed": 0,
+          "blocked_for": 0,
+          "blocked_against": 0,
+          "cf": 0,
+          "ff": 0,
+          "hdcf": 0,
+          "inner_slot_cf": 0,
+          "slot_sog": 0,
+          "perim_sog": 0,
+          "goals": 0,
+          "xgf": 0.0,
+          "xgf_unblocked": 0.0,
+          "hits": 1,
+          "fo_won": 3,
+          "fo_lost": 0,
+          "shots_list": []
+        },
+        "TBL": {
+          "sog": 0,
+          "missed": 0,
+          "blocked_for": 0,
+          "blocked_against": 0,
+          "cf": 0,
+          "ff": 0,
+          "hdcf": 0,
+          "inner_slot_cf": 0,
+          "slot_sog": 0,
+          "perim_sog": 0,
+          "goals": 0,
+          "xgf": 0.0,
+          "xgf_unblocked": 0.0,
+          "hits": 2,
+          "fo_won": 1,
+          "fo_lost": 0,
+          "shots_list": []
+        }
+      },
+      "2_pp": {
+        "TBL": {
+          "sog": 3,
+          "missed": 1,
+          "blocked_for": 0,
+          "blocked_against": 0,
+          "cf": 4,
+          "ff": 4,
+          "hdcf": 1,
+          "inner_slot_cf": 1,
+          "slot_sog": 1,
+          "perim_sog": 2,
+          "goals": 1,
+          "xgf": 0.307,
+          "xgf_unblocked": 0.307,
+          "hits": 0,
+          "fo_won": 1,
+          "fo_lost": 0,
+          "shots_list": []
+        },
+        "MTL": {
+          "sog": 0,
+          "missed": 2,
+          "blocked_for": 0,
+          "blocked_against": 0,
+          "cf": 2,
+          "ff": 2,
+          "hdcf": 1,
+          "inner_slot_cf": 1,
+          "slot_sog": 0,
+          "perim_sog": 0,
+          "goals": 0,
+          "xgf": 0.254,
+          "xgf_unblocked": 0.254,
+          "hits": 0,
+          "fo_won": 0,
+          "fo_lost": 0,
+          "shots_list": []
+        }
+      },
+      "all_pp": {
+        "TBL": {
+          "sog": 3,
+          "missed": 1,
+          "blocked_for": 0,
+          "blocked_against": 0,
+          "cf": 4,
+          "ff": 4,
+          "hdcf": 1,
+          "inner_slot_cf": 1,
+          "slot_sog": 1,
+          "perim_sog": 2,
+          "goals": 1,
+          "xgf": 0.307,
+          "xgf_unblocked": 0.307,
+          "hits": 0,
+          "fo_won": 1,
+          "fo_lost": 0,
+          "shots_list": []
+        },
+        "MTL": {
+          "sog": 0,
+          "missed": 2,
+          "blocked_for": 0,
+          "blocked_against": 0,
+          "cf": 2,
+          "ff": 2,
+          "hdcf": 1,
+          "inner_slot_cf": 1,
+          "slot_sog": 0,
+          "perim_sog": 0,
+          "goals": 0,
+          "xgf": 0.254,
+          "xgf_unblocked": 0.254,
+          "hits": 0,
+          "fo_won": 0,
+          "fo_lost": 0,
+          "shots_list": []
+        }
+      },
+      "3": {
+        "TBL": {
+          "sog": 8,
+          "missed": 5,
+          "blocked_for": 7,
+          "blocked_against": 9,
+          "cf": 22,
+          "ff": 13,
+          "hdcf": 3,
+          "inner_slot_cf": 1,
+          "slot_sog": 1,
+          "perim_sog": 7,
+          "goals": 0,
+          "xgf": 0.53,
+          "xgf_unblocked": 0.53,
+          "hits": 12,
+          "fo_won": 12,
+          "fo_lost": 10,
+          "shots_list": [
+            {
+              "type": "missed-shot",
+              "x": 81,
+              "y": 17,
+              "dist": 18.8,
+              "xg": 0.09,
+              "subtype": "snap",
+              "sit": "5v5",
+              "score_state_at_event": "TBL1-MTL1"
+            },
+            {
+              "type": "shot-on-goal",
+              "x": 68,
+              "y": 12,
+              "dist": 24.2,
+              "xg": 0.054,
+              "subtype": "snap",
+              "sit": "5v5",
+              "score_state_at_event": "TBL1-MTL1"
+            },
+            {
+              "type": "shot-on-goal",
+              "x": 63,
+              "y": -39,
+              "dist": 46.9,
+              "xg": 0.005,
+              "subtype": "snap",
+              "sit": "5v5",
+              "score_state_at_event": "TBL1-MTL1"
+            },
+            {
+              "type": "shot-on-goal",
+              "x": 50,
+              "y": -15,
+              "dist": 41.8,
+              "xg": 0.007,
+              "subtype": "wrist",
+              "sit": "5v5",
+              "score_state_at_event": "TBL1-MTL1"
+            },
+            {
+              "type": "missed-shot",
+              "x": 63,
+              "y": 36,
+              "dist": 44.4,
+              "xg": 0.005,
+              "subtype": "snap",
+              "sit": "5v5",
+              "score_state_at_event": "TBL1-MTL1"
+            },
+            {
+              "type": "missed-shot",
+              "x": 72,
+              "y": 0,
+              "dist": 17.0,
+              "xg": 0.146,
+              "subtype": "tip-in",
+              "sit": "5v5",
+              "score_state_at_event": "TBL1-MTL2"
+            },
+            {
+              "type": "shot-on-goal",
+              "x": 63,
+              "y": 12,
+              "dist": 28.6,
+              "xg": 0.033,
+              "subtype": "snap",
+              "sit": "5v5",
+              "score_state_at_event": "TBL1-MTL2"
+            },
+            {
+              "type": "shot-on-goal",
+              "x": 58,
+              "y": 14,
+              "dist": 34.0,
+              "xg": 0.018,
+              "subtype": "snap",
+              "sit": "5v5",
+              "score_state_at_event": "TBL1-MTL2"
+            },
+            {
+              "type": "missed-shot",
+              "x": 60,
+              "y": 20,
+              "dist": 35.2,
+              "xg": 0.022,
+              "subtype": "tip-in",
+              "sit": "5v5",
+              "score_state_at_event": "TBL1-MTL2"
+            },
+            {
+              "type": "shot-on-goal",
+              "x": 51,
+              "y": 5,
+              "dist": 38.3,
+              "xg": 0.011,
+              "subtype": "snap",
+              "sit": "5v5",
+              "score_state_at_event": "TBL1-MTL2"
+            },
+            {
+              "type": "missed-shot",
+              "x": 61,
+              "y": -30,
+              "dist": 41.0,
+              "xg": 0.008,
+              "subtype": "snap",
+              "sit": "5v5",
+              "score_state_at_event": "TBL1-MTL2"
+            },
+            {
+              "type": "shot-on-goal",
+              "x": 82,
+              "y": -10,
+              "dist": 12.2,
+              "xg": 0.126,
+              "subtype": "backhand",
+              "sit": "5v5",
+              "score_state_at_event": "TBL1-MTL2"
+            },
+            {
+              "type": "shot-on-goal",
+              "x": 0,
+              "y": -12,
+              "dist": 89.8,
+              "xg": 0.005,
+              "subtype": "snap",
+              "sit": "all",
+              "score_state_at_event": "TBL1-MTL2"
+            }
+          ]
+        },
+        "MTL": {
+          "sog": 5,
+          "missed": 3,
+          "blocked_for": 9,
+          "blocked_against": 7,
+          "cf": 15,
+          "ff": 8,
+          "hdcf": 2,
+          "inner_slot_cf": 2,
+          "slot_sog": 1,
+          "perim_sog": 4,
+          "goals": 1,
+          "xgf": 0.453,
+          "xgf_unblocked": 0.453,
+          "hits": 9,
+          "fo_won": 10,
+          "fo_lost": 12,
+          "shots_list": [
+            {
+              "type": "shot-on-goal",
+              "x": -50,
+              "y": -27,
+              "dist": 47.4,
+              "xg": 0.005,
+              "subtype": "snap",
+              "sit": "5v5",
+              "score_state_at_event": "TBL1-MTL1"
+            },
+            {
+              "type": "shot-on-goal",
+              "x": -18,
+              "y": -34,
+              "dist": 78.7,
+              "xg": 0.005,
+              "subtype": "wrist",
+              "sit": "5v5",
+              "score_state_at_event": "TBL1-MTL1"
+            },
+            {
+              "type": "missed-shot",
+              "x": -63,
+              "y": -25,
+              "dist": 36.1,
+              "xg": 0.014,
+              "subtype": "slap",
+              "sit": "5v5",
+              "score_state_at_event": "TBL1-MTL1"
+            },
+            {
+              "type": "missed-shot",
+              "x": -80,
+              "y": 5,
+              "dist": 10.3,
+              "xg": 0.232,
+              "subtype": "tip-in",
+              "sit": "5v5",
+              "score_state_at_event": "TBL1-MTL1"
+            },
+            {
+              "type": "missed-shot",
+              "x": -53,
+              "y": -23,
+              "dist": 42.7,
+              "xg": 0.006,
+              "subtype": "wrist",
+              "sit": "5v5",
+              "score_state_at_event": "TBL1-MTL1"
+            },
+            {
+              "type": "goal",
+              "x": -87,
+              "y": -10,
+              "dist": 10.2,
+              "xg": 0.167,
+              "subtype": "bat",
+              "sit": "5v5",
+              "score_state_at_event": "TBL1-MTL1"
+            },
+            {
+              "type": "shot-on-goal",
+              "x": -69,
+              "y": 27,
+              "dist": 33.6,
+              "xg": 0.019,
+              "subtype": "slap",
+              "sit": "5v5",
+              "score_state_at_event": "TBL1-MTL2"
+            },
+            {
+              "type": "shot-on-goal",
+              "x": 0,
+              "y": -36,
+              "dist": 96.0,
+              "xg": 0.005,
+              "subtype": "tip-in",
+              "sit": "5v5",
+              "score_state_at_event": "TBL1-MTL2"
+            }
+          ]
+        }
+      },
+      "3_5v5": {
+        "TBL": {
+          "sog": 7,
+          "missed": 5,
+          "blocked_for": 0,
+          "blocked_against": 0,
+          "cf": 12,
+          "ff": 12,
+          "hdcf": 3,
+          "inner_slot_cf": 1,
+          "slot_sog": 1,
+          "perim_sog": 6,
+          "goals": 0,
+          "xgf": 0.525,
+          "xgf_unblocked": 0.525,
+          "hits": 10,
+          "fo_won": 10,
+          "fo_lost": 0,
+          "shots_list": []
+        },
+        "MTL": {
+          "sog": 5,
+          "missed": 3,
+          "blocked_for": 0,
+          "blocked_against": 0,
+          "cf": 8,
+          "ff": 8,
+          "hdcf": 2,
+          "inner_slot_cf": 2,
+          "slot_sog": 1,
+          "perim_sog": 4,
+          "goals": 1,
+          "xgf": 0.453,
+          "xgf_unblocked": 0.453,
+          "hits": 9,
+          "fo_won": 7,
+          "fo_lost": 0,
+          "shots_list": []
+        }
+      }
+    },
+    "by_score_state": {
+      "tied": {
+        "MTL": {
+          "sog": 7,
+          "missed": 14,
+          "blocked_for": 0,
+          "blocked_against": 0,
+          "cf": 35,
+          "ff": 21,
+          "hdcf": 4,
+          "inner_slot_cf": 3,
+          "slot_sog": 1,
+          "perim_sog": 6,
+          "goals": 2,
+          "xgf": 0.991,
+          "xgf_unblocked": 0.991,
+          "hits": 34,
+          "fo_won": 16,
+          "fo_lost": 0,
+          "shots_list": []
+        },
+        "TBL": {
+          "sog": 13,
+          "missed": 7,
+          "blocked_for": 0,
+          "blocked_against": 0,
+          "cf": 29,
+          "ff": 20,
+          "hdcf": 5,
+          "inner_slot_cf": 4,
+          "slot_sog": 4,
+          "perim_sog": 9,
+          "goals": 0,
+          "xgf": 1.07,
+          "xgf_unblocked": 1.07,
+          "hits": 18,
+          "fo_won": 19,
+          "fo_lost": 0,
+          "shots_list": []
+        }
+      },
+      "away_lead": {
+        "MTL": {
+          "sog": 2,
+          "missed": 0,
+          "blocked_for": 0,
+          "blocked_against": 0,
+          "cf": 5,
+          "ff": 2,
+          "hdcf": 0,
+          "inner_slot_cf": 0,
+          "slot_sog": 0,
+          "perim_sog": 2,
+          "goals": 0,
+          "xgf": 0.024,
+          "xgf_unblocked": 0.024,
+          "hits": 9,
+          "fo_won": 16,
+          "fo_lost": 0,
+          "shots_list": []
+        },
+        "TBL": {
+          "sog": 16,
+          "missed": 5,
+          "blocked_for": 0,
+          "blocked_against": 0,
+          "cf": 27,
+          "ff": 21,
+          "hdcf": 4,
+          "inner_slot_cf": 3,
+          "slot_sog": 3,
+          "perim_sog": 13,
+          "goals": 1,
+          "xgf": 1.066,
+          "xgf_unblocked": 1.066,
+          "hits": 12,
+          "fo_won": 9,
+          "fo_lost": 0,
+          "shots_list": []
+        }
+      }
+    }
+  },
+  "g7_team_view_mtl": {
+    "team": "MTL",
+    "opp": "TBL",
+    "periods": {
+      "P1": {
+        "all": {
+          "sog": 4,
+          "cf": 16,
+          "ff": 12,
+          "hdcf": 1,
+          "inner_slot_cf": 0,
+          "slot_sog": 0,
+          "perim_sog": 4,
+          "goals": 1,
+          "xgf": 0.303,
+          "xgf_unblocked": 0.303,
+          "hits": 23,
+          "blocked_for": 6,
+          "blocked_against": 4
+        },
+        "5v5": {
+          "sog": 4,
+          "cf": 12,
+          "ff": 12,
+          "hdcf": 1,
+          "inner_slot_cf": 0,
+          "slot_sog": 0,
+          "perim_sog": 4,
+          "goals": 1,
+          "xgf": 0.303,
+          "xgf_unblocked": 0.303
+        },
+        "pp": {
+          "sog": 0,
+          "cf": 0,
+          "ff": 0,
+          "hdcf": 0,
+          "goals": 0,
+          "xgf": 0
+        },
+        "pk": {
+          "sog": 0,
+          "cf": 0,
+          "ff": 0,
+          "hdcf": 0,
+          "goals": 0,
+          "xgf": 0
+        }
+      },
+      "P2": {
+        "all": {
+          "sog": 0,
+          "cf": 7,
+          "ff": 3,
+          "hdcf": 1,
+          "inner_slot_cf": 1,
+          "slot_sog": 0,
+          "perim_sog": 0,
+          "goals": 0,
+          "xgf": 0.259,
+          "xgf_unblocked": 0.259,
+          "hits": 11,
+          "blocked_for": 2,
+          "blocked_against": 4
+        },
+        "5v5": {
+          "sog": 0,
+          "cf": 1,
+          "ff": 1,
+          "hdcf": 0,
+          "inner_slot_cf": 0,
+          "slot_sog": 0,
+          "perim_sog": 0,
+          "goals": 0,
+          "xgf": 0.005,
+          "xgf_unblocked": 0.005
+        },
+        "pp": {
+          "sog": 0,
+          "cf": 2,
+          "ff": 2,
+          "hdcf": 1,
+          "goals": 0,
+          "xgf": 0.254
+        },
+        "pk": {
+          "sog": 0,
+          "cf": 0,
+          "ff": 0,
+          "hdcf": 0,
+          "goals": 0,
+          "xgf": 0.0
+        }
+      },
+      "P3": {
+        "all": {
+          "sog": 5,
+          "cf": 15,
+          "ff": 8,
+          "hdcf": 2,
+          "inner_slot_cf": 2,
+          "slot_sog": 1,
+          "perim_sog": 4,
+          "goals": 1,
+          "xgf": 0.453,
+          "xgf_unblocked": 0.453,
+          "hits": 9,
+          "blocked_for": 9,
+          "blocked_against": 7
+        },
+        "5v5": {
+          "sog": 5,
+          "cf": 8,
+          "ff": 8,
+          "hdcf": 2,
+          "inner_slot_cf": 2,
+          "slot_sog": 1,
+          "perim_sog": 4,
+          "goals": 1,
+          "xgf": 0.453,
+          "xgf_unblocked": 0.453
+        },
+        "pp": {
+          "sog": 0,
+          "cf": 0,
+          "ff": 0,
+          "hdcf": 0,
+          "goals": 0,
+          "xgf": 0
+        },
+        "pk": {
+          "sog": 0,
+          "cf": 0,
+          "ff": 0,
+          "hdcf": 0,
+          "goals": 0,
+          "xgf": 0
+        }
+      }
+    },
+    "game": {
+      "all": {
+        "sog": 9,
+        "cf": 38,
+        "ff": 23,
+        "hdcf": 4,
+        "inner_slot_cf": 3,
+        "slot_sog": 1,
+        "perim_sog": 8,
+        "goals": 2,
+        "xgf": 1.015,
+        "xgf_unblocked": 1.015,
+        "hits": 43,
+        "blocked_for": 17,
+        "blocked_against": 15,
+        "fo_won": 32,
+        "fo_lost": 28
+      },
+      "5v5": {
+        "sog": 9,
+        "cf": 21,
+        "ff": 21,
+        "hdcf": 3,
+        "inner_slot_cf": 2,
+        "slot_sog": 1,
+        "perim_sog": 8,
+        "goals": 2,
+        "xgf": 0.761,
+        "xgf_unblocked": 0.761
+      },
+      "pp": {
+        "sog": 0,
+        "cf": 2,
+        "ff": 2,
+        "hdcf": 1,
+        "goals": 0,
+        "xgf": 0.254
+      },
+      "pk": {
+        "sog": 0,
+        "cf": 0,
+        "ff": 0,
+        "hdcf": 0,
+        "goals": 0,
+        "xgf": 0.0
+      }
+    }
+  },
+  "g7_team_view_tbl": {
+    "team": "TBL",
+    "opp": "MTL",
+    "periods": {
+      "P1": {
+        "all": {
+          "sog": 9,
+          "cf": 18,
+          "ff": 12,
+          "hdcf": 3,
+          "inner_slot_cf": 3,
+          "slot_sog": 3,
+          "perim_sog": 6,
+          "goals": 0,
+          "xgf": 0.622,
+          "xgf_unblocked": 0.622,
+          "hits": 9,
+          "blocked_for": 4,
+          "blocked_against": 6
+        },
+        "5v5": {
+          "sog": 9,
+          "cf": 12,
+          "ff": 12,
+          "hdcf": 3,
+          "inner_slot_cf": 3,
+          "slot_sog": 3,
+          "perim_sog": 6,
+          "goals": 0,
+          "xgf": 0.622,
+          "xgf_unblocked": 0.622
+        },
+        "pp": {
+          "sog": 0,
+          "cf": 0,
+          "ff": 0,
+          "hdcf": 0,
+          "goals": 0,
+          "xgf": 0
+        },
+        "pk": {
+          "sog": 0,
+          "cf": 0,
+          "ff": 0,
+          "hdcf": 0,
+          "goals": 0,
+          "xgf": 0
+        }
+      },
+      "P2": {
+        "all": {
+          "sog": 12,
+          "cf": 18,
+          "ff": 16,
+          "hdcf": 3,
+          "inner_slot_cf": 3,
+          "slot_sog": 3,
+          "perim_sog": 9,
+          "goals": 1,
+          "xgf": 0.984,
+          "xgf_unblocked": 0.984,
+          "hits": 9,
+          "blocked_for": 4,
+          "blocked_against": 2
+        },
+        "5v5": {
+          "sog": 7,
+          "cf": 10,
+          "ff": 10,
+          "hdcf": 2,
+          "inner_slot_cf": 2,
+          "slot_sog": 2,
+          "perim_sog": 5,
+          "goals": 0,
+          "xgf": 0.666,
+          "xgf_unblocked": 0.666
+        },
+        "pp": {
+          "sog": 3,
+          "cf": 4,
+          "ff": 4,
+          "hdcf": 1,
+          "goals": 1,
+          "xgf": 0.307
+        },
+        "pk": {
+          "sog": 0,
+          "cf": 0,
+          "ff": 0,
+          "hdcf": 0,
+          "goals": 0,
+          "xgf": 0.0
+        }
+      },
+      "P3": {
+        "all": {
+          "sog": 8,
+          "cf": 22,
+          "ff": 13,
+          "hdcf": 3,
+          "inner_slot_cf": 1,
+          "slot_sog": 1,
+          "perim_sog": 7,
+          "goals": 0,
+          "xgf": 0.53,
+          "xgf_unblocked": 0.53,
+          "hits": 12,
+          "blocked_for": 7,
+          "blocked_against": 9
+        },
+        "5v5": {
+          "sog": 7,
+          "cf": 12,
+          "ff": 12,
+          "hdcf": 3,
+          "inner_slot_cf": 1,
+          "slot_sog": 1,
+          "perim_sog": 6,
+          "goals": 0,
+          "xgf": 0.525,
+          "xgf_unblocked": 0.525
+        },
+        "pp": {
+          "sog": 0,
+          "cf": 0,
+          "ff": 0,
+          "hdcf": 0,
+          "goals": 0,
+          "xgf": 0
+        },
+        "pk": {
+          "sog": 0,
+          "cf": 0,
+          "ff": 0,
+          "hdcf": 0,
+          "goals": 0,
+          "xgf": 0
+        }
+      }
+    },
+    "game": {
+      "all": {
+        "sog": 29,
+        "cf": 58,
+        "ff": 41,
+        "hdcf": 9,
+        "inner_slot_cf": 7,
+        "slot_sog": 7,
+        "perim_sog": 22,
+        "goals": 1,
+        "xgf": 2.136,
+        "xgf_unblocked": 2.136,
+        "hits": 30,
+        "blocked_for": 15,
+        "blocked_against": 17,
+        "fo_won": 28,
+        "fo_lost": 32
+      },
+      "5v5": {
+        "sog": 23,
+        "cf": 34,
+        "ff": 34,
+        "hdcf": 8,
+        "inner_slot_cf": 6,
+        "slot_sog": 6,
+        "perim_sog": 17,
+        "goals": 0,
+        "xgf": 1.813,
+        "xgf_unblocked": 1.813
+      },
+      "pp": {
+        "sog": 3,
+        "cf": 4,
+        "ff": 4,
+        "hdcf": 1,
+        "goals": 1,
+        "xgf": 0.307
+      },
+      "pk": {
+        "sog": 0,
+        "cf": 0,
+        "ff": 0,
+        "hdcf": 0,
+        "goals": 0,
+        "xgf": 0.0
+      }
+    }
+  },
+  "g7_score_state": {
+    "tied": {
+      "MTL": {
+        "sog": 7,
+        "missed": 14,
+        "blocked_for": 0,
+        "blocked_against": 0,
+        "cf": 35,
+        "ff": 21,
+        "hdcf": 4,
+        "inner_slot_cf": 3,
+        "slot_sog": 1,
+        "perim_sog": 6,
+        "goals": 2,
+        "xgf": 0.991,
+        "xgf_unblocked": 0.991,
+        "hits": 34,
+        "fo_won": 16,
+        "fo_lost": 0,
+        "shots_list": []
+      },
+      "TBL": {
+        "sog": 13,
+        "missed": 7,
+        "blocked_for": 0,
+        "blocked_against": 0,
+        "cf": 29,
+        "ff": 20,
+        "hdcf": 5,
+        "inner_slot_cf": 4,
+        "slot_sog": 4,
+        "perim_sog": 9,
+        "goals": 0,
+        "xgf": 1.07,
+        "xgf_unblocked": 1.07,
+        "hits": 18,
+        "fo_won": 19,
+        "fo_lost": 0,
+        "shots_list": []
+      }
+    },
+    "away_lead": {
+      "MTL": {
+        "sog": 2,
+        "missed": 0,
+        "blocked_for": 0,
+        "blocked_against": 0,
+        "cf": 5,
+        "ff": 2,
+        "hdcf": 0,
+        "inner_slot_cf": 0,
+        "slot_sog": 0,
+        "perim_sog": 2,
+        "goals": 0,
+        "xgf": 0.024,
+        "xgf_unblocked": 0.024,
+        "hits": 9,
+        "fo_won": 16,
+        "fo_lost": 0,
+        "shots_list": []
+      },
+      "TBL": {
+        "sog": 16,
+        "missed": 5,
+        "blocked_for": 0,
+        "blocked_against": 0,
+        "cf": 27,
+        "ff": 21,
+        "hdcf": 4,
+        "inner_slot_cf": 3,
+        "slot_sog": 3,
+        "perim_sog": 13,
+        "goals": 1,
+        "xgf": 1.066,
+        "xgf_unblocked": 1.066,
+        "hits": 12,
+        "fo_won": 9,
+        "fo_lost": 0,
+        "shots_list": []
+      }
+    }
+  },
+  "g7_dobes_gsax_estimate": {
+    "tbl_unblocked_xg_for": 2.14,
+    "mtl_actual_ga": 1,
+    "dobes_gsax_estimate": 1.14,
+    "interpretation": "Dobeš faced ~2.1 expected goals on TBL's unblocked attempts and allowed 1. GSAx ≈ 1.1."
+  },
+  "g7_vasilevskiy_gsax_estimate": {
+    "mtl_unblocked_xg_for": 1.01,
+    "tbl_actual_ga": 2,
+    "vasi_gsax_estimate": -0.99,
+    "interpretation": "Vasilevskiy faced ~1.0 expected goals on MTL's 9 unblocked attempts and allowed 2. GSAx ≈ -1.0."
+  },
+  "series_per_game": {
+    "G1": {
+      "MTL": {
+        "all": {
+          "sog": 19,
+          "cf": 46,
+          "ff": 29,
+          "hdcf": 16,
+          "inner_slot_cf": 9,
+          "slot_sog": 13,
+          "perim_sog": 6,
+          "goals": 4,
+          "xgf": 2.637,
+          "xgf_unblocked": 2.637,
+          "hits": 42,
+          "blocked_for": 13,
+          "blocked_against": 17,
+          "fo_won": 36,
+          "fo_lost": 23
+        },
+        "5v5": {
+          "sog": 9,
+          "cf": 17,
+          "ff": 17,
+          "hdcf": 9,
+          "inner_slot_cf": 5,
+          "slot_sog": 6,
+          "perim_sog": 3,
+          "goals": 1,
+          "xgf": 1.54,
+          "xgf_unblocked": 1.54
+        }
+      },
+      "TBL": {
+        "all": {
+          "sog": 23,
+          "cf": 50,
+          "ff": 37,
+          "hdcf": 6,
+          "inner_slot_cf": 3,
+          "slot_sog": 6,
+          "perim_sog": 17,
+          "goals": 3,
+          "xgf": 1.29,
+          "xgf_unblocked": 1.29,
+          "hits": 44,
+          "blocked_for": 17,
+          "blocked_against": 13,
+          "fo_won": 23,
+          "fo_lost": 36
+        },
+        "5v5": {
+          "sog": 13,
+          "cf": 23,
+          "ff": 23,
+          "hdcf": 2,
+          "inner_slot_cf": 1,
+          "slot_sog": 2,
+          "perim_sog": 11,
+          "goals": 1,
+          "xgf": 0.524,
+          "xgf_unblocked": 0.524
+        }
+      },
+      "final_score": {
+        "TBL": 3,
+        "MTL": 4
+      }
+    },
+    "G2": {
+      "MTL": {
+        "all": {
+          "sog": 27,
+          "cf": 68,
+          "ff": 41,
+          "hdcf": 15,
+          "inner_slot_cf": 10,
+          "slot_sog": 9,
+          "perim_sog": 18,
+          "goals": 2,
+          "xgf": 2.833,
+          "xgf_unblocked": 2.833,
+          "hits": 43,
+          "blocked_for": 15,
+          "blocked_against": 27,
+          "fo_won": 35,
+          "fo_lost": 38
+        },
+        "5v5": {
+          "sog": 19,
+          "cf": 32,
+          "ff": 32,
+          "hdcf": 13,
+          "inner_slot_cf": 9,
+          "slot_sog": 8,
+          "perim_sog": 11,
+          "goals": 1,
+          "xgf": 2.25,
+          "xgf_unblocked": 2.25
+        }
+      },
+      "TBL": {
+        "all": {
+          "sog": 34,
+          "cf": 68,
+          "ff": 53,
+          "hdcf": 14,
+          "inner_slot_cf": 9,
+          "slot_sog": 8,
+          "perim_sog": 26,
+          "goals": 3,
+          "xgf": 2.665,
+          "xgf_unblocked": 2.665,
+          "hits": 34,
+          "blocked_for": 27,
+          "blocked_against": 15,
+          "fo_won": 38,
+          "fo_lost": 35
+        },
+        "5v5": {
+          "sog": 29,
+          "cf": 44,
+          "ff": 44,
+          "hdcf": 12,
+          "inner_slot_cf": 8,
+          "slot_sog": 7,
+          "perim_sog": 22,
+          "goals": 3,
+          "xgf": 2.069,
+          "xgf_unblocked": 2.069
+        }
+      },
+      "final_score": {
+        "TBL": 3,
+        "MTL": 2
+      }
+    },
+    "G3": {
+      "MTL": {
+        "all": {
+          "sog": 29,
+          "cf": 58,
+          "ff": 38,
+          "hdcf": 10,
+          "inner_slot_cf": 4,
+          "slot_sog": 7,
+          "perim_sog": 22,
+          "goals": 3,
+          "xgf": 2.14,
+          "xgf_unblocked": 2.14,
+          "hits": 36,
+          "blocked_for": 14,
+          "blocked_against": 20,
+          "fo_won": 22,
+          "fo_lost": 26
+        },
+        "5v5": {
+          "sog": 22,
+          "cf": 31,
+          "ff": 31,
+          "hdcf": 9,
+          "inner_slot_cf": 3,
+          "slot_sog": 6,
+          "perim_sog": 16,
+          "goals": 3,
+          "xgf": 1.641,
+          "xgf_unblocked": 1.641
+        }
+      },
+      "TBL": {
+        "all": {
+          "sog": 17,
+          "cf": 44,
+          "ff": 30,
+          "hdcf": 4,
+          "inner_slot_cf": 3,
+          "slot_sog": 2,
+          "perim_sog": 15,
+          "goals": 2,
+          "xgf": 1.249,
+          "xgf_unblocked": 1.249,
+          "hits": 31,
+          "blocked_for": 20,
+          "blocked_against": 14,
+          "fo_won": 26,
+          "fo_lost": 22
+        },
+        "5v5": {
+          "sog": 11,
+          "cf": 19,
+          "ff": 19,
+          "hdcf": 3,
+          "inner_slot_cf": 2,
+          "slot_sog": 2,
+          "perim_sog": 9,
+          "goals": 1,
+          "xgf": 0.751,
+          "xgf_unblocked": 0.751
+        }
+      },
+      "final_score": {
+        "MTL": 3,
+        "TBL": 2
+      }
+    },
+    "G4": {
+      "MTL": {
+        "all": {
+          "sog": 18,
+          "cf": 45,
+          "ff": 32,
+          "hdcf": 12,
+          "inner_slot_cf": 8,
+          "slot_sog": 9,
+          "perim_sog": 9,
+          "goals": 2,
+          "xgf": 2.346,
+          "xgf_unblocked": 2.346,
+          "hits": 50,
+          "blocked_for": 16,
+          "blocked_against": 13,
+          "fo_won": 37,
+          "fo_lost": 20
+        },
+        "5v5": {
+          "sog": 9,
+          "cf": 14,
+          "ff": 14,
+          "hdcf": 4,
+          "inner_slot_cf": 1,
+          "slot_sog": 4,
+          "perim_sog": 5,
+          "goals": 1,
+          "xgf": 0.734,
+          "xgf_unblocked": 0.734
+        }
+      },
+      "TBL": {
+        "all": {
+          "sog": 20,
+          "cf": 58,
+          "ff": 42,
+          "hdcf": 20,
+          "inner_slot_cf": 15,
+          "slot_sog": 12,
+          "perim_sog": 8,
+          "goals": 3,
+          "xgf": 3.816,
+          "xgf_unblocked": 3.816,
+          "hits": 28,
+          "blocked_for": 13,
+          "blocked_against": 16,
+          "fo_won": 20,
+          "fo_lost": 37
+        },
+        "5v5": {
+          "sog": 13,
+          "cf": 26,
+          "ff": 26,
+          "hdcf": 12,
+          "inner_slot_cf": 8,
+          "slot_sog": 8,
+          "perim_sog": 5,
+          "goals": 2,
+          "xgf": 2.212,
+          "xgf_unblocked": 2.212
+        }
+      },
+      "final_score": {
+        "MTL": 2,
+        "TBL": 3
+      }
+    },
+    "G5": {
+      "MTL": {
+        "all": {
+          "sog": 24,
+          "cf": 49,
+          "ff": 33,
+          "hdcf": 16,
+          "inner_slot_cf": 12,
+          "slot_sog": 11,
+          "perim_sog": 13,
+          "goals": 3,
+          "xgf": 2.777,
+          "xgf_unblocked": 2.777,
+          "hits": 37,
+          "blocked_for": 18,
+          "blocked_against": 16,
+          "fo_won": 33,
+          "fo_lost": 17
+        },
+        "5v5": {
+          "sog": 21,
+          "cf": 28,
+          "ff": 28,
+          "hdcf": 12,
+          "inner_slot_cf": 8,
+          "slot_sog": 8,
+          "perim_sog": 13,
+          "goals": 3,
+          "xgf": 2.12,
+          "xgf_unblocked": 2.12
+        }
+      },
+      "TBL": {
+        "all": {
+          "sog": 40,
+          "cf": 65,
+          "ff": 47,
+          "hdcf": 8,
+          "inner_slot_cf": 4,
+          "slot_sog": 6,
+          "perim_sog": 34,
+          "goals": 2,
+          "xgf": 1.92,
+          "xgf_unblocked": 1.92,
+          "hits": 23,
+          "blocked_for": 16,
+          "blocked_against": 18,
+          "fo_won": 17,
+          "fo_lost": 33
+        },
+        "5v5": {
+          "sog": 24,
+          "cf": 29,
+          "ff": 29,
+          "hdcf": 3,
+          "inner_slot_cf": 2,
+          "slot_sog": 2,
+          "perim_sog": 22,
+          "goals": 2,
+          "xgf": 1.125,
+          "xgf_unblocked": 1.125
+        }
+      },
+      "final_score": {
+        "TBL": 2,
+        "MTL": 3
+      }
+    },
+    "G6": {
+      "MTL": {
+        "all": {
+          "sog": 30,
+          "cf": 77,
+          "ff": 51,
+          "hdcf": 15,
+          "inner_slot_cf": 8,
+          "slot_sog": 13,
+          "perim_sog": 17,
+          "goals": 0,
+          "xgf": 2.923,
+          "xgf_unblocked": 2.923,
+          "hits": 49,
+          "blocked_for": 15,
+          "blocked_against": 26,
+          "fo_won": 24,
+          "fo_lost": 23
+        },
+        "5v5": {
+          "sog": 25,
+          "cf": 40,
+          "ff": 40,
+          "hdcf": 11,
+          "inner_slot_cf": 7,
+          "slot_sog": 11,
+          "perim_sog": 14,
+          "goals": 0,
+          "xgf": 2.342,
+          "xgf_unblocked": 2.342
+        }
+      },
+      "TBL": {
+        "all": {
+          "sog": 33,
+          "cf": 79,
+          "ff": 64,
+          "hdcf": 22,
+          "inner_slot_cf": 16,
+          "slot_sog": 14,
+          "perim_sog": 19,
+          "goals": 1,
+          "xgf": 4.633,
+          "xgf_unblocked": 4.633,
+          "hits": 38,
+          "blocked_for": 26,
+          "blocked_against": 15,
+          "fo_won": 23,
+          "fo_lost": 24
+        },
+        "5v5": {
+          "sog": 29,
+          "cf": 50,
+          "ff": 50,
+          "hdcf": 20,
+          "inner_slot_cf": 16,
+          "slot_sog": 13,
+          "perim_sog": 16,
+          "goals": 1,
+          "xgf": 4.265,
+          "xgf_unblocked": 4.265
+        }
+      },
+      "final_score": {
+        "MTL": 0,
+        "TBL": 1
+      }
+    }
+  },
+  "series_avg_prior_g1_g6": {
+    "MTL": {
+      "sog": 24.5,
+      "cf": 57.17,
+      "ff": 37.33,
+      "hdcf": 14.0,
+      "inner_slot_cf": 8.5,
+      "slot_sog": 10.33,
+      "perim_sog": 14.17,
+      "goals": 2.33,
+      "xgf": 2.61,
+      "xgf_unblocked": 2.61,
+      "hits": 42.83,
+      "blocked_for": 15.17,
+      "blocked_against": 19.83,
+      "fo_won": 31.17,
+      "fo_lost": 24.5
+    },
+    "TBL": {
+      "sog": 27.83,
+      "cf": 60.67,
+      "ff": 45.5,
+      "hdcf": 12.33,
+      "inner_slot_cf": 8.33,
+      "slot_sog": 8.0,
+      "perim_sog": 19.83,
+      "goals": 2.33,
+      "xgf": 2.6,
+      "xgf_unblocked": 2.6,
+      "hits": 33.0,
+      "blocked_for": 19.83,
+      "blocked_against": 15.17,
+      "fo_won": 24.5,
+      "fo_lost": 31.17
+    }
+  },
+  "g7_deltas_vs_prior": {
+    "sog": {
+      "MTL_g7": 9,
+      "MTL_avg_prior_g1_g6": 24.5,
+      "MTL_delta": -15.5,
+      "TBL_g7": 29,
+      "TBL_avg_prior_g1_g6": 27.83,
+      "TBL_delta": 1.17
+    },
+    "cf": {
+      "MTL_g7": 38,
+      "MTL_avg_prior_g1_g6": 57.17,
+      "MTL_delta": -19.17,
+      "TBL_g7": 58,
+      "TBL_avg_prior_g1_g6": 60.67,
+      "TBL_delta": -2.67
+    },
+    "ff": {
+      "MTL_g7": 23,
+      "MTL_avg_prior_g1_g6": 37.33,
+      "MTL_delta": -14.33,
+      "TBL_g7": 41,
+      "TBL_avg_prior_g1_g6": 45.5,
+      "TBL_delta": -4.5
+    },
+    "hdcf": {
+      "MTL_g7": 4,
+      "MTL_avg_prior_g1_g6": 14.0,
+      "MTL_delta": -10.0,
+      "TBL_g7": 9,
+      "TBL_avg_prior_g1_g6": 12.33,
+      "TBL_delta": -3.33
+    },
+    "inner_slot_cf": {
+      "MTL_g7": 3,
+      "MTL_avg_prior_g1_g6": 8.5,
+      "MTL_delta": -5.5,
+      "TBL_g7": 7,
+      "TBL_avg_prior_g1_g6": 8.33,
+      "TBL_delta": -1.33
+    },
+    "slot_sog": {
+      "MTL_g7": 1,
+      "MTL_avg_prior_g1_g6": 10.33,
+      "MTL_delta": -9.33,
+      "TBL_g7": 7,
+      "TBL_avg_prior_g1_g6": 8.0,
+      "TBL_delta": -1.0
+    },
+    "perim_sog": {
+      "MTL_g7": 8,
+      "MTL_avg_prior_g1_g6": 14.17,
+      "MTL_delta": -6.17,
+      "TBL_g7": 22,
+      "TBL_avg_prior_g1_g6": 19.83,
+      "TBL_delta": 2.17
+    },
+    "xgf": {
+      "MTL_g7": 1.015,
+      "MTL_avg_prior_g1_g6": 2.61,
+      "MTL_delta": -1.59,
+      "TBL_g7": 2.136,
+      "TBL_avg_prior_g1_g6": 2.6,
+      "TBL_delta": -0.46
+    },
+    "xgf_unblocked": {
+      "MTL_g7": 1.015,
+      "MTL_avg_prior_g1_g6": 2.61,
+      "MTL_delta": -1.59,
+      "TBL_g7": 2.136,
+      "TBL_avg_prior_g1_g6": 2.6,
+      "TBL_delta": -0.46
+    }
+  },
+  "tbl_shot_quality_diagnostic": {
+    "all_shots_sorted_by_xg": [
+      {
+        "type": "shot-on-goal",
+        "x": -81,
+        "y": -1,
+        "dist": 8.1,
+        "xg": 0.261,
+        "subtype": "tip-in",
+        "sit": "5v5",
+        "score_state_at_event": "TBL1-MTL1",
+        "period": "2"
+      },
+      {
+        "type": "goal",
+        "x": -79,
+        "y": 1,
+        "dist": 10.0,
+        "xg": 0.235,
+        "subtype": "tip-in",
+        "sit": "pp",
+        "score_state_at_event": "TBL0-MTL1",
+        "period": "2"
+      },
+      {
+        "type": "shot-on-goal",
+        "x": -84,
+        "y": 7,
+        "dist": 8.6,
+        "xg": 0.181,
+        "subtype": "snap",
+        "sit": "5v5",
+        "score_state_at_event": "TBL0-MTL1",
+        "period": "2"
+      },
+      {
+        "type": "shot-on-goal",
+        "x": 79,
+        "y": -1,
+        "dist": 10.0,
+        "xg": 0.168,
+        "subtype": "snap",
+        "sit": "5v5",
+        "score_state_at_event": "TBL0-MTL0",
+        "period": "1"
+      },
+      {
+        "type": "shot-on-goal",
+        "x": 82,
+        "y": -2,
+        "dist": 7.3,
+        "xg": 0.164,
+        "subtype": "backhand",
+        "sit": "5v5",
+        "score_state_at_event": "TBL0-MTL0",
+        "period": "1"
+      },
+      {
+        "type": "missed-shot",
+        "x": 72,
+        "y": 0,
+        "dist": 17.0,
+        "xg": 0.146,
+        "subtype": "tip-in",
+        "sit": "5v5",
+        "score_state_at_event": "TBL1-MTL2",
+        "period": "3"
+      },
+      {
+        "type": "shot-on-goal",
+        "x": 82,
+        "y": -10,
+        "dist": 12.2,
+        "xg": 0.126,
+        "subtype": "backhand",
+        "sit": "5v5",
+        "score_state_at_event": "TBL1-MTL2",
+        "period": "3"
+      },
+      {
+        "type": "shot-on-goal",
+        "x": 89,
+        "y": -15,
+        "dist": 15.0,
+        "xg": 0.122,
+        "subtype": "snap",
+        "sit": "5v5",
+        "score_state_at_event": "TBL0-MTL0",
+        "period": "1"
+      },
+      {
+        "type": "missed-shot",
+        "x": 81,
+        "y": 17,
+        "dist": 18.8,
+        "xg": 0.09,
+        "subtype": "snap",
+        "sit": "5v5",
+        "score_state_at_event": "TBL1-MTL1",
+        "period": "3"
+      },
+      {
+        "type": "shot-on-goal",
+        "x": -70,
+        "y": 19,
+        "dist": 26.9,
+        "xg": 0.057,
+        "subtype": "tip-in",
+        "sit": "5v5",
+        "score_state_at_event": "TBL0-MTL1",
+        "period": "2"
+      },
+      {
+        "type": "shot-on-goal",
+        "x": 68,
+        "y": 11,
+        "dist": 23.7,
+        "xg": 0.056,
+        "subtype": "snap",
+        "sit": "5v5",
+        "score_state_at_event": "TBL0-MTL0",
+        "period": "1"
+      },
+      {
+        "type": "shot-on-goal",
+        "x": 68,
+        "y": 12,
+        "dist": 24.2,
+        "xg": 0.054,
+        "subtype": "snap",
+        "sit": "5v5",
+        "score_state_at_event": "TBL1-MTL1",
+        "period": "3"
+      },
+      {
+        "type": "shot-on-goal",
+        "x": -69,
+        "y": 15,
+        "dist": 25.0,
+        "xg": 0.049,
+        "subtype": "snap",
+        "sit": "5v5",
+        "score_state_at_event": "TBL0-MTL1",
+        "period": "2"
+      },
+      {
+        "type": "missed-shot",
+        "x": -68,
+        "y": -17,
+        "dist": 27.0,
+        "xg": 0.04,
+        "subtype": "wrist",
+        "sit": "5v5",
+        "score_state_at_event": "TBL0-MTL1",
+        "period": "2"
+      },
+      {
+        "type": "missed-shot",
+        "x": 63,
+        "y": 9,
+        "dist": 27.5,
+        "xg": 0.038,
+        "subtype": "snap",
+        "sit": "5v5",
+        "score_state_at_event": "TBL0-MTL0",
+        "period": "1"
+      },
+      {
+        "type": "shot-on-goal",
+        "x": -62,
+        "y": 10,
+        "dist": 28.8,
+        "xg": 0.033,
+        "subtype": "snap",
+        "sit": "5v5",
+        "score_state_at_event": "TBL0-MTL1",
+        "period": "2"
+      },
+      {
+        "type": "shot-on-goal",
+        "x": 63,
+        "y": 12,
+        "dist": 28.6,
+        "xg": 0.033,
+        "subtype": "snap",
+        "sit": "5v5",
+        "score_state_at_event": "TBL1-MTL2",
+        "period": "3"
+      },
+      {
+        "type": "shot-on-goal",
+        "x": -70,
+        "y": -22,
+        "dist": 29.1,
+        "xg": 0.032,
+        "subtype": "snap",
+        "sit": "pp",
+        "score_state_at_event": "TBL0-MTL1",
+        "period": "2"
+      },
+      {
+        "type": "missed-shot",
+        "x": -57,
+        "y": -3,
+        "dist": 32.1,
+        "xg": 0.022,
+        "subtype": "snap",
+        "sit": "pp",
+        "score_state_at_event": "TBL0-MTL1",
+        "period": "2"
+      },
+      {
+        "type": "missed-shot",
+        "x": 60,
+        "y": 20,
+        "dist": 35.2,
+        "xg": 0.022,
+        "subtype": "tip-in",
+        "sit": "5v5",
+        "score_state_at_event": "TBL1-MTL2",
+        "period": "3"
+      },
+      {
+        "type": "shot-on-goal",
+        "x": 58,
+        "y": -10,
+        "dist": 32.6,
+        "xg": 0.021,
+        "subtype": "snap",
+        "sit": "5v5",
+        "score_state_at_event": "TBL0-MTL0",
+        "period": "1"
+      },
+      {
+        "type": "shot-on-goal",
+        "x": -60,
+        "y": -18,
+        "dist": 34.1,
+        "xg": 0.018,
+        "subtype": "wrist",
+        "sit": "pp",
+        "score_state_at_event": "TBL0-MTL1",
+        "period": "2"
+      },
+      {
+        "type": "shot-on-goal",
+        "x": 58,
+        "y": 14,
+        "dist": 34.0,
+        "xg": 0.018,
+        "subtype": "snap",
+        "sit": "5v5",
+        "score_state_at_event": "TBL1-MTL2",
+        "period": "3"
+      },
+      {
+        "type": "shot-on-goal",
+        "x": 84,
+        "y": -34,
+        "dist": 34.4,
+        "xg": 0.017,
+        "subtype": "snap",
+        "sit": "5v5",
+        "score_state_at_event": "TBL0-MTL0",
+        "period": "1"
+      },
+      {
+        "type": "missed-shot",
+        "x": -58,
+        "y": 21,
+        "dist": 37.4,
+        "xg": 0.017,
+        "subtype": "tip-in",
+        "sit": "5v5",
+        "score_state_at_event": "TBL1-MTL1",
+        "period": "2"
+      },
+      {
+        "type": "shot-on-goal",
+        "x": -60,
+        "y": 22,
+        "dist": 36.4,
+        "xg": 0.014,
+        "subtype": "snap",
+        "sit": "5v5",
+        "score_state_at_event": "TBL0-MTL1",
+        "period": "2"
+      },
+      {
+        "type": "shot-on-goal",
+        "x": 54,
+        "y": -15,
+        "dist": 38.1,
+        "xg": 0.011,
+        "subtype": "wrist",
+        "sit": "5v5",
+        "score_state_at_event": "TBL0-MTL0",
+        "period": "1"
+      },
+      {
+        "type": "shot-on-goal",
+        "x": 51,
+        "y": 5,
+        "dist": 38.3,
+        "xg": 0.011,
+        "subtype": "snap",
+        "sit": "5v5",
+        "score_state_at_event": "TBL1-MTL2",
+        "period": "3"
+      },
+      {
+        "type": "missed-shot",
+        "x": -58,
+        "y": 23,
+        "dist": 38.6,
+        "xg": 0.01,
+        "subtype": "snap",
+        "sit": "5v5",
+        "score_state_at_event": "TBL1-MTL1",
+        "period": "2"
+      },
+      {
+        "type": "missed-shot",
+        "x": 61,
+        "y": -30,
+        "dist": 41.0,
+        "xg": 0.008,
+        "subtype": "snap",
+        "sit": "5v5",
+        "score_state_at_event": "TBL1-MTL2",
+        "period": "3"
+      },
+      {
+        "type": "shot-on-goal",
+        "x": 55,
+        "y": -25,
+        "dist": 42.2,
+        "xg": 0.007,
+        "subtype": "snap",
+        "sit": "5v5",
+        "score_state_at_event": "TBL0-MTL0",
+        "period": "1"
+      },
+      {
+        "type": "shot-on-goal",
+        "x": 50,
+        "y": -15,
+        "dist": 41.8,
+        "xg": 0.007,
+        "subtype": "wrist",
+        "sit": "5v5",
+        "score_state_at_event": "TBL1-MTL1",
+        "period": "3"
+      },
+      {
+        "type": "missed-shot",
+        "x": 71,
+        "y": -39,
+        "dist": 43.0,
+        "xg": 0.006,
+        "subtype": "snap",
+        "sit": "5v5",
+        "score_state_at_event": "TBL0-MTL0",
+        "period": "1"
+      },
+      {
+        "type": "missed-shot",
+        "x": 73,
+        "y": -39,
+        "dist": 42.2,
+        "xg": 0.006,
+        "subtype": "backhand",
+        "sit": "5v5",
+        "score_state_at_event": "TBL0-MTL0",
+        "period": "1"
+      },
+      {
+        "type": "shot-on-goal",
+        "x": -46,
+        "y": -7,
+        "dist": 43.6,
+        "xg": 0.006,
+        "subtype": "slap",
+        "sit": "all",
+        "score_state_at_event": "TBL0-MTL1",
+        "period": "2"
+      },
+      {
+        "type": "shot-on-goal",
+        "x": 32,
+        "y": 35,
+        "dist": 66.9,
+        "xg": 0.005,
+        "subtype": "snap",
+        "sit": "5v5",
+        "score_state_at_event": "TBL0-MTL0",
+        "period": "1"
+      },
+      {
+        "type": "shot-on-goal",
+        "x": -56,
+        "y": 30,
+        "dist": 44.6,
+        "xg": 0.005,
+        "subtype": "slap",
+        "sit": "all",
+        "score_state_at_event": "TBL0-MTL1",
+        "period": "2"
+      },
+      {
+        "type": "shot-on-goal",
+        "x": -32,
+        "y": 8,
+        "dist": 57.6,
+        "xg": 0.005,
+        "subtype": "snap",
+        "sit": "5v5",
+        "score_state_at_event": "TBL0-MTL1",
+        "period": "2"
+      },
+      {
+        "type": "shot-on-goal",
+        "x": 63,
+        "y": -39,
+        "dist": 46.9,
+        "xg": 0.005,
+        "subtype": "snap",
+        "sit": "5v5",
+        "score_state_at_event": "TBL1-MTL1",
+        "period": "3"
+      },
+      {
+        "type": "missed-shot",
+        "x": 63,
+        "y": 36,
+        "dist": 44.4,
+        "xg": 0.005,
+        "subtype": "snap",
+        "sit": "5v5",
+        "score_state_at_event": "TBL1-MTL1",
+        "period": "3"
+      },
+      {
+        "type": "shot-on-goal",
+        "x": 0,
+        "y": -12,
+        "dist": 89.8,
+        "xg": 0.005,
+        "subtype": "snap",
+        "sit": "all",
+        "score_state_at_event": "TBL1-MTL2",
+        "period": "3"
+      }
+    ],
+    "n_shots_logged": 41
+  }
+}
